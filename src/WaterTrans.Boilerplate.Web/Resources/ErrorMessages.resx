@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DataAnnotationDataCode" xml:space="preserve">
+    <value>'{0}'は英数字とハイフンのみで入力してください。</value>
+  </data>
+  <data name="DataAnnotationDataTree" xml:space="preserve">
+    <value>'{0}'は数字2、4、6、8文字のいずれかで入力してください。</value>
+  </data>
+  <data name="DataAnnotationDuplicatedStringArray" xml:space="preserve">
+    <value>'{0}'は重複登録できません。</value>
+  </data>
+  <data name="DataAnnotationEnumContains" xml:space="preserve">
+    <value>'{0}'の値が正しくありません。</value>
+  </data>
+  <data name="DataAnnotationEnumDataType" xml:space="preserve">
+    <value>'{0}'の値が正しくありません。</value>
+  </data>
+  <data name="DataAnnotationGuid" xml:space="preserve">
+    <value>'{0}'の値が正しくありません。</value>
+  </data>
+  <data name="DataAnnotationISO8601" xml:space="preserve">
+    <value>'{0}'の値は日付と時刻の形式で入力してください。</value>
+  </data>
+  <data name="DataAnnotationISO8601Date" xml:space="preserve">
+    <value>'{0}'の値は日付の形式で入力してください。</value>
+  </data>
+  <data name="DataAnnotationMaxLength" xml:space="preserve">
+    <value>'{0}'は{1}個以内で入力してください。</value>
+  </data>
+  <data name="DataAnnotationRange" xml:space="preserve">
+    <value>'{0}'は{1}以上{2}以下で入力してください。</value>
+  </data>
+  <data name="DataAnnotationRequired" xml:space="preserve">
+    <value>'{0}'を入力してください。</value>
+  </data>
+  <data name="DataAnnotationRequiredStringArray" xml:space="preserve">
+    <value>'{0}'は空の要素を登録できません。</value>
+  </data>
+  <data name="DataAnnotationSort" xml:space="preserve">
+    <value>'{0}'に指定可能な項目リストを確認してください。</value>
+  </data>
+  <data name="DataAnnotationStringLength" xml:space="preserve">
+    <value>'{0}'は{1}文字以内で入力してください。</value>
+  </data>
+  <data name="DataAnnotationStringLengthArray" xml:space="preserve">
+    <value>'{0}'の要素は{1}文字以内で入力してください。</value>
+  </data>
+  <data name="DisplayCommonConcurrencyToken" xml:space="preserve">
+    <value>同時実行トークン</value>
+  </data>
+  <data name="DisplayCommonGrantType" xml:space="preserve">
+    <value>権限種別</value>
+  </data>
+  <data name="DisplayCommonPage" xml:space="preserve">
+    <value>ページ番号</value>
+  </data>
+  <data name="DisplayCommonPageSize" xml:space="preserve">
+    <value>ページサイズ</value>
+  </data>
+  <data name="DisplayCommonQuery" xml:space="preserve">
+    <value>検索キーワード</value>
+  </data>
+  <data name="DisplayCommonSort" xml:space="preserve">
+    <value>並び順</value>
+  </data>
+  <data name="DisplayForecastCityCode" xml:space="preserve">
+    <value>都市コード</value>
+  </data>
+  <data name="DisplayForecastCountryCode" xml:space="preserve">
+    <value>国コード</value>
+  </data>
+  <data name="DisplayForecastDate" xml:space="preserve">
+    <value>日付</value>
+  </data>
+  <data name="DisplayForecastForecastCode" xml:space="preserve">
+    <value>予報コード</value>
+  </data>
+  <data name="DisplayForecastSummary" xml:space="preserve">
+    <value>天気</value>
+  </data>
+  <data name="DisplayForecastTemperature" xml:space="preserve">
+    <value>気温</value>
+  </data>
+  <data name="ErrorResultAuthorizationTokenExpired" xml:space="preserve">
+    <value>認証トークンの有効期限が切れています。</value>
+    <comment>認証トークンの有効期限が切れている場合のメッセージ。</comment>
+  </data>
+  <data name="ErrorResultBadRequest" xml:space="preserve">
+    <value>要求が正しくありません。</value>
+    <comment>汎用的なBadRequestメッセージ。</comment>
+  </data>
+  <data name="ErrorResultForbidden" xml:space="preserve">
+    <value>指定した操作を実行するアクセス権がありません。</value>
+    <comment>汎用的なForbiddenメッセージ。</comment>
+  </data>
+  <data name="ErrorResultInternalServerError" xml:space="preserve">
+    <value>サーバーで予期しないエラーが発生しました。</value>
+    <comment>汎用的なサーバーエラーメッセージ。</comment>
+  </data>
+  <data name="ErrorResultInvalidAuthorizationScheme" xml:space="preserve">
+    <value>認証スキームが正しくありません。</value>
+    <comment>認証スキームがBearer以外の場合のメッセージ。</comment>
+  </data>
+  <data name="ErrorResultInvalidAuthorizationToken" xml:space="preserve">
+    <value>認証トークンが正しくありません。</value>
+    <comment>認証トークンが無効または指定されていない場合のメッセージ。</comment>
+  </data>
+  <data name="ErrorResultInvalidClient" xml:space="preserve">
+    <value>クライアントの認証に失敗しました。</value>
+    <comment>クライアント認証の失敗メッセージ。</comment>
+  </data>
+  <data name="ErrorResultInvalidCode" xml:space="preserve">
+    <value>認可コードが正しくありません。</value>
+    <comment>認可コードによる認証トークン交換の失敗メッセージ。</comment>
+  </data>
+  <data name="ErrorResultInvalidGrantType" xml:space="preserve">
+    <value>権限種別が正しくありません。</value>
+    <comment>許可されていない権限種別を指定した場合のメッセージ。</comment>
+  </data>
+  <data name="ErrorResultInvalidScope" xml:space="preserve">
+    <value>スコープが正しくありません。</value>
+    <comment>許可されていないスコープを指定した場合のメッセージ。</comment>
+  </data>
+  <data name="ErrorResultNoAuthorizationHeader" xml:space="preserve">
+    <value>認証ヘッダーを指定してください。</value>
+    <comment>認証ヘッダーが存在しない場合のメッセージ。</comment>
+  </data>
+  <data name="ErrorResultNotFound" xml:space="preserve">
+    <value>指定したリソースは存在しません。</value>
+    <comment>汎用的なNotFoundメッセージ。</comment>
+  </data>
+  <data name="ErrorResultUnauthorized" xml:space="preserve">
+    <value>認証情報が正しくありません。</value>
+    <comment>汎用的なUnauthorizedメッセージ。</comment>
+  </data>
+  <data name="ErrorResultValidationError" xml:space="preserve">
+    <value>入力エラーが発生しました。エラーメッセージを確認してください。</value>
+    <comment>汎用的な入力エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingAttemptedValueIsInvalidAccessor" xml:space="preserve">
+    <value>'{1}'に対する値'{0}'は正しくありません。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingMissingBindRequiredValueAccessor" xml:space="preserve">
+    <value>'{0}'に対するパラメーターまたはプロパティが指定されていません。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingMissingKeyOrValueAccessor" xml:space="preserve">
+    <value>値を入力してください。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingMissingRequestBodyRequiredValueAccessor" xml:space="preserve">
+    <value>空文字以外の本文を入力してください。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingNonPropertyAttemptedValueIsInvalidAccessor" xml:space="preserve">
+    <value>値'{0}'は正しくありません。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingNonPropertyUnknownValueIsInvalidAccessor" xml:space="preserve">
+    <value>指定された値が無効です。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingNonPropertyValueMustBeANumberAccessor" xml:space="preserve">
+    <value>フィールドは数字を指定してください。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingUnknownValueIsInvalidAccessor" xml:space="preserve">
+    <value>'{0}'に対する値は正しくありません。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingValueIsInvalidAccessor" xml:space="preserve">
+    <value>値'{0}'は正しくありません。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingValueMustBeANumberAccessor" xml:space="preserve">
+    <value>フィールド'{0}'は数字を指定してください。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ModelBindingValueMustNotBeNullAccessor" xml:space="preserve">
+    <value>値'{0}'は正しくありません。</value>
+    <comment>ModelBinderの標準エラーメッセージ。</comment>
+  </data>
+  <data name="ValidationDataNotFound" xml:space="preserve">
+    <value>'{0}'に指定した'{1}'に対応するデータが存在しません。</value>
+    <comment>対象データは見つからない場合のエラーメッセージ。</comment>
+  </data>
+  <data name="ValidationDuplicated" xml:space="preserve">
+    <value>'{0}'の値はすでに登録されています。</value>
+    <comment>同じ値が重複している場合のエラーメッセージ。</comment>
+  </data>
+  <data name="ValidationHasChildren" xml:space="preserve">
+    <value>'{0}'が登録されているため削除することはできません。</value>
+    <comment>子要素が存在して削除できない場合のエラーメッセージ。</comment>
+  </data>
+</root>

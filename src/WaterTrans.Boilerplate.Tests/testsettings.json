@@ -1,0 +1,8 @@
+﻿{
+  "DBSettings": {
+    "CommandTimeout": 300,
+    "StorageConnectionString": "UseDevelopmentStorage=true",
+    "SqlConnectionString": "Server=localhost;Database=BoilerplateTest;UID=test;Password=test;",
+    "ReplicaSqlConnectionString": "Server=localhost;Database=BoilerplateTest;UID=test;Password=test;"
+  }
+}

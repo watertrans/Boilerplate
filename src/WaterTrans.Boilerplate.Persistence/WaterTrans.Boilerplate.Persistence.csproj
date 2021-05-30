@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SqlResources\CreateDatabase.sql" />
+    <EmbeddedResource Include="SqlResources\CreateForecast.sql" />
+    <EmbeddedResource Include="SqlResources\CreateTestDatabase.sql" />
+    <EmbeddedResource Include="SqlResources\LoadInitialData.sql" />
+    <EmbeddedResource Include="SqlResources\LoadTestData.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Dapper.FastCrud" Version="2.5.0.39" />
+    <PackageReference Include="MySqlConnector" Version="1.3.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WaterTrans.Boilerplate.Application\WaterTrans.Boilerplate.Application.csproj" />
+    <ProjectReference Include="..\WaterTrans.Boilerplate.Domain\WaterTrans.Boilerplate.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="SqlResources\CreateForecast.sql" />
+  </ItemGroup>
+</Project>
