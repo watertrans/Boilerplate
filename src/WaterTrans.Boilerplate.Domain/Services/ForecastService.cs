@@ -41,7 +41,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
 
         public Forecast GetById(Guid forecastId)
         {
-            var result = _forecastRepository.Read(forecastId);
+            var result = _forecastRepository.GetById(forecastId);
 
             if (result == null)
             {
@@ -53,7 +53,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
 
         public Forecast Update(ForecastUpdateDto dto)
         {
-            var entity = _forecastRepository.Read(dto.ForecastId);
+            var entity = _forecastRepository.GetById(dto.ForecastId);
 
             if (entity == null)
             {

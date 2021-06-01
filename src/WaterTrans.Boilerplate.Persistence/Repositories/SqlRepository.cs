@@ -60,13 +60,13 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
             }
         }
 
-        public virtual TSqlEntity Read(TSqlEntity sqlEntity)
+        public virtual TSqlEntity GetById(TSqlEntity sqlEntity)
         {
             return Connection.Get<TSqlEntity>(sqlEntity, statement => statement
                 .WithTimeout(TimeSpan.FromSeconds(DBSettings.CommandTimeout)));
         }
 
-        public async virtual Task<TSqlEntity> ReadAsync(TSqlEntity sqlEntity)
+        public async virtual Task<TSqlEntity> GetByIdAsync(TSqlEntity sqlEntity)
         {
             return await Connection.GetAsync<TSqlEntity>(sqlEntity, statement => statement
                 .WithTimeout(TimeSpan.FromSeconds(DBSettings.CommandTimeout)));

@@ -57,6 +57,10 @@ namespace WaterTrans.Boilerplate.Persistence
 
         public void CreateTables()
         {
+            _connection.Execute(_resources["CreateAccessToken.sql"]);
+            _connection.Execute(_resources["CreateAccount.sql"]);
+            _connection.Execute(_resources["CreateApplication.sql"]);
+            _connection.Execute(_resources["CreateAuthorizationCode.sql"]);
             _connection.Execute(_resources["CreateForecast.sql"]);
         }
 
@@ -72,7 +76,11 @@ namespace WaterTrans.Boilerplate.Persistence
 
         public void DropTables()
         {
-            _connection.Execute("DROP TABLE IF EXISTS Forecast");
+            _connection.Execute("DROP TABLE IF EXISTS `AccessToken`");
+            _connection.Execute("DROP TABLE IF EXISTS `Account`");
+            _connection.Execute("DROP TABLE IF EXISTS `Application`");
+            _connection.Execute("DROP TABLE IF EXISTS `AuthorizationCode`");
+            _connection.Execute("DROP TABLE IF EXISTS `Forecast`");
         }
     }
 }

@@ -28,6 +28,8 @@ namespace WaterTrans.Boilerplate.Web
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToISO8601Date()))
                 .ForMember(dest => dest.CreateTime, opt => opt.MapFrom(src => src.CreateTime.ToISO8601()))
                 .ForMember(dest => dest.UpdateTime, opt => opt.MapFrom(src => src.UpdateTime.ToISO8601()));
+            CreateMap<TokenCreateRequest, TokenCreateByClientCredentialsDto>();
+            CreateMap<TokenCreateRequest, TokenCreateByAuthorizationCodeDto>();
         }
     }
 }

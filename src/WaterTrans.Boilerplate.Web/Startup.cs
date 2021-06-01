@@ -56,10 +56,18 @@ namespace WaterTrans.Boilerplate.Web
             services.AddTransient<IEnvSettings>(x => x.GetService<IOptionsMonitor<EnvSettings>>().CurrentValue);
             services.AddTransient<IDBSettings>(x => x.GetService<IOptionsMonitor<DBSettings>>().CurrentValue);
 
+            services.AddTransient<IAccessTokenRepository, AccessTokenRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IApplicationQueryService, ApplicationQueryService>();
+            services.AddTransient<IApplicationRepository, ApplicationRepository>();
+            services.AddTransient<IAuthorizationCodeRepository, AuthorizationCodeRepository>();
+            services.AddTransient<IAuthorizeService, AuthorizeService>();
             services.AddTransient<IForecastQueryService, ForecastQueryService>();
             services.AddTransient<IForecastRepository, ForecastRepository>();
             services.AddTransient<IForecastService, ForecastService>();
             services.AddTransient<IForecastUseCase, ForecastUseCase>();
+            services.AddTransient<ITokenUseCase, TokenUseCase>();
 
             if (!WebHostEnvironment.IsProduction())
             {

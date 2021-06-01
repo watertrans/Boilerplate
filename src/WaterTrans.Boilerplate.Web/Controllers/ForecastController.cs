@@ -14,12 +14,12 @@ namespace WaterTrans.Boilerplate.Web.Controllers
 {
     [ApiController]
     [ApiVersion("1")]
-    public class ForecastsController : ControllerBase
+    public class ForecastController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IForecastUseCase _usecase;
 
-        public ForecastsController(IMapper mapper, IForecastUseCase usecase)
+        public ForecastController(IMapper mapper, IForecastUseCase usecase)
         {
             _mapper = mapper;
             _usecase = usecase;

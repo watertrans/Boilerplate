@@ -6,8 +6,8 @@ namespace WaterTrans.Boilerplate.Domain.Abstractions.Services
 {
     public interface IAuthorizeService
     {
-        AccessToken CreateAccessToken(Guid applicationId, IList<string> scopes);
-        AccessToken CreateAccessToken(Guid applicationId, Guid accountId, IList<string> scopes);
+        AccessToken CreateAccessToken(Guid applicationId, List<string> scopes);
+        AccessToken CreateAccessToken(Guid applicationId, Guid accountId, List<string> scopes);
         AuthorizationCode CreateAuthorizationCode(Guid applicationId, Guid accountId);
         AccessToken GetAccessToken(string token);
         Application GetApplication(string clientId);

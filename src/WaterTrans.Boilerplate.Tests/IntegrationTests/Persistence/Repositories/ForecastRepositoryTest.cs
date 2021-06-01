@@ -35,7 +35,7 @@ namespace WaterTrans.Boilerplate.Tests.IntegrationTests.Persistence.Repositories
         {
             var forecastKey = Guid.Parse("00000000-0000-0000-0000-000000000001");
             var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
-            var forecast = forecastRepository.Read(forecastKey);
+            var forecast = forecastRepository.GetById(forecastKey);
 
             Assert.IsNotNull(forecast);
         }
@@ -45,7 +45,7 @@ namespace WaterTrans.Boilerplate.Tests.IntegrationTests.Persistence.Repositories
         {
             var forecastKey = Guid.Parse("00000000-0000-0000-0000-000000000000");
             var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
-            var forecast = forecastRepository.Read(forecastKey);
+            var forecast = forecastRepository.GetById(forecastKey);
 
             Assert.IsNull(forecast);
         }

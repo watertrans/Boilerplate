@@ -69,7 +69,7 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
         {
             var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
-            forecastRepositoryMock.Setup(x => x.Read(It.IsAny<Guid>())).Returns(new Forecast());
+            forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(new Forecast());
             var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
             var forecast = forecastService.GetById(Guid.NewGuid());
             Assert.IsNotNull(forecast);
@@ -81,7 +81,7 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
         {
             var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
-            forecastRepositoryMock.Setup(x => x.Read(It.IsAny<Guid>())).Returns((Forecast)null);
+            forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns((Forecast)null);
             var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
             var forecast = forecastService.GetById(Guid.NewGuid());
             Assert.IsNull(forecast);
@@ -107,7 +107,7 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
 
             var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
-            forecastRepositoryMock.Setup(x => x.Read(It.IsAny<Guid>())).Returns((Forecast)null);
+            forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns((Forecast)null);
             var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
             var forecast = forecastService.Update(forecastUpdateDto);
         }
@@ -137,7 +137,7 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
 
             var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
-            forecastRepositoryMock.Setup(x => x.Read(It.IsAny<Guid>())).Returns(mockForecast);
+            forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(mockForecast);
             var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
             var forecast = forecastService.Update(forecastUpdateDto);
         }
@@ -167,7 +167,7 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
 
             var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
-            forecastRepositoryMock.Setup(x => x.Read(It.IsAny<Guid>())).Returns(mockForecast);
+            forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(mockForecast);
             forecastRepositoryMock.Setup(x => x.Update(It.IsAny<Forecast>())).Returns(false);
             var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
             var forecast = forecastService.Update(forecastUpdateDto);

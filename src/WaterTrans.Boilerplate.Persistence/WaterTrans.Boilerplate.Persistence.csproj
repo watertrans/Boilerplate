@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="SqlResources\CreateAccessToken.sql" />
+    <EmbeddedResource Include="SqlResources\CreateApplication.sql" />
+    <EmbeddedResource Include="SqlResources\CreateAuthorizationCode.sql" />
     <EmbeddedResource Include="SqlResources\CreateDatabase.sql" />
     <EmbeddedResource Include="SqlResources\CreateForecast.sql" />
     <EmbeddedResource Include="SqlResources\CreateTestDatabase.sql" />

@@ -6,7 +6,7 @@ namespace WaterTrans.Boilerplate.Domain.Abstractions.Repositories
     public interface IForecastRepository
     {
         void Create(Forecast entity);
-        Forecast Read(Guid forecastId);
+        Forecast GetById(Guid forecastId);
         bool Update(Forecast entity);
         bool Delete(Guid forecastId);
     }

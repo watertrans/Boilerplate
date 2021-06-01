@@ -8,8 +8,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
     {
         void Create(TSqlEntity entity);
         Task CreateAsync(TSqlEntity entity);
-        TSqlEntity Read(TSqlEntity entity);
-        Task<TSqlEntity> ReadAsync(TSqlEntity entity);
+        TSqlEntity GetById(TSqlEntity entity);
+        Task<TSqlEntity> GetByIdAsync(TSqlEntity entity);
         bool Update(TSqlEntity entity);
         Task<bool> UpdateAsync(TSqlEntity entity);
         bool Delete(TSqlEntity entity);

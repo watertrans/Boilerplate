@@ -27,9 +27,9 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
             return _sqlRepository.Delete(new ForecastSqlEntity { ForecastId = forecastId });
         }
 
-        public Forecast Read(Guid forecastId)
+        public Forecast GetById(Guid forecastId)
         {
-            Forecast result = _sqlRepository.Read(new ForecastSqlEntity { ForecastId = forecastId });
+            Forecast result = _sqlRepository.GetById(new ForecastSqlEntity { ForecastId = forecastId });
             return result;
         }
 
