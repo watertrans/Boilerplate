@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="SqlResources\CreateAccessToken.sql" />
+    <EmbeddedResource Include="SqlResources\CreateAccount.sql" />
     <EmbeddedResource Include="SqlResources\CreateApplication.sql" />
     <EmbeddedResource Include="SqlResources\CreateAuthorizationCode.sql" />
     <EmbeddedResource Include="SqlResources\CreateDatabase.sql" />
@@ -26,7 +27,4 @@
     <ProjectReference Include="..\WaterTrans.Boilerplate.Domain\WaterTrans.Boilerplate.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="SqlResources\CreateForecast.sql" />
-  </ItemGroup>
 </Project>

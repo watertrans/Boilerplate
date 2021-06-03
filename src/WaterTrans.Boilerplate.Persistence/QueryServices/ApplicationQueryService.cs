@@ -54,7 +54,6 @@ namespace WaterTrans.Boilerplate.Persistence.QueryServices
             var param = new
             {
                 Query = DataUtil.EscapeLike(query, LikeMatchType.PrefixSearch),
-                TagQuery = query,
                 Page = paging.Page,
                 PageSize = paging.PageSize,
                 Offset = (paging.Page - 1) * paging.PageSize,

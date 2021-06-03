@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using WaterTrans.Boilerplate.Domain.Abstractions.QueryServices;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
 using WaterTrans.Boilerplate.Domain.Entities;
@@ -29,9 +28,8 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
                 Temperature = 30,
             };
 
-            var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
-            var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object);
             var forecast = forecastService.Create(forecastCreateDto);
 
             forecastRepositoryMock.Verify(x => x.Create(It.IsAny<Forecast>()));
@@ -46,10 +44,9 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
         [TestMethod]
         public void Delete_存在するIDの場合は例外が発生しない()
         {
-            var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.Delete(It.IsAny<Guid>())).Returns(true);
-            var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object);
             forecastService.Delete(Guid.NewGuid());
         }
 
@@ -57,20 +54,18 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
         [ExpectedException(typeof(EntityNotFoundException))]
         public void Delete_存在しないIDの場合は例外が発生する()
         {
-            var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.Delete(It.IsAny<Guid>())).Returns(false);
-            var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object);
             forecastService.Delete(Guid.NewGuid());
         }
 
         [TestMethod]
         public void GetById_存在するIDの場合は例外が発生しない()
         {
-            var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(new Forecast());
-            var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object);
             var forecast = forecastService.GetById(Guid.NewGuid());
             Assert.IsNotNull(forecast);
         }
@@ -79,10 +74,9 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
         [ExpectedException(typeof(EntityNotFoundException))]
         public void GetById_存在しないIDの場合は例外が発生する()
         {
-            var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns((Forecast)null);
-            var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object);
             var forecast = forecastService.GetById(Guid.NewGuid());
             Assert.IsNull(forecast);
         }
@@ -105,10 +99,9 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
                 ConcurrencyToken = now
             };
 
-            var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns((Forecast)null);
-            var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object);
             var forecast = forecastService.Update(forecastUpdateDto);
         }
 
@@ -135,10 +128,9 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
                 UpdateTime = DateUtil.Now.AddSeconds(1),
             };
 
-            var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(mockForecast);
-            var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object);
             var forecast = forecastService.Update(forecastUpdateDto);
         }
 
@@ -165,11 +157,10 @@ namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
                 UpdateTime = now,
             };
 
-            var forecastQueryServiceMock = new Mock<IForecastQueryService>();
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(mockForecast);
             forecastRepositoryMock.Setup(x => x.Update(It.IsAny<Forecast>())).Returns(false);
-            var forecastService = new ForecastService(forecastQueryServiceMock.Object, forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object);
             var forecast = forecastService.Update(forecastUpdateDto);
         }
     }

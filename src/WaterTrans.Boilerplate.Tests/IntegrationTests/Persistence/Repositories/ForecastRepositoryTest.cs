@@ -31,7 +31,7 @@ namespace WaterTrans.Boilerplate.Tests.IntegrationTests.Persistence.Repositories
         }
 
         [TestMethod]
-        public void Read_存在するデータを取得できる()
+        public void GetById_存在するデータを取得できる()
         {
             var forecastKey = Guid.Parse("00000000-0000-0000-0000-000000000001");
             var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
@@ -41,7 +41,7 @@ namespace WaterTrans.Boilerplate.Tests.IntegrationTests.Persistence.Repositories
         }
 
         [TestMethod]
-        public void Read_存在しないデータを取得するとNull()
+        public void GetById_存在しないデータを取得するとNull()
         {
             var forecastKey = Guid.Parse("00000000-0000-0000-0000-000000000000");
             var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);

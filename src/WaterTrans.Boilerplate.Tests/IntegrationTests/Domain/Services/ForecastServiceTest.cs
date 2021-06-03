@@ -4,7 +4,6 @@ using WaterTrans.Boilerplate.Domain.DataTransferObjects;
 using WaterTrans.Boilerplate.Domain.Exceptions;
 using WaterTrans.Boilerplate.Domain.Services;
 using WaterTrans.Boilerplate.Persistence.Exceptions;
-using WaterTrans.Boilerplate.Persistence.QueryServices;
 using WaterTrans.Boilerplate.Persistence.Repositories;
 
 namespace WaterTrans.Boilerplate.Tests.IntegrationTests.Domain.Services
@@ -28,9 +27,8 @@ namespace WaterTrans.Boilerplate.Tests.IntegrationTests.Domain.Services
                 Temperature = 30,
             };
 
-            var forecastQueryServiceMock = new ForecastQueryService(TestEnvironment.DBSettings);
-            var forecastRepositoryMock = new ForecastRepository(TestEnvironment.DBSettings);
-            var forecastService = new ForecastService(forecastQueryServiceMock, forecastRepositoryMock);
+            var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
+            var forecastService = new ForecastService(forecastRepository);
             forecastService.Create(createForecastDto);
             forecastService.Create(createForecastDto);
         }
@@ -39,19 +37,17 @@ namespace WaterTrans.Boilerplate.Tests.IntegrationTests.Domain.Services
         [ExpectedException(typeof(EntityNotFoundException))]
         public void Delete_存在しないキーで削除をするとエラー()
         {
-            var forecastQueryServiceMock = new ForecastQueryService(TestEnvironment.DBSettings);
-            var forecastRepositoryMock = new ForecastRepository(TestEnvironment.DBSettings);
-            var forecastService = new ForecastService(forecastQueryServiceMock, forecastRepositoryMock);
+            var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
+            var forecastService = new ForecastService(forecastRepository);
             forecastService.Delete(Guid.NewGuid());
         }
 
         [TestMethod]
         [ExpectedException(typeof(EntityNotFoundException))]
-        public void Read_存在しないキーで取得をするとエラー()
+        public void GetById_存在しないキーで取得をするとエラー()
         {
-            var forecastQueryServiceMock = new ForecastQueryService(TestEnvironment.DBSettings);
-            var forecastRepositoryMock = new ForecastRepository(TestEnvironment.DBSettings);
-            var forecastService = new ForecastService(forecastQueryServiceMock, forecastRepositoryMock);
+            var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
+            var forecastService = new ForecastService(forecastRepository);
             forecastService.GetById(Guid.NewGuid());
         }
     }

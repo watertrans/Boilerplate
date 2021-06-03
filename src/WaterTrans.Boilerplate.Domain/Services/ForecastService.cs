@@ -12,14 +12,10 @@ namespace WaterTrans.Boilerplate.Domain.Services
 {
     public class ForecastService : IForecastService
     {
-        private readonly IForecastQueryService _forecastQueryService;
         private readonly IForecastRepository _forecastRepository;
 
-        public ForecastService(
-            IForecastQueryService forecastQueryService,
-            IForecastRepository forecastRepository)
+        public ForecastService(IForecastRepository forecastRepository)
         {
-            _forecastQueryService = forecastQueryService;
             _forecastRepository = forecastRepository;
         }
 
