@@ -5,8 +5,8 @@ namespace WaterTrans.Boilerplate.Domain.Abstractions.Repositories
     public interface IAccessTokenRepository
     {
         void Create(AccessToken entity);
-        AccessToken GetById(string tokenId);
+        AccessToken GetById(string token);
         bool Update(AccessToken entity);
-        bool Delete(string tokenId);
+        bool Delete(string token);
     }
 }

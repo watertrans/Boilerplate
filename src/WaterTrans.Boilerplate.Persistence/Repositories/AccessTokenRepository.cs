@@ -22,14 +22,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
             _sqlRepository.Create(sqlEntity);
         }
 
-        public bool Delete(string tokenId)
+        public bool Delete(string token)
         {
-            return _sqlRepository.Delete(new AccessTokenSqlEntity { TokenId = tokenId });
+            return _sqlRepository.Delete(new AccessTokenSqlEntity { Token = token });
         }
 
-        public AccessToken GetById(string tokenId)
+        public AccessToken GetById(string token)
         {
-            AccessToken result = _sqlRepository.GetById(new AccessTokenSqlEntity { TokenId = tokenId });
+            AccessToken result = _sqlRepository.GetById(new AccessTokenSqlEntity { Token = token });
             return result;
         }
 

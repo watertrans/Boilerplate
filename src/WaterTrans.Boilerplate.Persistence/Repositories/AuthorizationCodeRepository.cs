@@ -21,14 +21,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
             _sqlRepository.Create(sqlEntity);
         }
 
-        public bool Delete(string codeId)
+        public bool Delete(string code)
         {
-            return _sqlRepository.Delete(new AuthorizationCodeSqlEntity { CodeId = codeId });
+            return _sqlRepository.Delete(new AuthorizationCodeSqlEntity { Code = code });
         }
 
-        public AuthorizationCode GetById(string codeId)
+        public AuthorizationCode GetById(string code)
         {
-            AuthorizationCode result = _sqlRepository.GetById(new AuthorizationCodeSqlEntity { CodeId = codeId });
+            AuthorizationCode result = _sqlRepository.GetById(new AuthorizationCodeSqlEntity { Code = code });
             return result;
         }
 

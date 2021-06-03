@@ -5,7 +5,7 @@ namespace WaterTrans.Boilerplate.Domain.Entities
 {
     public class AuthorizationCode : Entity
     {
-        public string CodeId { get; set; }
+        public string Code { get; set; }
         public Guid ApplicationId { get; set; }
         public Guid AccountId { get; set; }
         public AuthorizationCodeStatus Status { get; set; }

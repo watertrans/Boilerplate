@@ -49,7 +49,7 @@ namespace WaterTrans.Boilerplate.Web.Controllers
                 {
                     return new TokenResponse
                     {
-                        AccessToken = _tokenUseCase.AccessToken.TokenId,
+                        AccessToken = _tokenUseCase.AccessToken.Token,
                         ExpiresIn = _appSetgings.AccessTokenExpiresIn,
                         Scope = string.Join(' ', _tokenUseCase.AccessToken.Scopes),
                         TokenType = "Bearer",
@@ -68,7 +68,7 @@ namespace WaterTrans.Boilerplate.Web.Controllers
                 {
                     return new TokenResponse
                     {
-                        AccessToken = _tokenUseCase.AccessToken.TokenId,
+                        AccessToken = _tokenUseCase.AccessToken.Token,
                         ExpiresIn = _appSetgings.AccessTokenExpiresIn,
                         Scope = string.Join(' ', _tokenUseCase.AccessToken.Scopes),
                         TokenType = "Bearer",

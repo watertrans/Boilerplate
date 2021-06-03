@@ -85,7 +85,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             var now = DateUtil.Now;
             var accessToken = new AccessToken
             {
-                TokenId = StringUtil.CreateCode(),
+                Token = StringUtil.CreateCode(),
                 ApplicationId = applicationId,
                 PrincipalType = PrincipalType.User.ToString(),
                 PrincipalId = accountId,
@@ -135,7 +135,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             var now = DateUtil.Now;
             var accessToken = new AccessToken
             {
-                TokenId = StringUtil.CreateCode(),
+                Token = StringUtil.CreateCode(),
                 ApplicationId = applicationId,
                 PrincipalType = PrincipalType.Application.ToString(),
                 PrincipalId = applicationId,
@@ -176,7 +176,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             var now = DateUtil.Now;
             var authorizationCode = new AuthorizationCode
             {
-                CodeId = StringUtil.CreateCode(),
+                Code = StringUtil.CreateCode(),
                 ApplicationId = applicationId,
                 AccountId = accountId,
                 Status = AuthorizationCodeStatus.NORMAL,
@@ -237,7 +237,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 Description = accessToken.Description,
                 Roles = roles,
                 Scopes = accessToken.Scopes,
-                TokenId = accessToken.TokenId,
+                Token = accessToken.Token,
                 ApplicationId = accessToken.ApplicationId,
                 PrincipalType = accessToken.PrincipalType,
                 PrincipalId = accessToken.PrincipalId,
@@ -303,7 +303,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
 
             var result = new Domain.Entities.AuthorizationCode
             {
-                CodeId = code,
+                Code = code,
                 ApplicationId = authorizationCode.ApplicationId,
                 AccountId = authorizationCode.AccountId,
                 ExpiryTime = authorizationCode.ExpiryTime,

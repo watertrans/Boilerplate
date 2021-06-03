@@ -9,7 +9,7 @@ namespace WaterTrans.Boilerplate.Persistence.SqlEntities
     public class AuthorizationCodeSqlEntity : SqlEntity
     {
         [Key]
-        public string CodeId { get; set; }
+        public string Code { get; set; }
         public Guid ApplicationId { get; set; }
         public Guid AccountId { get; set; }
         public string Status { get; set; }

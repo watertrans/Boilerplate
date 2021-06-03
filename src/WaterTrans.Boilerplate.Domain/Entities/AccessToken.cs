@@ -6,7 +6,7 @@ namespace WaterTrans.Boilerplate.Domain.Entities
 {
     public class AccessToken : Entity
     {
-        public string TokenId { get; set; }
+        public string Token { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Guid ApplicationId { get; set; }
