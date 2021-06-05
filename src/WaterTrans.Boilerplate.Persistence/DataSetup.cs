@@ -52,7 +52,7 @@ namespace WaterTrans.Boilerplate.Persistence
 
         public void CreateTestDatabase()
         {
-            _connection.Execute(_resources["CreateTestDatabse.sql"]);
+            _connection.Execute(_resources["CreateTestDatabase.sql"]);
         }
 
         public void CreateTables()

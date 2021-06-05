@@ -10,13 +10,29 @@ This is a Boilerplate Code, with implementation of Clean Architecture, using Mic
 
 ### Initialize Database
 
-- MariaDB
-  - Execute: `\db\docker-compose.yml`
-  - Execute: `\src\WaterTrans.Boilerplate.Persistence\SqlResources\CreateDatabase.sql`
-  - Execute: `\src\WaterTrans.Boilerplate.Persistence\SqlResources\CreateTestDatabase.sql`
+- MariaDB on Docker
+  - `cd .\db`
+  - `docker compose up -d`
+  - `dbadmin init server -s`
+  - `dbadmin init database -s`
+
+### Get Access Tokens
+
 - Visual Studio
   - Open: `WaterTrans.Boilerplate.sln`
-  - Set as Startup Project: `WaterTrans.Boilerplate.Web`
+  - Set as Startup Project: `WaterTrans.Boilerplate.Web.Api`
   - Start Debugging
-  - Execute: `/api/v1/debug/database/initialize`
-  - Execute: `​/api​/v1​/debug​/database​/loadInitialData`
+  - Visit: `/api/v1/token`
+  - Enter the following values
+    - grant_type: `client_credentials`
+    - client_id: `owner`
+    - client_secret: `owner-secret`
+
+## MariaDB default user / password
+
+- MariaDB root user
+  - root / root
+- MariaDB Boilerplate database owner
+  - user / user
+- MariaDB BoilerplateTest database owner
+  - test / test
