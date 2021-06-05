@@ -12,7 +12,6 @@ namespace WaterTrans.Boilerplate.Web.DataAnnotations
 
         public string[] Fields { get; set; }
 
-        /// <inheritdoc/>
         public override bool IsValid(object value)
         {
             if (value == null)

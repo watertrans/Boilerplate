@@ -7,7 +7,7 @@ using MySqlConnector;
 using System.IO;
 using WaterTrans.Boilerplate.Application.Settings;
 using WaterTrans.Boilerplate.Persistence;
-using WaterTrans.Boilerplate.Web;
+using WaterTrans.Boilerplate.Web.Api;
 
 namespace WaterTrans.Boilerplate.Tests
 {

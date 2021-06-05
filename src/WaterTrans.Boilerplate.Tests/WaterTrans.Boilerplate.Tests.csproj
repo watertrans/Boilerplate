@@ -33,6 +33,7 @@
     <ProjectReference Include="..\WaterTrans.Boilerplate.Application\WaterTrans.Boilerplate.Application.csproj" />
     <ProjectReference Include="..\WaterTrans.Boilerplate.Domain\WaterTrans.Boilerplate.Domain.csproj" />
     <ProjectReference Include="..\WaterTrans.Boilerplate.Persistence\WaterTrans.Boilerplate.Persistence.csproj" />
+    <ProjectReference Include="..\WaterTrans.Boilerplate.Web.Api\WaterTrans.Boilerplate.Web.Api.csproj" />
     <ProjectReference Include="..\WaterTrans.Boilerplate.Web\WaterTrans.Boilerplate.Web.csproj" />
   </ItemGroup>
 
