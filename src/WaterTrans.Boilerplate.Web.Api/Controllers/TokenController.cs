@@ -80,7 +80,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
             }
             else
             {
-                throw new NotImplementedException();
+                return ErrorObjectResultFactory.InvalidGrantType();
             }
         }
 
