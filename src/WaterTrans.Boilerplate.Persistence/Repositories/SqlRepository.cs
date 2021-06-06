@@ -1,6 +1,7 @@
 ﻿using Dapper.FastCrud;
 using MySqlConnector;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -58,6 +59,16 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
             {
                 throw new DuplicateKeyException("The primary key is duplicated.", ex);
             }
+        }
+
+        public virtual IEnumerable<TSqlEntity> GetAll()
+        {
+            return Connection.Find<TSqlEntity>();
+        }
+
+        public async virtual Task<IEnumerable<TSqlEntity>> GetAllAsync()
+        {
+            return await Connection.FindAsync<TSqlEntity>();
         }
 
         public virtual TSqlEntity GetById(TSqlEntity sqlEntity)

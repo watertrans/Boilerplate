@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using WaterTrans.Boilerplate.Persistence;
 
 namespace WaterTrans.Boilerplate.Web.Server
 {
@@ -7,6 +8,7 @@ namespace WaterTrans.Boilerplate.Web.Server
     {
         public static void Main(string[] args)
         {
+            DataConfiguration.Initialize();
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using WaterTrans.Boilerplate.Persistence.SqlEntities;
 
 namespace WaterTrans.Boilerplate.Persistence.Repositories
@@ -10,6 +11,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
         Task CreateAsync(TSqlEntity entity);
         TSqlEntity GetById(TSqlEntity entity);
         Task<TSqlEntity> GetByIdAsync(TSqlEntity entity);
+        IEnumerable<TSqlEntity> GetAll();
+        Task<IEnumerable<TSqlEntity>> GetAllAsync();
         bool Update(TSqlEntity entity);
         Task<bool> UpdateAsync(TSqlEntity entity);
         bool Delete(TSqlEntity entity);

@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
@@ -9,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using MySqlConnector;
+using System;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
@@ -39,6 +43,7 @@ namespace WaterTrans.Boilerplate.Web.Api
 
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment WebHostEnvironment { get; }
+        public IServiceProvider ServiceProvider { get; private set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -51,9 +56,13 @@ namespace WaterTrans.Boilerplate.Web.Api
                 Configuration.GetSection("DBSettings").Bind(options);
                 options.SqlProviderFactory = MySqlConnectorFactory.Instance;
             });
+
             // This is work around. See https://github.com/dotnet/aspnetcore/issues/4853 @zhurinvlad commented on 5 Sep 2018
             services.AddSingleton<IValidationAttributeAdapterProvider, CustomValidationAttributeAdapterProvider>();
             services.AddSingleton<IConfigureOptions<MvcOptions>, MvcConfiguration>();
+            services.AddSingleton<IConfigureOptions<KeyManagementOptions>, ConfigureKeyManagementOptions>();
+            services.AddSingleton<IXmlRepository, DataProtectionRepository>();
+
             services.AddTransient<IAppSettings>(x => x.GetService<IOptionsMonitor<AppSettings>>().CurrentValue);
             services.AddTransient<IEnvSettings>(x => x.GetService<IOptionsMonitor<EnvSettings>>().CurrentValue);
             services.AddTransient<IDBSettings>(x => x.GetService<IOptionsMonitor<DBSettings>>().CurrentValue);
@@ -139,6 +148,7 @@ namespace WaterTrans.Boilerplate.Web.Api
                 {
                     options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(ErrorMessages));
                 });
+            services.AddDataProtection();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

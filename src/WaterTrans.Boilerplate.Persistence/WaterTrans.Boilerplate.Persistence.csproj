@@ -10,6 +10,7 @@
     <EmbeddedResource Include="SqlResources\CreateApplication.sql" />
     <EmbeddedResource Include="SqlResources\CreateAuthorizationCode.sql" />
     <EmbeddedResource Include="SqlResources\CreateDatabase.sql" />
+    <EmbeddedResource Include="SqlResources\CreateDataProtection.sql" />
     <EmbeddedResource Include="SqlResources\CreateForecast.sql" />
     <EmbeddedResource Include="SqlResources\CreateTestDatabase.sql" />
     <EmbeddedResource Include="SqlResources\LoadInitialData.sql" />
@@ -20,6 +21,7 @@
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Dapper.FastCrud" Version="2.5.0.39" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="3.1.15" />
     <PackageReference Include="MySqlConnector" Version="1.3.9" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>

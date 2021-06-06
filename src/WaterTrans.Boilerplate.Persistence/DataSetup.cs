@@ -61,6 +61,7 @@ namespace WaterTrans.Boilerplate.Persistence
             _connection.Execute(_resources["CreateAccount.sql"]);
             _connection.Execute(_resources["CreateApplication.sql"]);
             _connection.Execute(_resources["CreateAuthorizationCode.sql"]);
+            _connection.Execute(_resources["CreateDataProtection.sql"]);
             _connection.Execute(_resources["CreateForecast.sql"]);
         }
 
@@ -80,6 +81,7 @@ namespace WaterTrans.Boilerplate.Persistence
             _connection.Execute("DROP TABLE IF EXISTS `Account`");
             _connection.Execute("DROP TABLE IF EXISTS `Application`");
             _connection.Execute("DROP TABLE IF EXISTS `AuthorizationCode`");
+            _connection.Execute("DROP TABLE IF EXISTS `DataProtection`");
             _connection.Execute("DROP TABLE IF EXISTS `Forecast`");
         }
     }
