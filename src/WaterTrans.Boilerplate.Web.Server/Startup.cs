@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,6 +18,7 @@ namespace WaterTrans.Boilerplate.Web.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<KestrelServerOptions>(Configuration.GetSection("Kestrel"));
             services.AddControllersWithViews();
         }
 
