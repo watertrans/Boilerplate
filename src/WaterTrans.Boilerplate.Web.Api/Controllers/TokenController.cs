@@ -26,7 +26,6 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
         public TokenController(
             IMapper mapper,
             IAppSettings appSetgings,
-            IAuthorizeService authorizeService,
             ITokenUseCase tokenUseCase)
         {
             _mapper = mapper;
