@@ -28,6 +28,12 @@ This is a Boilerplate Code, with implementation of Clean Architecture, using Mic
     - client_id: `owner`
     - client_secret: `owner-secret`
 
+## Database Maintenance
+
+- Create tables, indexes, stored procedures and others.
+  - `cd .\db`
+  - `dbadmin apply database`
+
 ## Default settings
 
 - MariaDB
