@@ -28,11 +28,11 @@ This is a Boilerplate Code, with implementation of Clean Architecture, using Mic
     - client_id: `owner`
     - client_secret: `owner-secret`
 
-## MariaDB default user / password
+## Default settings
 
-- MariaDB root user
-  - root / root
-- MariaDB Boilerplate database owner
-  - user / user
-- MariaDB BoilerplateTest database owner
-  - test / test
+- MariaDB
+  - Root user: `root` / `root`
+  - Boilerplate database owner: `user` / `user`
+  - BoilerplateTest database owner: `test` / `test`
+  - Data: `C:\Users\{USERNAME}\AppData\Local\MariaDB\data`
+  - Backup: `C:\Users\{USERNAME}\AppData\Local\MariaDB\backup`
