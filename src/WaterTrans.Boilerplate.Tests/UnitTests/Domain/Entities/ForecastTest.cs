@@ -2,7 +2,7 @@ using FluentValidation.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WaterTrans.Boilerplate.Domain.Entities;
 
-namespace WaterTrans.Boilerplate.Tests.UnitTests.Entities.Services
+namespace WaterTrans.Boilerplate.Entities.Services.UnitTests
 {
     [TestClass]
     [TestCategory("UnitTests")]

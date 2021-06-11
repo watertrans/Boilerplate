@@ -56,14 +56,7 @@ namespace WaterTrans.Boilerplate.Application.UseCases
                 return CreateTokenResult.InvalidCode;
             }
 
-            using (var scope = new TransactionScope())
-            {
-                AccessToken = _authorizeService.CreateAccessToken(
-                    application.ApplicationId,
-                    authorizationCode.AccountId,
-                    null);
-                _authorizeService.UseAuthorizationCode(dto.Code);
-            }
+            AccessToken = _authorizeService.CreateAccessToken(authorizationCode, null);
 
             return CreateTokenResult.Success;
         }

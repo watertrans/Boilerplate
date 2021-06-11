@@ -1,8 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WaterTrans.Boilerplate.Domain;
-using WaterTrans.Boilerplate.Persistence.QueryServices;
+using WaterTrans.Boilerplate.Tests;
 
-namespace WaterTrans.Boilerplate.Tests.IntegrationTests.Persistence.QueryServices
+namespace WaterTrans.Boilerplate.Persistence.QueryServices.IntegrationTests
 {
     [TestClass]
     [TestCategory("IntegrationTests")]

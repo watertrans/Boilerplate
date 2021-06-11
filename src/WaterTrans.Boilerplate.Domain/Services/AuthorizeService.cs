@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using WaterTrans.Boilerplate.Domain.Abstractions;
 using WaterTrans.Boilerplate.Domain.Abstractions.QueryServices;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
@@ -36,37 +37,42 @@ namespace WaterTrans.Boilerplate.Domain.Services
             _accountService = accountService;
         }
 
-        public AccessToken CreateAccessToken(Guid applicationId, Guid accountId, List<string> scopes)
+        public AccessToken CreateAccessToken(AuthorizationCode authorizationCode, IEnumerable<string> scopes)
         {
-            if (applicationId == null || applicationId == Guid.Empty)
+            if (authorizationCode == null)
             {
-                throw new ArgumentNullException(nameof(applicationId));
+                throw new ArgumentNullException(nameof(authorizationCode));
             }
 
-            if (accountId == null || accountId == Guid.Empty)
+            if (authorizationCode.Status != AuthorizationCodeStatus.NORMAL)
             {
-                throw new ArgumentNullException(nameof(accountId));
+                throw new InvalidOperationException($"AuthorizationCode '{authorizationCode.Code}' was not valid.");
             }
 
-            var application = _applicationRepository.GetById(applicationId);
-            if (application == null || application.Status != ApplicationStatus.NORMAL)
+            var application = _applicationRepository.GetById(authorizationCode.ApplicationId);
+            if (application == null)
             {
-                throw new InvalidOperationException($"Application '{applicationId}' was not found.");
+                throw new InvalidOperationException($"Application '{authorizationCode.ApplicationId}' was not found.");
             }
 
-            var account = _accountService.GetAccount(accountId);
+            if (application.Status != ApplicationStatus.NORMAL)
+            {
+                throw new InvalidOperationException($"Application '{authorizationCode.ApplicationId}' was not valid.");
+            }
+
+            var account = _accountService.GetAccount(authorizationCode.AccountId);
             if (account == null)
             {
-                throw new InvalidOperationException($"Account '{accountId}' was not found.");
+                throw new InvalidOperationException($"Account '{authorizationCode.AccountId}' was not found.");
             }
 
             if (account.Status != AccountStatus.NORMAL)
             {
-                throw new InvalidOperationException($"Account '{accountId}' was not valid.");
+                throw new InvalidOperationException($"Account '{authorizationCode.AccountId}' was not valid.");
             }
 
             var roleScopes = GetAccountRoleScopes(account.Roles);
-            List<string> accessTokenScopes = scopes;
+            List<string> accessTokenScopes = scopes.ToList();
             if (scopes == null || scopes.Count() == 0)
             {
                 accessTokenScopes = roleScopes;
@@ -86,10 +92,10 @@ namespace WaterTrans.Boilerplate.Domain.Services
             var accessToken = new AccessToken
             {
                 Token = StringUtil.CreateCode(),
-                ApplicationId = applicationId,
+                ApplicationId = authorizationCode.ApplicationId,
                 PrincipalType = PrincipalType.User.ToString(),
-                PrincipalId = accountId,
-                Name = accountId + " - " + now.ToISO8601(),
+                PrincipalId = authorizationCode.AccountId,
+                Name = authorizationCode.AccountId + " - " + now.ToISO8601(),
                 Description = string.Empty,
                 Roles = account.Roles,
                 Scopes = accessTokenScopes,
@@ -99,11 +105,19 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 UpdateTime = now,
             };
 
-            _accessTokenRepository.Create(accessToken);
+            authorizationCode.Status = AuthorizationCodeStatus.USED;
+            authorizationCode.UpdateTime = DateUtil.Now;
+
+            using (var scope = new TransactionScope())
+            {
+                _accessTokenRepository.Create(accessToken);
+                _authorizationCodeRepository.Update(authorizationCode);
+            }
+
             return accessToken;
         }
 
-        public AccessToken CreateAccessToken(Guid applicationId, List<string> scopes)
+        public AccessToken CreateAccessToken(Guid applicationId, IEnumerable<string> scopes)
         {
             if (applicationId == null || applicationId == Guid.Empty)
             {
@@ -111,12 +125,17 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var application = _applicationRepository.GetById(applicationId);
-            if (application == null || application.Status != ApplicationStatus.NORMAL)
+            if (application == null)
             {
                 throw new InvalidOperationException($"Application '{applicationId}' was not found.");
             }
 
-            List<string> accessTokenScopes = scopes;
+            if (application.Status != ApplicationStatus.NORMAL)
+            {
+                throw new InvalidOperationException($"Application '{applicationId}' was not valid.");
+            }
+
+            List<string> accessTokenScopes = scopes.ToList();
             if (scopes == null || scopes.Count() == 0)
             {
                 accessTokenScopes = application.Scopes;
@@ -231,23 +250,9 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 roles = account.Roles;
             }
 
-            var result = new AccessToken
-            {
-                Name = accessToken.Name,
-                Description = accessToken.Description,
-                Roles = roles,
-                Scopes = accessToken.Scopes,
-                Token = accessToken.Token,
-                ApplicationId = accessToken.ApplicationId,
-                PrincipalType = accessToken.PrincipalType,
-                PrincipalId = accessToken.PrincipalId,
-                ExpiryTime = accessToken.ExpiryTime,
-                Status = accessToken.Status,
-                CreateTime = accessToken.CreateTime,
-                UpdateTime = accessToken.UpdateTime,
-            };
+            accessToken.Roles = roles;
 
-            return result;
+            return accessToken;
         }
 
         public Domain.Entities.Application GetApplication(string clientId)
@@ -263,24 +268,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 return null;
             }
 
-            var result = new Domain.Entities.Application
-            {
-                ApplicationId = application.ApplicationId,
-                ClientId = application.ClientId,
-                ClientSecret = application.ClientSecret,
-                Name = application.Name,
-                Description = application.Description,
-                Roles = application.Roles,
-                Scopes = application.Scopes,
-                GrantTypes = application.GrantTypes,
-                RedirectUris = application.RedirectUris,
-                PostLogoutRedirectUris = application.PostLogoutRedirectUris,
-                Status = application.Status,
-                CreateTime = application.CreateTime,
-                UpdateTime = application.UpdateTime,
-            };
-
-            return result;
+            return application;
         }
 
         public Domain.Entities.AuthorizationCode GetAuthorizationCode(string code)
@@ -301,31 +289,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 return null;
             }
 
-            var result = new Domain.Entities.AuthorizationCode
-            {
-                Code = code,
-                ApplicationId = authorizationCode.ApplicationId,
-                AccountId = authorizationCode.AccountId,
-                ExpiryTime = authorizationCode.ExpiryTime,
-                Status = authorizationCode.Status,
-                CreateTime = authorizationCode.CreateTime,
-                UpdateTime = authorizationCode.UpdateTime,
-            };
-
-            return result;
-        }
-
-        public void UseAuthorizationCode(string code)
-        {
-            if (string.IsNullOrEmpty(code))
-            {
-                throw new ArgumentNullException(nameof(code));
-            }
-
-            var authorizationCode = _authorizationCodeRepository.GetById(code);
-            authorizationCode.Status = AuthorizationCodeStatus.USED;
-            authorizationCode.UpdateTime = DateUtil.Now;
-            _authorizationCodeRepository.Update(authorizationCode);
+            return authorizationCode;
         }
 
         private List<string> GetAccountRoleScopes(List<string> roles)

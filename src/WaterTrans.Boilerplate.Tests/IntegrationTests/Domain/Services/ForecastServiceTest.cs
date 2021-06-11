@@ -2,11 +2,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
 using WaterTrans.Boilerplate.Domain.Exceptions;
-using WaterTrans.Boilerplate.Domain.Services;
 using WaterTrans.Boilerplate.Persistence.Exceptions;
 using WaterTrans.Boilerplate.Persistence.Repositories;
+using WaterTrans.Boilerplate.Tests;
 
-namespace WaterTrans.Boilerplate.Tests.IntegrationTests.Domain.Services
+namespace WaterTrans.Boilerplate.Domain.Services.IntegrationTests
 {
     [TestClass]
     [TestCategory("IntegrationTests")]

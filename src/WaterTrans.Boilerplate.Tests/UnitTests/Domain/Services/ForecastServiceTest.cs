@@ -5,10 +5,9 @@ using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
 using WaterTrans.Boilerplate.Domain.Entities;
 using WaterTrans.Boilerplate.Domain.Exceptions;
-using WaterTrans.Boilerplate.Domain.Services;
 using WaterTrans.Boilerplate.Domain.Utils;
 
-namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Services
+namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
 {
     [TestClass]
     [TestCategory("UnitTests")]

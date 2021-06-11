@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using WaterTrans.Boilerplate.Domain.Utils;
 
-namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Utils
+namespace WaterTrans.Boilerplate.Domain.Utils.UnitTests
 {
     [TestClass]
     [TestCategory("UnitTests")]

@@ -3,16 +3,16 @@ using System;
 using WaterTrans.Boilerplate.Domain.Entities;
 using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Domain.ValueObjects;
-using WaterTrans.Boilerplate.Persistence.Repositories;
+using WaterTrans.Boilerplate.Tests;
 
-namespace WaterTrans.Boilerplate.Tests.IntegrationTests.Persistence.Repositories
+namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
 {
     [TestClass]
     [TestCategory("IntegrationTests")]
     public class ForecastRepositoryTest
     {
         [TestMethod]
-        public void Create_Å‘å’l‚ğ“o˜^‚µ‚Ä‚à—áŠO‚ª”­¶‚µ‚È‚¢()
+        public void Create_“o˜^‚É—áŠO‚ª”­¶‚µ‚È‚¢()
         {
             var forecast = new Forecast
             {

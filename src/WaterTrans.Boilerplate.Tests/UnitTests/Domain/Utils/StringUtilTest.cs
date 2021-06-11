@@ -3,9 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WaterTrans.Boilerplate.Domain.Utils;
 
-namespace WaterTrans.Boilerplate.Tests.UnitTests.Domain.Utils
+namespace WaterTrans.Boilerplate.Domain.Utils.UnitTests
 {
     [TestClass]
     [TestCategory("UnitTests")]
