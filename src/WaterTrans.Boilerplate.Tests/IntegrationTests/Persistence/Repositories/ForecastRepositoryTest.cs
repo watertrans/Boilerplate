@@ -23,8 +23,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 Date = DateTime.Today,
                 Summary = new string('A', 100),
                 Temperature = int.MaxValue,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
             forecastRepository.Create(forecast);
@@ -62,13 +62,16 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 Date = DateTime.Today,
                 Summary = new string('A', 100),
                 Temperature = int.MaxValue,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
             forecastRepository.Create(forecast);
-            forecast.UpdateTime = DateUtil.Now;
-            Assert.IsTrue(forecastRepository.Update(forecast));
+
+            var createdForecast = forecastRepository.GetById(forecast.ForecastId);
+            createdForecast.UpdateTime = DateUtil.Now;
+
+            Assert.IsTrue(forecastRepository.Update(createdForecast));
         }
 
         [TestMethod]
@@ -83,8 +86,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 Date = DateTime.Today,
                 Summary = new string('A', 100),
                 Temperature = int.MaxValue,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
             forecastRepository.Create(forecast);

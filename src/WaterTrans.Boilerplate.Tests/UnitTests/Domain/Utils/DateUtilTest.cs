@@ -44,7 +44,7 @@ namespace WaterTrans.Boilerplate.Domain.Utils.UnitTests
         [TestMethod]
         public void ParseISO8601_解析できること()
         {
-            Assert.AreEqual(new DateTimeOffset(2000, 1, 1, 12, 34, 56, TimeSpan.FromHours(9)), DateUtil.ParseISO8601("2000-01-01T12:34:56+09:00"));
+            Assert.AreEqual(new DateTimeOffset(2000, 1, 1, 12, 34, 56, TimeSpan.FromHours(9)).DateTime, DateUtil.ParseISO8601("2000-01-01T12:34:56+09:00"));
         }
 
         [TestMethod]
@@ -142,24 +142,10 @@ namespace WaterTrans.Boilerplate.Domain.Utils.UnitTests
         }
 
         [TestMethod]
-        public void ToISO8601_プラスのオフセット()
-        {
-            DateTimeOffset? offset = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.FromHours(9));
-            Assert.AreEqual("2000-01-01T00:00:00+09:00", offset.ToISO8601());
-        }
-
-        [TestMethod]
         public void ToISO8601_UTC日付()
         {
-            DateTimeOffset? offset = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.FromHours(0));
+            DateTime? offset = new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             Assert.AreEqual("2000-01-01T00:00:00+00:00", offset.ToISO8601());
-        }
-
-        [TestMethod]
-        public void ToISO8601_マイナスのオフセット()
-        {
-            DateTimeOffset? offset = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.FromHours(-9));
-            Assert.AreEqual("2000-01-01T00:00:00-09:00", offset.ToISO8601());
         }
     }
 }

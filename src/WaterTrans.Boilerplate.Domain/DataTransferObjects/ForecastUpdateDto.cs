@@ -11,6 +11,6 @@ namespace WaterTrans.Boilerplate.Domain.DataTransferObjects
         public DateTime? Date { get; set; }
         public int? Temperature { get; set; }
         public string Summary { get; set; }
-        public DateTimeOffset ConcurrencyToken { get; set; }
+        public DateTime ConcurrencyToken { get; set; }
     }
 }

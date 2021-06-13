@@ -17,7 +17,8 @@ namespace WaterTrans.Boilerplate.Domain.Entities
         public List<string> RedirectUris { get; set; }
         public List<string> PostLogoutRedirectUris { get; set; }
         public ApplicationStatus Status { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
-        public DateTimeOffset UpdateTime { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
+        public DateTime ConcurrencyToken { get; set; }
     }
 }

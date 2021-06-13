@@ -5,9 +5,9 @@ namespace WaterTrans.Boilerplate.Domain.Utils
 {
     public static class DateUtil
     {
-        public static DateTimeOffset Now
+        public static DateTime Now
         {
-            get => DateTimeOffset.Now;
+            get => DateTime.UtcNow;
         }
 
         public static bool IsISO8601Date(string dateString)
@@ -22,12 +22,12 @@ namespace WaterTrans.Boilerplate.Domain.Utils
 
         public static bool IsISO8601(string dateString)
         {
-            return DateTimeOffset.TryParseExact((string)dateString, "yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+            return DateTime.TryParseExact((string)dateString, "yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
         }
 
-        public static DateTimeOffset ParseISO8601(string dateString)
+        public static DateTime ParseISO8601(string dateString)
         {
-            return DateTimeOffset.ParseExact((string)dateString, "yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture, DateTimeStyles.None);
+            return DateTime.ParseExact((string)dateString, "yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture, DateTimeStyles.None);
         }
 
         public static string ToISO8601Date(this DateTime value)
@@ -40,12 +40,12 @@ namespace WaterTrans.Boilerplate.Domain.Utils
             return value?.ToISO8601Date();
         }
 
-        public static string ToISO8601(this DateTimeOffset value)
+        public static string ToISO8601(this DateTime value)
         {
             return value.ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture);
         }
 
-        public static string ToISO8601(this DateTimeOffset? value)
+        public static string ToISO8601(this DateTime? value)
         {
             return value?.ToISO8601();
         }

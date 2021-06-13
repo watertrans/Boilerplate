@@ -23,8 +23,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 Roles = new List<string>(new string[] { Roles.Contributor }),
                 Status = AccountStatus.NORMAL,
                 LastLoginTime = null,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var accountRepository = new AccountRepository(TestEnvironment.DBSettings);
             accountRepository.Create(account);
@@ -58,8 +58,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 Roles = new List<string>(new string[] { Roles.Contributor }),
                 Status = AccountStatus.NORMAL,
                 LastLoginTime = null,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var accountRepository = new AccountRepository(TestEnvironment.DBSettings);
             accountRepository.Create(account);

@@ -2,9 +2,9 @@
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Threading.Tasks;
 using WaterTrans.Boilerplate.Domain.Abstractions;
 using WaterTrans.Boilerplate.Persistence.Exceptions;
@@ -34,10 +34,10 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
                 Connection.Insert<TSqlEntity>(sqlEntity, statement => statement
                     .WithTimeout(TimeSpan.FromSeconds(DBSettings.CommandTimeout)));
             }
-            catch (SqlException ex) when (ex.Number == 2601 | ex.Number == 2627)
-            {
-                throw new DuplicateKeyException("The primary key is duplicated.", ex);
-            }
+            //catch (SqlException ex) when (ex.Number == 2601 | ex.Number == 2627)
+            //{
+            //    throw new DuplicateKeyException("The primary key is duplicated.", ex);
+            //}
             catch (MySqlException ex) when (ex.Number == 1022 | ex.Number == 1062)
             {
                 throw new DuplicateKeyException("The primary key is duplicated.", ex);
@@ -51,10 +51,10 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
                 await Connection.InsertAsync<TSqlEntity>(sqlEntity, statement => statement
                     .WithTimeout(TimeSpan.FromSeconds(DBSettings.CommandTimeout)));
             }
-            catch (SqlException ex) when (ex.Number == 2601 | ex.Number == 2627)
-            {
-                throw new DuplicateKeyException("The primary key is duplicated.", ex);
-            }
+            //catch (SqlException ex) when (ex.Number == 2601 | ex.Number == 2627)
+            //{
+            //    throw new DuplicateKeyException("The primary key is duplicated.", ex);
+            //}
             catch (MySqlException ex) when (ex.Number == 1022 | ex.Number == 1062)
             {
                 throw new DuplicateKeyException("The primary key is duplicated.", ex);
@@ -85,13 +85,19 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
 
         public virtual bool Update(TSqlEntity sqlEntity)
         {
+            var mappings = OrmConfiguration.GetDefaultEntityMapping<TSqlEntity>().Clone();
+            mappings.SetProperty(p => p.ConcurrencyToken, setup => setup.SetPrimaryKey());
             return Connection.Update<TSqlEntity>(sqlEntity, statement => statement
+                .WithEntityMappingOverride(mappings)
                 .WithTimeout(TimeSpan.FromSeconds(DBSettings.CommandTimeout)));
         }
 
         public async virtual Task<bool> UpdateAsync(TSqlEntity sqlEntity)
         {
+            var mappings = OrmConfiguration.GetDefaultEntityMapping<TSqlEntity>().Clone();
+            mappings.SetProperty(p => p.ConcurrencyToken, setup => setup.SetPrimaryKey());
             return await Connection.UpdateAsync<TSqlEntity>(sqlEntity, statement => statement
+                .WithEntityMappingOverride(mappings)
                 .WithTimeout(TimeSpan.FromSeconds(DBSettings.CommandTimeout)));
         }
 

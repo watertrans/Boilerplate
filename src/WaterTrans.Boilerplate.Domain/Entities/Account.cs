@@ -10,8 +10,9 @@ namespace WaterTrans.Boilerplate.Domain.Entities
         public Guid UserId { get; set; }
         public List<string> Roles { get; set; }
         public AccountStatus Status { get; set; }
-        public DateTimeOffset? LastLoginTime { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
-        public DateTimeOffset UpdateTime { get; set; }
+        public DateTime? LastLoginTime { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
+        public DateTime ConcurrencyToken { get; set; }
     }
 }

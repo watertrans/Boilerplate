@@ -21,9 +21,9 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 ApplicationId = Guid.NewGuid(),
                 AccountId = Guid.NewGuid(),
                 Status = AuthorizationCodeStatus.NORMAL,
-                ExpiryTime = DateTimeOffset.MaxValue,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                ExpiryTime = DateTime.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var authorizationCodeRepository = new AuthorizationCodeRepository(TestEnvironment.DBSettings);
             authorizationCodeRepository.Create(authorizationCode);
@@ -56,9 +56,9 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 ApplicationId = Guid.NewGuid(),
                 AccountId = Guid.NewGuid(),
                 Status = AuthorizationCodeStatus.USED,
-                ExpiryTime = DateTimeOffset.MaxValue,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                ExpiryTime = DateTime.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var authorizationCodeRepository = new AuthorizationCodeRepository(TestEnvironment.DBSettings);
             authorizationCodeRepository.Create(authorizationCode);

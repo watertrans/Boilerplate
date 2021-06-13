@@ -17,9 +17,9 @@ namespace WaterTrans.Boilerplate.Persistence.SqlEntities
         public Guid PrincipalId { get; set; }
         public string Scopes { get; set; }
         public string Status { get; set; }
-        public DateTimeOffset ExpiryTime { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
-        public DateTimeOffset UpdateTime { get; set; }
+        public DateTime ExpiryTime { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
 
         public static implicit operator AccessTokenSqlEntity(AccessToken entity)
         {

@@ -9,8 +9,9 @@ namespace WaterTrans.Boilerplate.Domain.Entities
         public Guid ApplicationId { get; set; }
         public Guid AccountId { get; set; }
         public AuthorizationCodeStatus Status { get; set; }
-        public DateTimeOffset ExpiryTime { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
-        public DateTimeOffset UpdateTime { get; set; }
+        public DateTime ExpiryTime { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
+        public DateTime ConcurrencyToken { get; set; }
     }
 }

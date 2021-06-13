@@ -19,8 +19,8 @@ namespace WaterTrans.Boilerplate.Persistence.SqlEntities
         public string RedirectUris { get; set; }
         public string PostLogoutRedirectUris { get; set; }
         public string Status { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
-        public DateTimeOffset UpdateTime { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
 
         public static implicit operator ApplicationSqlEntity(Domain.Entities.Application entity)
         {

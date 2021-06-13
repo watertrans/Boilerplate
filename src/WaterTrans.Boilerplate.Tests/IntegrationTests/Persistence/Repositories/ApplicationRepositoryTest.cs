@@ -28,8 +28,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = new List<string>(),
                 PostLogoutRedirectUris = new List<string>(),
                 Status = ApplicationStatus.NORMAL,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var applicationRepository = new ApplicationRepository(TestEnvironment.DBSettings);
             applicationRepository.Create(application);
@@ -69,8 +69,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = new List<string>(),
                 PostLogoutRedirectUris = new List<string>(),
                 Status = ApplicationStatus.SUSPENDED,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var applicationRepository = new ApplicationRepository(TestEnvironment.DBSettings);
             applicationRepository.Create(application);

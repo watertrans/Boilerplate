@@ -26,9 +26,9 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 PrincipalId = Guid.NewGuid(),
                 Scopes = new List<string>(new string[] { Scopes.FullControl }),
                 Status = AccessTokenStatus.NORMAL,
-                ExpiryTime = DateTimeOffset.MaxValue,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                ExpiryTime = DateTime.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var accessTokenRepository = new AccessTokenRepository(TestEnvironment.DBSettings);
             accessTokenRepository.Create(accessToken);
@@ -65,9 +65,9 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 PrincipalId = Guid.NewGuid(),
                 Scopes = new List<string>(new string[] { Scopes.FullControl }),
                 Status = AccessTokenStatus.SUSPENDED,
-                ExpiryTime = DateTimeOffset.MaxValue,
-                CreateTime = DateTimeOffset.MaxValue,
-                UpdateTime = DateTimeOffset.MaxValue,
+                ExpiryTime = DateTime.MaxValue,
+                CreateTime = DateTime.MaxValue,
+                UpdateTime = DateTime.MaxValue,
             };
             var accessTokenRepository = new AccessTokenRepository(TestEnvironment.DBSettings);
             accessTokenRepository.Create(accessToken);

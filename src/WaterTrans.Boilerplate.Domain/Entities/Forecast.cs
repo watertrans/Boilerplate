@@ -34,8 +34,9 @@ namespace WaterTrans.Boilerplate.Domain.Entities
         public DateTime Date { get; set; }
         public int Temperature { get; set; }
         public string Summary { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
-        public DateTimeOffset UpdateTime { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
+        public DateTime ConcurrencyToken { get; set; }
         public IValidator<Forecast> Validator { get; } = new ForecastValidator();
 
         public ValidationResult Validate()

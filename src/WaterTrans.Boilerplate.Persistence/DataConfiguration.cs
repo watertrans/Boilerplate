@@ -1,4 +1,6 @@
-﻿using Dapper.FastCrud;
+﻿using Dapper;
+using Dapper.FastCrud;
+using WaterTrans.Boilerplate.Persistence.TypeHandlers;
 
 namespace WaterTrans.Boilerplate.Persistence
 {
@@ -7,6 +9,7 @@ namespace WaterTrans.Boilerplate.Persistence
         public static void Initialize()
         {
             OrmConfiguration.DefaultDialect = SqlDialect.MySql;
+            SqlMapper.AddTypeHandler(new DateTimeHandler());
         }
     }
 }

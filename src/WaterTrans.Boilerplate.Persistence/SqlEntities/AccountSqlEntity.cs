@@ -13,9 +13,9 @@ namespace WaterTrans.Boilerplate.Persistence.SqlEntities
         public Guid UserId { get; set; }
         public string Roles { get; set; }
         public string Status { get; set; }
-        public DateTimeOffset? LastLoginTime { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
-        public DateTimeOffset UpdateTime { get; set; }
+        public DateTime? LastLoginTime { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
 
         public static implicit operator AccountSqlEntity(Account entity)
         {
