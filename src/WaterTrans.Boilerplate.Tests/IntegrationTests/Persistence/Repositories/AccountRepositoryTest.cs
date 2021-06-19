@@ -20,6 +20,10 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
             {
                 AccountId = Guid.NewGuid(),
                 UserId = Guid.NewGuid(),
+                LoginId = "test",
+                Password = Guid.NewGuid().ToByteArray(),
+                Salt = Guid.NewGuid().ToByteArray(),
+                Iterations = 1000,
                 Roles = new List<string>(new string[] { Roles.Contributor }),
                 Status = AccountStatus.NORMAL,
                 LastLoginTime = null,
@@ -55,6 +59,10 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
             {
                 AccountId = Guid.NewGuid(),
                 UserId = Guid.NewGuid(),
+                LoginId = "delete",
+                Password = Guid.NewGuid().ToByteArray(),
+                Salt = Guid.NewGuid().ToByteArray(),
+                Iterations = 1000,
                 Roles = new List<string>(new string[] { Roles.Contributor }),
                 Status = AccountStatus.NORMAL,
                 LastLoginTime = null,

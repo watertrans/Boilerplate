@@ -1,6 +1,10 @@
 ﻿CREATE TABLE IF NOT EXISTS `Account` (
     `AccountId` CHAR(36) NOT NULL
   , `UserId` CHAR(36) NOT NULL
+  , `LoginId` VARCHAR(100) NOT NULL
+  , `Password` VARBINARY(64) NOT NULL
+  , `Salt` VARBINARY(64) NOT NULL
+  , `Iterations` INT NOT NULL
   , `Roles` TEXT NOT NULL
   , `Status` VARCHAR(20) NOT NULL
   , `LastLoginTime` DATETIME NULL
@@ -11,3 +15,4 @@
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS `ix_Account_UserId` ON `Account` (`UserId`);
+CREATE UNIQUE INDEX IF NOT EXISTS `ix_Account_LoginId` ON `Account` (`LoginId`);

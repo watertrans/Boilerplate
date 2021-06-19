@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace WaterTrans.Boilerplate.Web.UnitTests
@@ -38,7 +40,7 @@ namespace WaterTrans.Boilerplate.Web.UnitTests
 
             for (int i = 10; i < 20; i++)
             {
-                dic.Add(CryptUtil.HashPassword("password", salt, i), i.ToString());
+                dic.Add(Encoding.Unicode.GetString(CryptUtil.HashPassword("password", salt, i)), i.ToString());
             }
         }
 
@@ -46,14 +48,14 @@ namespace WaterTrans.Boilerplate.Web.UnitTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void VerifyPassword_引数passwordがNullで例外()
         {
-            CryptUtil.VerifyPassword(null, new byte[] { }, 100, "password");
+            CryptUtil.VerifyPassword(null, new byte[] { }, 100, new byte[] { });
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void VerifyPassword_引数saltがNullで例外()
         {
-            CryptUtil.VerifyPassword("password", null, 100, "password");
+            CryptUtil.VerifyPassword("password", null, 100, new byte[] { });
         }
 
         [TestMethod]
@@ -67,7 +69,7 @@ namespace WaterTrans.Boilerplate.Web.UnitTests
         public void VerifyPassword_例外が発生しない()
         {
             byte[] salt = Encoding.Unicode.GetBytes("password");
-            CryptUtil.VerifyPassword("password", salt, 100, "password");
+            CryptUtil.VerifyPassword("password", salt, 100, new byte[] { });
         }
 
         [TestMethod]
@@ -86,6 +88,17 @@ namespace WaterTrans.Boilerplate.Web.UnitTests
             Assert.IsTrue(CryptUtil.VerifyPassword("password", salt, 100, CryptUtil.HashPassword("password", salt, 100)));
             Assert.IsTrue(CryptUtil.VerifyPassword("password", salt, 105, CryptUtil.HashPassword("password", salt, 105)));
             Assert.IsTrue(CryptUtil.VerifyPassword("password", salt, 110, CryptUtil.HashPassword("password", salt, 110)));
+        }
+
+        [TestMethod]
+        public void HashPassword_管理者の初期パスワード()
+        {
+            string password = "admin-secret";
+            int iterations = 1000;
+            byte[] salt = Guid.Empty.ToByteArray().Concat(Guid.Empty.ToByteArray()).ToArray();
+            byte[] hashedPassword = CryptUtil.HashPassword(password, salt, iterations);
+            Debug.WriteLine("0x" + BitConverter.ToString(salt).Replace("-", string.Empty));
+            Debug.WriteLine("0x" + BitConverter.ToString(hashedPassword).Replace("-", string.Empty));
         }
     }
 }

@@ -11,6 +11,10 @@ namespace WaterTrans.Boilerplate.Persistence.SqlEntities
         [Key]
         public Guid AccountId { get; set; }
         public Guid UserId { get; set; }
+        public string LoginId { get; set; }
+        public byte[] Password { get; set; }
+        public byte[] Salt { get; set; }
+        public int Iterations { get; set; }
         public string Roles { get; set; }
         public string Status { get; set; }
         public DateTime? LastLoginTime { get; set; }
