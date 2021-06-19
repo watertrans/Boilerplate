@@ -5,11 +5,6 @@ namespace WaterTrans.Boilerplate.Domain.Utils
 {
     public static class DateUtil
     {
-        public static DateTime Now
-        {
-            get => DateTime.UtcNow;
-        }
-
         public static bool IsISO8601Date(string dateString)
         {
             return DateTime.TryParseExact((string)dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _);

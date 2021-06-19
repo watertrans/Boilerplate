@@ -2,7 +2,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using WaterTrans.Boilerplate.Domain.Constants;
 using WaterTrans.Boilerplate.Domain.Entities;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Tests;
 
 namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
@@ -14,7 +13,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         [TestMethod]
         public void Create_ìoò^éûÇ…ó·äOÇ™î≠ê∂ÇµÇ»Ç¢()
         {
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var authorizationCode = new AuthorizationCode
             {
                 Code = new string('X', 100),
@@ -42,14 +41,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         {
             var authorizationCodeRepository = new AuthorizationCodeRepository(TestEnvironment.DBSettings);
             var authorizationCode = authorizationCodeRepository.GetById("normal");
-            authorizationCode.UpdateTime = DateUtil.Now;
+            authorizationCode.UpdateTime = TestEnvironment.DateTimeProvider.Now;
             Assert.IsTrue(authorizationCodeRepository.Update(authorizationCode));
         }
 
         [TestMethod]
         public void Delete_ìoò^ÇµÇΩÉfÅ[É^ÇçÌèúÇ≈Ç´ÇÈ()
         {
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var authorizationCode = new AuthorizationCode
             {
                 Code = new string('Y', 100),

@@ -1,11 +1,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Exceptions;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
 using WaterTrans.Boilerplate.Domain.Entities;
-using WaterTrans.Boilerplate.Domain.Exceptions;
 using WaterTrans.Boilerplate.Domain.Utils;
+using WaterTrans.Boilerplate.Tests;
 
 namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
 {
@@ -28,7 +29,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
             };
 
             var forecastRepositoryMock = new Mock<IForecastRepository>();
-            var forecastService = new ForecastService(forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object, TestEnvironment.DateTimeProvider);
             var forecast = forecastService.Create(forecastCreateDto);
 
             forecastRepositoryMock.Verify(x => x.Create(It.IsAny<Forecast>()));
@@ -45,7 +46,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
         {
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.Delete(It.IsAny<Guid>())).Returns(true);
-            var forecastService = new ForecastService(forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object, TestEnvironment.DateTimeProvider);
             forecastService.Delete(Guid.NewGuid());
         }
 
@@ -55,7 +56,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
         {
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.Delete(It.IsAny<Guid>())).Returns(false);
-            var forecastService = new ForecastService(forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object, TestEnvironment.DateTimeProvider);
             forecastService.Delete(Guid.NewGuid());
         }
 
@@ -64,7 +65,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
         {
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(new Forecast());
-            var forecastService = new ForecastService(forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object, TestEnvironment.DateTimeProvider);
             var forecast = forecastService.GetById(Guid.NewGuid());
             Assert.IsNotNull(forecast);
         }
@@ -75,7 +76,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
         {
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns((Forecast)null);
-            var forecastService = new ForecastService(forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object, TestEnvironment.DateTimeProvider);
             var forecast = forecastService.GetById(Guid.NewGuid());
             Assert.IsNull(forecast);
         }
@@ -85,7 +86,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
         public void Update_存在しないIDの場合は例外が発生する()
         {
             var today = DateTime.Today;
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var forecastUpdateDto = new ForecastUpdateDto
             {
                 ForecastId = Guid.NewGuid(),
@@ -100,7 +101,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
 
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns((Forecast)null);
-            var forecastService = new ForecastService(forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object, TestEnvironment.DateTimeProvider);
             var forecast = forecastService.Update(forecastUpdateDto);
         }
 
@@ -109,7 +110,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
         public void Update_更新日が一致しない場合は例外が発生する()
         {
             var today = DateTime.Today;
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var forecastUpdateDto = new ForecastUpdateDto
             {
                 ForecastId = Guid.NewGuid(),
@@ -124,12 +125,12 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
             var mockForecast = new Forecast
             {
                 ForecastId = forecastUpdateDto.ForecastId,
-                UpdateTime = DateUtil.Now.AddSeconds(1),
+                UpdateTime = TestEnvironment.DateTimeProvider.Now.AddSeconds(1),
             };
 
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(mockForecast);
-            var forecastService = new ForecastService(forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object, TestEnvironment.DateTimeProvider);
             var forecast = forecastService.Update(forecastUpdateDto);
         }
 
@@ -138,7 +139,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
         public void Update_更新対象が存在しなくなった場合は例外が発生する()
         {
             var today = DateTime.Today;
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var forecastUpdateDto = new ForecastUpdateDto
             {
                 ForecastId = Guid.NewGuid(),
@@ -159,7 +160,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.UnitTests
             var forecastRepositoryMock = new Mock<IForecastRepository>();
             forecastRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(mockForecast);
             forecastRepositoryMock.Setup(x => x.Update(It.IsAny<Forecast>())).Returns(false);
-            var forecastService = new ForecastService(forecastRepositoryMock.Object);
+            var forecastService = new ForecastService(forecastRepositoryMock.Object, TestEnvironment.DateTimeProvider);
             var forecast = forecastService.Update(forecastUpdateDto);
         }
     }

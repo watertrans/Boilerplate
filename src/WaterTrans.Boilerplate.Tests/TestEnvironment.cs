@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySqlConnector;
 using System.IO;
 using WaterTrans.Boilerplate.Application.Settings;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
+using WaterTrans.Boilerplate.Infrastructure.OS;
 using WaterTrans.Boilerplate.Persistence;
 using WaterTrans.Boilerplate.Web.Api;
 
@@ -16,6 +18,7 @@ namespace WaterTrans.Boilerplate.Tests
     {
         public static WebApplicationFactory<Startup> WebApiFactory;
         public static DBSettings DBSettings { get; } = new DBSettings();
+        public static IDateTimeProvider DateTimeProvider { get; } = new DateTimeProvider();
 
         [AssemblyInitialize]
         public static void Initialize(TestContext _)

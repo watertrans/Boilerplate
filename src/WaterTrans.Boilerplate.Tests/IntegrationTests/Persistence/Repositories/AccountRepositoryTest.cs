@@ -15,7 +15,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         [TestMethod]
         public void Create_ìoò^éûÇ…ó·äOÇ™î≠ê∂ÇµÇ»Ç¢()
         {
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var account = new Account
             {
                 AccountId = Guid.NewGuid(),
@@ -47,14 +47,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         {
             var accountRepository = new AccountRepository(TestEnvironment.DBSettings);
             var account = accountRepository.GetById(Guid.Parse("00000000-B001-0000-0000-000000000000"));
-            account.LastLoginTime = DateUtil.Now;
+            account.LastLoginTime = TestEnvironment.DateTimeProvider.Now;
             Assert.IsTrue(accountRepository.Update(account));
         }
 
         [TestMethod]
         public void Delete_ìoò^ÇµÇΩÉfÅ[É^ÇçÌèúÇ≈Ç´ÇÈ()
         {
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var account = new Account
             {
                 AccountId = Guid.NewGuid(),

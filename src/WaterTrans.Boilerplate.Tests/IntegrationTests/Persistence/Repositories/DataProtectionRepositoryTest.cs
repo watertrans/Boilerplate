@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Xml.Linq;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
 using WaterTrans.Boilerplate.Domain.Constants;
 using WaterTrans.Boilerplate.Domain.Entities;
 using WaterTrans.Boilerplate.Domain.Utils;
@@ -15,7 +16,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         [TestMethod]
         public void GetAllElements_ó·äOÇ™î≠ê∂ÇµÇ»Ç¢()
         {
-            var authorizationCodeRepository = new DataProtectionRepository(TestEnvironment.DBSettings);
+            var authorizationCodeRepository = new DataProtectionRepository(TestEnvironment.DBSettings, TestEnvironment.DateTimeProvider);
             authorizationCodeRepository.GetAllElements();
         }
 
@@ -24,7 +25,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         {
             var element = XElement.Parse("<root><item></item></root>");
 
-            var authorizationCodeRepository = new DataProtectionRepository(TestEnvironment.DBSettings);
+            var authorizationCodeRepository = new DataProtectionRepository(TestEnvironment.DBSettings, TestEnvironment.DateTimeProvider);
             authorizationCodeRepository.StoreElement(element, "elementKey1");
         }
 
@@ -33,7 +34,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         {
             var element = XElement.Parse("<hoge><item></item></hoge>");
 
-            var authorizationCodeRepository = new DataProtectionRepository(TestEnvironment.DBSettings);
+            var authorizationCodeRepository = new DataProtectionRepository(TestEnvironment.DBSettings, TestEnvironment.DateTimeProvider);
             authorizationCodeRepository.StoreElement(element, "elementKey2");
             foreach (var item in authorizationCodeRepository.GetAllElements())
             {

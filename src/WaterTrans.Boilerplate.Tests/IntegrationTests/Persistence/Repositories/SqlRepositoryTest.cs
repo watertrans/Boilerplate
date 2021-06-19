@@ -36,8 +36,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = "[]",
                 Scopes = "[]",
                 Status = ApplicationStatus.NORMAL.ToString(),
-                CreateTime = DateUtil.Now,
-                UpdateTime = DateUtil.Now,
+                CreateTime = TestEnvironment.DateTimeProvider.Now,
+                UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
             _sqlRepository.Create(applicationSqlEntity);
@@ -61,8 +61,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = "[]",
                 Scopes = "[]",
                 Status = ApplicationStatus.NORMAL.ToString(),
-                CreateTime = DateUtil.Now,
-                UpdateTime = DateUtil.Now,
+                CreateTime = TestEnvironment.DateTimeProvider.Now,
+                UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
             await _sqlRepository.CreateAsync(applicationSqlEntity);
@@ -87,8 +87,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = "[]",
                 Scopes = "[]",
                 Status = ApplicationStatus.NORMAL.ToString(),
-                CreateTime = DateUtil.Now,
-                UpdateTime = DateUtil.Now,
+                CreateTime = TestEnvironment.DateTimeProvider.Now,
+                UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
             _sqlRepository.Create(applicationSqlEntity);
@@ -112,8 +112,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = "[]",
                 Scopes = "[]",
                 Status = ApplicationStatus.NORMAL.ToString(),
-                CreateTime = DateUtil.Now,
-                UpdateTime = DateUtil.Now,
+                CreateTime = TestEnvironment.DateTimeProvider.Now,
+                UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
             await _sqlRepository.CreateAsync(applicationSqlEntity);
@@ -162,14 +162,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = "[]",
                 Scopes = "[]",
                 Status = ApplicationStatus.NORMAL.ToString(),
-                CreateTime = DateUtil.Now,
-                UpdateTime = DateUtil.Now,
+                CreateTime = TestEnvironment.DateTimeProvider.Now,
+                UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
             _sqlRepository.Create(applicationSqlEntity);
 
             applicationSqlEntity.Name = new string('Y', 100);
-            applicationSqlEntity.UpdateTime = DateUtil.Now;
+            applicationSqlEntity.UpdateTime = TestEnvironment.DateTimeProvider.Now;
 
             Assert.IsTrue(_sqlRepository.Update(applicationSqlEntity));
         }
@@ -190,14 +190,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = "[]",
                 Scopes = "[]",
                 Status = ApplicationStatus.NORMAL.ToString(),
-                CreateTime = DateUtil.Now,
-                UpdateTime = DateUtil.Now,
+                CreateTime = TestEnvironment.DateTimeProvider.Now,
+                UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
             await _sqlRepository.CreateAsync(applicationSqlEntity);
 
             applicationSqlEntity.Name = new string('Y', 100);
-            applicationSqlEntity.UpdateTime = DateUtil.Now;
+            applicationSqlEntity.UpdateTime = TestEnvironment.DateTimeProvider.Now;
 
             Assert.IsTrue(await _sqlRepository.UpdateAsync(applicationSqlEntity));
         }
@@ -218,14 +218,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = "[]",
                 Scopes = "[]",
                 Status = ApplicationStatus.NORMAL.ToString(),
-                CreateTime = DateUtil.Now,
-                UpdateTime = DateUtil.Now,
+                CreateTime = TestEnvironment.DateTimeProvider.Now,
+                UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
             _sqlRepository.Create(applicationSqlEntity);
 
             applicationSqlEntity.Name = new string('Y', 100);
-            applicationSqlEntity.UpdateTime = DateUtil.Now;
+            applicationSqlEntity.UpdateTime = TestEnvironment.DateTimeProvider.Now;
             applicationSqlEntity.ConcurrencyToken = applicationSqlEntity.ConcurrencyToken.AddSeconds(-1);
 
             Assert.IsFalse(_sqlRepository.Update(applicationSqlEntity));
@@ -247,14 +247,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = "[]",
                 Scopes = "[]",
                 Status = ApplicationStatus.NORMAL.ToString(),
-                CreateTime = DateUtil.Now,
-                UpdateTime = DateUtil.Now,
+                CreateTime = TestEnvironment.DateTimeProvider.Now,
+                UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
             await _sqlRepository.CreateAsync(applicationSqlEntity);
 
             applicationSqlEntity.Name = new string('Y', 100);
-            applicationSqlEntity.UpdateTime = DateUtil.Now;
+            applicationSqlEntity.UpdateTime = TestEnvironment.DateTimeProvider.Now;
             applicationSqlEntity.ConcurrencyToken = applicationSqlEntity.ConcurrencyToken.AddSeconds(-1);
 
             Assert.IsFalse(await _sqlRepository.UpdateAsync(applicationSqlEntity));
@@ -276,8 +276,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = "[]",
                 Scopes = "[]",
                 Status = ApplicationStatus.NORMAL.ToString(),
-                CreateTime = DateUtil.Now,
-                UpdateTime = DateUtil.Now,
+                CreateTime = TestEnvironment.DateTimeProvider.Now,
+                UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
             _sqlRepository.Create(applicationSqlEntity);
@@ -300,8 +300,8 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
                 RedirectUris = "[]",
                 Scopes = "[]",
                 Status = ApplicationStatus.NORMAL.ToString(),
-                CreateTime = DateUtil.Now,
-                UpdateTime = DateUtil.Now,
+                CreateTime = TestEnvironment.DateTimeProvider.Now,
+                UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
             await _sqlRepository.CreateAsync(applicationSqlEntity);

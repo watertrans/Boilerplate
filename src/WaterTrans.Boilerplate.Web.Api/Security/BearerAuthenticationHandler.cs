@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
 using WaterTrans.Boilerplate.Domain.Abstractions.Services;
 using WaterTrans.Boilerplate.Domain.Constants;
 using WaterTrans.Boilerplate.Domain.Utils;
@@ -24,6 +25,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Security
 
         private readonly ILogger<BearerAuthenticationHandler> _logger;
         private readonly IAuthorizeService _authorizeService;
+        private readonly IDateTimeProvider _dateTimeProvider;
         private ErrorObjectResult _responseResult;
         private string _responseHeader;
 
@@ -32,11 +34,13 @@ namespace WaterTrans.Boilerplate.Web.Api.Security
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock,
-            IAuthorizeService authorizeService)
+            IAuthorizeService authorizeService,
+            IDateTimeProvider dateTimeProvider)
             : base(options, logger, encoder, clock)
         {
             _logger = logger.CreateLogger<BearerAuthenticationHandler>();
             _authorizeService = authorizeService;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -75,7 +79,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Security
                         return AuthenticateResult.Fail(_responseResult.Error.Message);
                     }
 
-                    if (accessToken.ExpiryTime < DateUtil.Now)
+                    if (accessToken.ExpiryTime < _dateTimeProvider.Now)
                     {
                         _responseHeader = "Bearer error=\"invalid_token\"";
                         _responseResult = ErrorObjectResultFactory.AuthorizationTokenExpired();

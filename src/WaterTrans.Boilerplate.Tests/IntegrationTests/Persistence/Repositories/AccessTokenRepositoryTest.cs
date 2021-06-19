@@ -15,7 +15,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         [TestMethod]
         public void Create_ìoò^éûÇ…ó·äOÇ™î≠ê∂ÇµÇ»Ç¢()
         {
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var accessToken = new AccessToken
             {
                 Token = new string('X', 100),
@@ -47,14 +47,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         {
             var accessTokenRepository = new AccessTokenRepository(TestEnvironment.DBSettings);
             var accessToken = accessTokenRepository.GetById("normal");
-            accessToken.UpdateTime = DateUtil.Now;
+            accessToken.UpdateTime = TestEnvironment.DateTimeProvider.Now;
             Assert.IsTrue(accessTokenRepository.Update(accessToken));
         }
 
         [TestMethod]
         public void Delete_ìoò^ÇµÇΩÉfÅ[É^ÇçÌèúÇ≈Ç´ÇÈ()
         {
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var accessToken = new AccessToken
             {
                 Token = new string('Y', 100),

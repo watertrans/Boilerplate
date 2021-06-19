@@ -1,14 +1,10 @@
-﻿using FluentValidation;
-using FluentValidation.Results;
-using System;
-using WaterTrans.Boilerplate.Domain.Abstractions;
+﻿using System;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Domain.ValueObjects;
 
 namespace WaterTrans.Boilerplate.Domain.Entities
 {
-    public class Forecast : Entity, IValidatableObject<Forecast>
+    public class Forecast : Entity
     {
         public Forecast()
         {
@@ -23,8 +19,6 @@ namespace WaterTrans.Boilerplate.Domain.Entities
             Date = dto.Date;
             Temperature = dto.Temperature;
             Summary = dto.Summary;
-            CreateTime = DateUtil.Now;
-            UpdateTime = DateUtil.Now;
         }
 
         public Guid ForecastId { get; set; }
@@ -37,28 +31,5 @@ namespace WaterTrans.Boilerplate.Domain.Entities
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
         public DateTime ConcurrencyToken { get; set; }
-        public IValidator<Forecast> Validator { get; } = new ForecastValidator();
-
-        public ValidationResult Validate()
-        {
-            return Validator.Validate(this);
-        }
-
-        public void ValidateAndThrow()
-        {
-            Validator.ValidateAndThrow(this);
-        }
-
-        private class ForecastValidator : AbstractValidator<Forecast>
-        {
-            internal ForecastValidator()
-            {
-                RuleFor(x => x.ForecastCode).Cascade(CascadeMode.Stop).NotNull().NotEmpty().Length(1, 20);
-                RuleFor(x => x.Country).NotNull();
-                RuleFor(x => x.City).NotNull();
-                RuleFor(x => x.Summary).Cascade(CascadeMode.Stop).NotNull().NotEmpty().Length(1, 100);
-                RuleFor(x => x.Temperature).GreaterThanOrEqualTo(-99).LessThanOrEqualTo(99);
-            }
-        }
     }
 }

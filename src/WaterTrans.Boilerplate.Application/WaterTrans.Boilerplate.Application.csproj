@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WaterTrans.Boilerplate.CrossCuttingConcerns\WaterTrans.Boilerplate.CrossCuttingConcerns.csproj" />
     <ProjectReference Include="..\WaterTrans.Boilerplate.Domain\WaterTrans.Boilerplate.Domain.csproj" />
   </ItemGroup>
 

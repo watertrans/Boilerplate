@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Exceptions;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
-using WaterTrans.Boilerplate.Domain.Exceptions;
 using WaterTrans.Boilerplate.Persistence.Exceptions;
 using WaterTrans.Boilerplate.Persistence.Repositories;
 using WaterTrans.Boilerplate.Tests;
@@ -28,7 +28,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.IntegrationTests
             };
 
             var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
-            var forecastService = new ForecastService(forecastRepository);
+            var forecastService = new ForecastService(forecastRepository, TestEnvironment.DateTimeProvider);
             forecastService.Create(createForecastDto);
             forecastService.Create(createForecastDto);
         }
@@ -38,7 +38,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.IntegrationTests
         public void Delete_存在しないキーで削除をするとエラー()
         {
             var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
-            var forecastService = new ForecastService(forecastRepository);
+            var forecastService = new ForecastService(forecastRepository, TestEnvironment.DateTimeProvider);
             forecastService.Delete(Guid.NewGuid());
         }
 
@@ -47,7 +47,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.IntegrationTests
         public void GetById_存在しないキーで取得をするとエラー()
         {
             var forecastRepository = new ForecastRepository(TestEnvironment.DBSettings);
-            var forecastService = new ForecastService(forecastRepository);
+            var forecastService = new ForecastService(forecastRepository, TestEnvironment.DateTimeProvider);
             forecastService.GetById(Guid.NewGuid());
         }
     }

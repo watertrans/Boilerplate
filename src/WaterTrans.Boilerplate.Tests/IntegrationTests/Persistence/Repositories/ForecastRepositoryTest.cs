@@ -69,7 +69,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
             forecastRepository.Create(forecast);
 
             var createdForecast = forecastRepository.GetById(forecast.ForecastId);
-            createdForecast.UpdateTime = DateUtil.Now;
+            createdForecast.UpdateTime = TestEnvironment.DateTimeProvider.Now;
 
             Assert.IsTrue(forecastRepository.Update(createdForecast));
         }

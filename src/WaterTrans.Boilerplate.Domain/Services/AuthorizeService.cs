@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
 using WaterTrans.Boilerplate.Domain.Abstractions;
 using WaterTrans.Boilerplate.Domain.Abstractions.QueryServices;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
@@ -20,6 +21,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
         private readonly IApplicationQueryService _applicationQueryService;
         private readonly IApplicationRepository _applicationRepository;
         private readonly IAccountService _accountService;
+        private readonly IDateTimeProvider _dateTimeProvider;
 
         public AuthorizeService(
             IAppSettings appSettings,
@@ -27,7 +29,8 @@ namespace WaterTrans.Boilerplate.Domain.Services
             IAuthorizationCodeRepository authorizationCodeRepository,
             IApplicationQueryService applicationQueryService,
             IApplicationRepository applicationRepository,
-            IAccountService accountService)
+            IAccountService accountService,
+            IDateTimeProvider dateTimeProvider)
         {
             _appSettings = appSettings;
             _accessTokenRepository = accessTokenRepository;
@@ -35,6 +38,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             _applicationQueryService = applicationQueryService;
             _applicationRepository = applicationRepository;
             _accountService = accountService;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         public AccessToken CreateAccessToken(AuthorizationCode authorizationCode, IEnumerable<string> scopes)
@@ -88,7 +92,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 }
             }
 
-            var now = DateUtil.Now;
+            var now = _dateTimeProvider.Now;
             var accessToken = new AccessToken
             {
                 Token = StringUtil.CreateCode(),
@@ -106,7 +110,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             };
 
             authorizationCode.Status = AuthorizationCodeStatus.USED;
-            authorizationCode.UpdateTime = DateUtil.Now;
+            authorizationCode.UpdateTime = _dateTimeProvider.Now;
 
             using (var scope = new TransactionScope())
             {
@@ -151,7 +155,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 }
             }
 
-            var now = DateUtil.Now;
+            var now = _dateTimeProvider.Now;
             var accessToken = new AccessToken
             {
                 Token = StringUtil.CreateCode(),
@@ -192,7 +196,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
 
             List<string> accessTokenScopes = application.Scopes;
 
-            var now = DateUtil.Now;
+            var now = _dateTimeProvider.Now;
             var authorizationCode = new AuthorizationCode
             {
                 Code = StringUtil.CreateCode(),
@@ -284,7 +288,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 return null;
             }
 
-            if (authorizationCode.ExpiryTime < DateUtil.Now)
+            if (authorizationCode.ExpiryTime < _dateTimeProvider.Now)
             {
                 return null;
             }

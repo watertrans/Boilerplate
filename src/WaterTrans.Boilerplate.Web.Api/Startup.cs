@@ -19,11 +19,15 @@ using System.Text.Unicode;
 using WaterTrans.Boilerplate.Application.Abstractions.UseCases;
 using WaterTrans.Boilerplate.Application.Settings;
 using WaterTrans.Boilerplate.Application.UseCases;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.Cryptography;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
 using WaterTrans.Boilerplate.Domain.Abstractions;
 using WaterTrans.Boilerplate.Domain.Abstractions.QueryServices;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.Abstractions.Services;
 using WaterTrans.Boilerplate.Domain.Services;
+using WaterTrans.Boilerplate.Infrastructure.Cryptography;
+using WaterTrans.Boilerplate.Infrastructure.OS;
 using WaterTrans.Boilerplate.Persistence.QueryServices;
 using WaterTrans.Boilerplate.Persistence.Repositories;
 using WaterTrans.Boilerplate.Web.Api.Filters;
@@ -66,6 +70,9 @@ namespace WaterTrans.Boilerplate.Web.Api
             services.AddTransient<IAppSettings>(x => x.GetService<IOptionsMonitor<AppSettings>>().CurrentValue);
             services.AddTransient<IEnvSettings>(x => x.GetService<IOptionsMonitor<EnvSettings>>().CurrentValue);
             services.AddTransient<IDBSettings>(x => x.GetService<IOptionsMonitor<DBSettings>>().CurrentValue);
+
+            services.AddTransient<IDateTimeProvider, DateTimeProvider>();
+            services.AddTransient<IPasswordHashProvider, PasswordHashProvider>();
 
             services.AddTransient<IAccessTokenRepository, AccessTokenRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();

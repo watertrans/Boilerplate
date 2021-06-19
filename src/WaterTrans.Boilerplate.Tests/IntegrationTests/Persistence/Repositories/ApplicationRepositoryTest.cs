@@ -14,7 +14,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         [TestMethod]
         public void Create_ìoò^éûÇ…ó·äOÇ™î≠ê∂ÇµÇ»Ç¢()
         {
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var application = new Domain.Entities.Application
             {
                 ApplicationId = Guid.NewGuid(),
@@ -48,14 +48,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         {
             var applicationRepository = new ApplicationRepository(TestEnvironment.DBSettings);
             var application = applicationRepository.GetById(Guid.Parse("00000000-A001-0000-0000-000000000000"));
-            application.UpdateTime = DateUtil.Now;
+            application.UpdateTime = TestEnvironment.DateTimeProvider.Now;
             Assert.IsTrue(applicationRepository.Update(application));
         }
 
         [TestMethod]
         public void Delete_ìoò^ÇµÇΩÉfÅ[É^ÇçÌèúÇ≈Ç´ÇÈ()
         {
-            var now = DateUtil.Now;
+            var now = TestEnvironment.DateTimeProvider.Now;
             var application = new Domain.Entities.Application
             {
                 ApplicationId = Guid.NewGuid(),

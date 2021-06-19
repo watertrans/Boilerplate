@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WaterTrans.Boilerplate.Application\WaterTrans.Boilerplate.Application.csproj" />
+    <ProjectReference Include="..\WaterTrans.Boilerplate.CrossCuttingConcerns\WaterTrans.Boilerplate.CrossCuttingConcerns.csproj" />
     <ProjectReference Include="..\WaterTrans.Boilerplate.Domain\WaterTrans.Boilerplate.Domain.csproj" />
     <ProjectReference Include="..\WaterTrans.Boilerplate.Persistence\WaterTrans.Boilerplate.Persistence.csproj" />
   </ItemGroup>

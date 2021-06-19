@@ -11,7 +11,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using MySqlConnector;
 using WaterTrans.Boilerplate.Application.Settings;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.Cryptography;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
 using WaterTrans.Boilerplate.Domain.Abstractions;
+using WaterTrans.Boilerplate.Infrastructure.Cryptography;
+using WaterTrans.Boilerplate.Infrastructure.OS;
 using WaterTrans.Boilerplate.Persistence.Repositories;
 using WaterTrans.Boilerplate.Web.AttributeAdapters;
 using WaterTrans.Boilerplate.Web.Resources;
@@ -47,6 +51,9 @@ namespace WaterTrans.Boilerplate.Web.Server
             services.AddTransient<IAppSettings>(x => x.GetService<IOptionsMonitor<AppSettings>>().CurrentValue);
             services.AddTransient<IEnvSettings>(x => x.GetService<IOptionsMonitor<EnvSettings>>().CurrentValue);
             services.AddTransient<IDBSettings>(x => x.GetService<IOptionsMonitor<DBSettings>>().CurrentValue);
+
+            services.AddTransient<IDateTimeProvider, DateTimeProvider>();
+            services.AddTransient<IPasswordHashProvider, PasswordHashProvider>();
 
             services.AddControllersWithViews()
                 .AddDataAnnotationsLocalization(options =>

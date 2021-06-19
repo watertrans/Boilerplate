@@ -1,11 +1,10 @@
 ﻿using System;
-using WaterTrans.Boilerplate.Domain.Abstractions.QueryServices;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Exceptions;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.Abstractions.Services;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
 using WaterTrans.Boilerplate.Domain.Entities;
-using WaterTrans.Boilerplate.Domain.Exceptions;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Domain.ValueObjects;
 
 namespace WaterTrans.Boilerplate.Domain.Services
@@ -13,16 +12,20 @@ namespace WaterTrans.Boilerplate.Domain.Services
     public class ForecastService : IForecastService
     {
         private readonly IForecastRepository _forecastRepository;
+        private readonly IDateTimeProvider _dateTimeProvider;
 
-        public ForecastService(IForecastRepository forecastRepository)
+        public ForecastService(IForecastRepository forecastRepository, IDateTimeProvider dateTimeProvider)
         {
             _forecastRepository = forecastRepository;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         public Forecast Create(ForecastCreateDto dto)
         {
+            var now = _dateTimeProvider.Now;
             var entity = new Forecast(dto);
-            entity.ValidateAndThrow();
+            entity.CreateTime = now;
+            entity.UpdateTime = now;
             _forecastRepository.Create(entity);
             return entity;
         }
@@ -91,8 +94,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 entity.Temperature = dto.Temperature.Value;
             }
 
-            entity.UpdateTime = DateUtil.Now;
-            entity.ValidateAndThrow();
+            entity.UpdateTime = _dateTimeProvider.Now;
 
             if (!_forecastRepository.Update(entity))
             {
