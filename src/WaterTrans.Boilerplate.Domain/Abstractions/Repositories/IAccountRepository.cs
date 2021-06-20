@@ -7,6 +7,7 @@ namespace WaterTrans.Boilerplate.Domain.Abstractions.Repositories
     {
         void Create(Account entity);
         Account GetById(Guid accountId);
+        Account GetByLoginId(string loginId);
         bool Update(Account entity);
         bool Delete(Guid accountId);
     }

@@ -403,6 +403,15 @@ namespace WaterTrans.Boilerplate.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ログインIDまたはパスワードが正しくありません。.
+        /// </summary>
+        public static string ErrorResultLoginFailed {
+            get {
+                return ResourceManager.GetString("ErrorResultLoginFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 認証ヘッダーを指定してください。.
         /// </summary>
         public static string ErrorResultNoAuthorizationHeader {

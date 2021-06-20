@@ -63,8 +63,8 @@ namespace WaterTrans.Boilerplate.Web.Api
 
             // This is work around. See https://github.com/dotnet/aspnetcore/issues/4853 @zhurinvlad commented on 5 Sep 2018
             services.AddSingleton<IValidationAttributeAdapterProvider, CustomValidationAttributeAdapterProvider>();
-            services.AddSingleton<IConfigureOptions<MvcOptions>, MvcConfiguration>();
-            services.AddSingleton<IConfigureOptions<KeyManagementOptions>, ConfigureKeyManagementOptions>();
+            services.AddSingleton<IConfigureOptions<MvcOptions>, ModelBindingMessageConfiguration>();
+            services.AddSingleton<IConfigureOptions<KeyManagementOptions>, KeyManagementConfiguration>();
             services.AddSingleton<IXmlRepository, DataProtectionRepository>();
 
             services.AddTransient<IAppSettings>(x => x.GetService<IOptionsMonitor<AppSettings>>().CurrentValue);
@@ -86,6 +86,7 @@ namespace WaterTrans.Boilerplate.Web.Api
             services.AddTransient<IForecastService, ForecastService>();
             services.AddTransient<IForecastUseCase, ForecastUseCase>();
             services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
+
             services.AddTransient<ITokenUseCase, TokenUseCase>();
 
             if (!WebHostEnvironment.IsProduction())

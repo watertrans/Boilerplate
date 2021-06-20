@@ -70,7 +70,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var roleScopes = GetAccountRoleScopes(account.Roles);
-            List<string> accessTokenScopes = scopes.ToList();
+            List<string> accessTokenScopes = scopes?.ToList();
             if (scopes == null || scopes.Count() == 0)
             {
                 accessTokenScopes = roleScopes;

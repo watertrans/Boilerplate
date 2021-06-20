@@ -8,14 +8,14 @@
     @RenderSection("HtmlHeads", required: false)
 </head>
 <body>
-    <header>HEADER</header>
+    <header class="bem-header">Bolerplate</header>
     <div class="container">
         <main role="main">
             @RenderBody()
         </main>
     </div>
-    <footer>FOOTER</footer>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <footer class="bem-footer">MIT LICENSE</footer>
+    <script src="~/js/site.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

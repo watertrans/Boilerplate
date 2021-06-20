@@ -9,35 +9,35 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
 {
     public class ForecastRepository : Repository, IForecastRepository
     {
-        private readonly SqlTableDataGateway<ForecastSqlEntity> _sqlRepository;
+        private readonly SqlTableDataGateway<ForecastSqlEntity> _sqlTableDataGateway;
 
         public ForecastRepository(IDBSettings dbSettings)
             : base(dbSettings)
         {
-            _sqlRepository = new SqlTableDataGateway<ForecastSqlEntity>(dbSettings);
+            _sqlTableDataGateway = new SqlTableDataGateway<ForecastSqlEntity>(dbSettings);
         }
 
         public void Create(Forecast entity)
         {
             ForecastSqlEntity sqlEntity = entity;
-            _sqlRepository.Create(sqlEntity);
+            _sqlTableDataGateway.Create(sqlEntity);
         }
 
         public bool Delete(Guid forecastId)
         {
-            return _sqlRepository.Delete(new ForecastSqlEntity { ForecastId = forecastId });
+            return _sqlTableDataGateway.Delete(new ForecastSqlEntity { ForecastId = forecastId });
         }
 
         public Forecast GetById(Guid forecastId)
         {
-            Forecast result = _sqlRepository.GetById(new ForecastSqlEntity { ForecastId = forecastId });
+            Forecast result = _sqlTableDataGateway.GetById(new ForecastSqlEntity { ForecastId = forecastId });
             return result;
         }
 
         public bool Update(Forecast entity)
         {
             ForecastSqlEntity sqlEntity = entity;
-            return _sqlRepository.Update(sqlEntity);
+            return _sqlTableDataGateway.Update(sqlEntity);
         }
     }
 }

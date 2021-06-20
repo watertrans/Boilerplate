@@ -12,11 +12,11 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
     [TestCategory("IntegrationTests")]
     public class SqlTableDataGatewayTest
     {
-        private readonly SqlTableDataGateway<ApplicationSqlEntity> _sqlRepository;
+        private readonly SqlTableDataGateway<ApplicationSqlEntity> _sqlTableDataGateway;
 
         public SqlTableDataGatewayTest()
         {
-            _sqlRepository = new SqlTableDataGateway<ApplicationSqlEntity>(TestEnvironment.DBSettings);
+            _sqlTableDataGateway = new SqlTableDataGateway<ApplicationSqlEntity>(TestEnvironment.DBSettings);
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
                 UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
-            _sqlRepository.Create(applicationSqlEntity);
+            _sqlTableDataGateway.Create(applicationSqlEntity);
 
             Assert.IsTrue(applicationSqlEntity.ConcurrencyToken != DateTime.MinValue);
         }
@@ -64,7 +64,7 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
                 UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
-            await _sqlRepository.CreateAsync(applicationSqlEntity);
+            await _sqlTableDataGateway.CreateAsync(applicationSqlEntity);
 
             Assert.IsTrue(applicationSqlEntity.ConcurrencyToken != DateTime.MinValue);
         }
@@ -90,8 +90,8 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
                 UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
-            _sqlRepository.Create(applicationSqlEntity);
-            _sqlRepository.Create(applicationSqlEntity);
+            _sqlTableDataGateway.Create(applicationSqlEntity);
+            _sqlTableDataGateway.Create(applicationSqlEntity);
         }
 
         [TestMethod]
@@ -115,33 +115,33 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
                 UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
-            await _sqlRepository.CreateAsync(applicationSqlEntity);
-            await _sqlRepository.CreateAsync(applicationSqlEntity);
+            await _sqlTableDataGateway.CreateAsync(applicationSqlEntity);
+            await _sqlTableDataGateway.CreateAsync(applicationSqlEntity);
         }
 
         [TestMethod]
         public void GetAll_例外が発生しない()
         {
-            _sqlRepository.GetAll();
+            _sqlTableDataGateway.GetAll();
         }
 
         [TestMethod]
         public async Task GetAllAsync_例外が発生しない()
         {
-            await _sqlRepository.GetAllAsync();
+            await _sqlTableDataGateway.GetAllAsync();
         }
 
         [TestMethod]
         public void GetById_例外が発生しない()
         {
-            var sqlEntity = _sqlRepository.GetById(new ApplicationSqlEntity { ApplicationId = Guid.Parse("00000000-a001-0000-0000-000000000000") });
+            var sqlEntity = _sqlTableDataGateway.GetById(new ApplicationSqlEntity { ApplicationId = Guid.Parse("00000000-a001-0000-0000-000000000000") });
             Assert.IsNotNull(sqlEntity);
         }
 
         [TestMethod]
         public async Task GetByIdAsync_例外が発生しない()
         {
-            var sqlEntity = await _sqlRepository.GetByIdAsync(new ApplicationSqlEntity { ApplicationId = Guid.Parse("00000000-a001-0000-0000-000000000000") });
+            var sqlEntity = await _sqlTableDataGateway.GetByIdAsync(new ApplicationSqlEntity { ApplicationId = Guid.Parse("00000000-a001-0000-0000-000000000000") });
             Assert.IsNotNull(sqlEntity);
         }
 
@@ -165,12 +165,12 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
                 UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
-            _sqlRepository.Create(applicationSqlEntity);
+            _sqlTableDataGateway.Create(applicationSqlEntity);
 
             applicationSqlEntity.Name = new string('Y', 100);
             applicationSqlEntity.UpdateTime = TestEnvironment.DateTimeProvider.Now;
 
-            Assert.IsTrue(_sqlRepository.Update(applicationSqlEntity));
+            Assert.IsTrue(_sqlTableDataGateway.Update(applicationSqlEntity));
         }
 
         [TestMethod]
@@ -193,12 +193,12 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
                 UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
-            await _sqlRepository.CreateAsync(applicationSqlEntity);
+            await _sqlTableDataGateway.CreateAsync(applicationSqlEntity);
 
             applicationSqlEntity.Name = new string('Y', 100);
             applicationSqlEntity.UpdateTime = TestEnvironment.DateTimeProvider.Now;
 
-            Assert.IsTrue(await _sqlRepository.UpdateAsync(applicationSqlEntity));
+            Assert.IsTrue(await _sqlTableDataGateway.UpdateAsync(applicationSqlEntity));
         }
 
         [TestMethod]
@@ -221,13 +221,13 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
                 UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
-            _sqlRepository.Create(applicationSqlEntity);
+            _sqlTableDataGateway.Create(applicationSqlEntity);
 
             applicationSqlEntity.Name = new string('Y', 100);
             applicationSqlEntity.UpdateTime = TestEnvironment.DateTimeProvider.Now;
             applicationSqlEntity.ConcurrencyToken = applicationSqlEntity.ConcurrencyToken.AddSeconds(-1);
 
-            Assert.IsFalse(_sqlRepository.Update(applicationSqlEntity));
+            Assert.IsFalse(_sqlTableDataGateway.Update(applicationSqlEntity));
         }
 
         [TestMethod]
@@ -250,13 +250,13 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
                 UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
-            await _sqlRepository.CreateAsync(applicationSqlEntity);
+            await _sqlTableDataGateway.CreateAsync(applicationSqlEntity);
 
             applicationSqlEntity.Name = new string('Y', 100);
             applicationSqlEntity.UpdateTime = TestEnvironment.DateTimeProvider.Now;
             applicationSqlEntity.ConcurrencyToken = applicationSqlEntity.ConcurrencyToken.AddSeconds(-1);
 
-            Assert.IsFalse(await _sqlRepository.UpdateAsync(applicationSqlEntity));
+            Assert.IsFalse(await _sqlTableDataGateway.UpdateAsync(applicationSqlEntity));
         }
 
         [TestMethod]
@@ -279,8 +279,8 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
                 UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
-            _sqlRepository.Create(applicationSqlEntity);
-            Assert.IsTrue(_sqlRepository.Delete(applicationSqlEntity));
+            _sqlTableDataGateway.Create(applicationSqlEntity);
+            Assert.IsTrue(_sqlTableDataGateway.Delete(applicationSqlEntity));
         }
 
         [TestMethod]
@@ -303,8 +303,8 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways.IntegrationTests
                 UpdateTime = TestEnvironment.DateTimeProvider.Now,
             };
 
-            await _sqlRepository.CreateAsync(applicationSqlEntity);
-            Assert.IsTrue(await _sqlRepository.DeleteAsync(applicationSqlEntity));
+            await _sqlTableDataGateway.CreateAsync(applicationSqlEntity);
+            Assert.IsTrue(await _sqlTableDataGateway.DeleteAsync(applicationSqlEntity));
         }
     }
 }

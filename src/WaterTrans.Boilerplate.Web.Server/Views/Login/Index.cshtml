@@ -1,0 +1,24 @@
+﻿@model LoginIndexViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+<div class="bem-login">
+    <h1 class="bem-login__h1">@ViewData["Title"]</h1>
+    <form class="bem-login__form" action="@Url.Action("Index")" method="post">
+        <div class="bem-login__error-summary">@Html.ValidationSummary(true)</div>
+        <div class="bem-login__loginid">
+            <div class="bem-login__loginid-label">LoginId:</div>
+            <div class="bem-login__loginid-input">@Html.TextBoxFor(m => m.LoginId)</div>
+            <div class="bem-login__loginid-error">@Html.ValidationMessageFor(m => m.LoginId)</div>
+        </div>
+        <div class="bem-login__password">
+            <div class="bem-login__password-label">Password:</div>
+            <div class="bem-login__password-input">@Html.PasswordFor(m => m.Password)</div>
+            <div class="bem-login__password-error">@Html.ValidationMessageFor(m => m.Password)</div>
+        </div>
+        <div class="bem-login__submit">
+            @Html.AntiForgeryToken()
+            <div class="bem-login__submit-input"><input type="submit" name="submit" value="Login" /></div>
+        </div>
+    </form>
+</div>

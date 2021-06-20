@@ -1,4 +1,5 @@
-﻿using Dapper.FastCrud;
+﻿using Dapper;
+using Dapper.FastCrud;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -110,6 +111,16 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways
         {
             return await _connection.DeleteAsync<TSqlEntity>(sqlEntity, statement => statement
                 .WithTimeout(TimeSpan.FromSeconds(_dbSettings.CommandTimeout)));
+        }
+
+        public IEnumerable<TSqlEntity> ExecuteQuery(string sql, object param)
+        {
+            return _connection.Query<TSqlEntity>(sql, param, null, true, _dbSettings.CommandTimeout);
+        }
+
+        public Task<IEnumerable<TSqlEntity>> ExecuteQueryAsync(string sql, object param)
+        {
+            return _connection.QueryAsync<TSqlEntity>(sql, param, null, _dbSettings.CommandTimeout);
         }
     }
 }

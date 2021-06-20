@@ -17,5 +17,7 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways
         Task<bool> UpdateAsync(TSqlEntity entity);
         bool Delete(TSqlEntity entity);
         Task<bool> DeleteAsync(TSqlEntity entity);
+        IEnumerable<TSqlEntity> ExecuteQuery(string sql, object param);
+        Task<IEnumerable<TSqlEntity>> ExecuteQueryAsync(string sql, object param);
     }
 }

@@ -37,6 +37,11 @@ namespace WaterTrans.Boilerplate.Domain.Services
             return _accountRepository.GetById(accountId);
         }
 
+        public Account GetAccountByLoginId(string loginId)
+        {
+            return _accountRepository.GetByLoginId(loginId);
+        }
+
         public bool VerifyPassword(string password, Account account)
         {
             return _passwordHashProvider.Verify(password, account.Salt, account.Iterations, account.Password);

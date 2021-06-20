@@ -8,35 +8,35 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
 {
     public class AccessTokenRepository : Repository, IAccessTokenRepository
     {
-        private readonly SqlTableDataGateway<AccessTokenSqlEntity> _sqlRepository;
+        private readonly SqlTableDataGateway<AccessTokenSqlEntity> _sqlTableDataGateway;
 
         public AccessTokenRepository(IDBSettings dbSettings)
             : base(dbSettings)
         {
-            _sqlRepository = new SqlTableDataGateway<AccessTokenSqlEntity>(dbSettings);
+            _sqlTableDataGateway = new SqlTableDataGateway<AccessTokenSqlEntity>(dbSettings);
         }
 
         public void Create(AccessToken entity)
         {
             AccessTokenSqlEntity sqlEntity = entity;
-            _sqlRepository.Create(sqlEntity);
+            _sqlTableDataGateway.Create(sqlEntity);
         }
 
         public bool Delete(string token)
         {
-            return _sqlRepository.Delete(new AccessTokenSqlEntity { Token = token });
+            return _sqlTableDataGateway.Delete(new AccessTokenSqlEntity { Token = token });
         }
 
         public AccessToken GetById(string token)
         {
-            AccessToken result = _sqlRepository.GetById(new AccessTokenSqlEntity { Token = token });
+            AccessToken result = _sqlTableDataGateway.GetById(new AccessTokenSqlEntity { Token = token });
             return result;
         }
 
         public bool Update(AccessToken entity)
         {
             AccessTokenSqlEntity sqlEntity = entity;
-            return _sqlRepository.Update(sqlEntity);
+            return _sqlTableDataGateway.Update(sqlEntity);
         }
     }
 }

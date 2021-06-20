@@ -10,12 +10,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using MySqlConnector;
+using WaterTrans.Boilerplate.Application.Abstractions.UseCases;
 using WaterTrans.Boilerplate.Application.Settings;
+using WaterTrans.Boilerplate.Application.UseCases;
 using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.Cryptography;
 using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
 using WaterTrans.Boilerplate.Domain.Abstractions;
+using WaterTrans.Boilerplate.Domain.Abstractions.QueryServices;
+using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
+using WaterTrans.Boilerplate.Domain.Abstractions.Services;
+using WaterTrans.Boilerplate.Domain.Services;
 using WaterTrans.Boilerplate.Infrastructure.Cryptography;
 using WaterTrans.Boilerplate.Infrastructure.OS;
+using WaterTrans.Boilerplate.Persistence.QueryServices;
 using WaterTrans.Boilerplate.Persistence.Repositories;
 using WaterTrans.Boilerplate.Web.AttributeAdapters;
 using WaterTrans.Boilerplate.Web.Resources;
@@ -44,8 +51,8 @@ namespace WaterTrans.Boilerplate.Web.Server
 
             // This is work around. See https://github.com/dotnet/aspnetcore/issues/4853 @zhurinvlad commented on 5 Sep 2018
             services.AddSingleton<IValidationAttributeAdapterProvider, CustomValidationAttributeAdapterProvider>();
-            services.AddSingleton<IConfigureOptions<MvcOptions>, MvcConfiguration>();
-            services.AddSingleton<IConfigureOptions<KeyManagementOptions>, ConfigureKeyManagementOptions>();
+            services.AddSingleton<IConfigureOptions<MvcOptions>, ModelBindingMessageConfiguration>();
+            services.AddSingleton<IConfigureOptions<KeyManagementOptions>, KeyManagementConfiguration>();
             services.AddSingleton<IXmlRepository, DataProtectionRepository>();
 
             services.AddTransient<IAppSettings>(x => x.GetService<IOptionsMonitor<AppSettings>>().CurrentValue);
@@ -54,6 +61,17 @@ namespace WaterTrans.Boilerplate.Web.Server
 
             services.AddTransient<IDateTimeProvider, DateTimeProvider>();
             services.AddTransient<IPasswordHashProvider, PasswordHashProvider>();
+
+            services.AddTransient<IAccessTokenRepository, AccessTokenRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IApplicationQueryService, ApplicationQueryService>();
+            services.AddTransient<IApplicationRepository, ApplicationRepository>();
+            services.AddTransient<IAuthorizationCodeRepository, AuthorizationCodeRepository>();
+            services.AddTransient<IAuthorizeService, AuthorizeService>();
+            services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
+
+            services.AddTransient<ILoginUseCase, LoginUseCase>();
 
             services.AddControllersWithViews()
                 .AddDataAnnotationsLocalization(options =>
@@ -83,7 +101,7 @@ namespace WaterTrans.Boilerplate.Web.Server
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

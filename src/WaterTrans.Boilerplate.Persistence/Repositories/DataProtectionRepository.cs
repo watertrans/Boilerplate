@@ -10,20 +10,20 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
 {
     public class DataProtectionRepository : Repository, IXmlRepository
     {
-        private readonly SqlTableDataGateway<DataProtectionSqlEntity> _sqlRepository;
+        private readonly SqlTableDataGateway<DataProtectionSqlEntity> _sqlTableDataGateway;
         private readonly IDateTimeProvider _dateTimeProvider;
 
         public DataProtectionRepository(IDBSettings dbSettings, IDateTimeProvider dateTimeProvider)
             : base(dbSettings)
         {
-            _sqlRepository = new SqlTableDataGateway<DataProtectionSqlEntity>(dbSettings);
+            _sqlTableDataGateway = new SqlTableDataGateway<DataProtectionSqlEntity>(dbSettings);
             _dateTimeProvider = dateTimeProvider;
         }
 
         public IReadOnlyCollection<XElement> GetAllElements()
         {
             var result = new List<XElement>();
-            foreach (var item in _sqlRepository.GetAll())
+            foreach (var item in _sqlTableDataGateway.GetAll())
             {
                 result.Add(XElement.Parse(item.Element));
             }
@@ -40,7 +40,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
                 CreateTime = now,
                 UpdateTime = now,
             };
-            _sqlRepository.Create(entity);
+            _sqlTableDataGateway.Create(entity);
         }
     }
 }

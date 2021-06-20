@@ -242,6 +242,10 @@
     <value>スコープが正しくありません。</value>
     <comment>許可されていないスコープを指定した場合のメッセージ。</comment>
   </data>
+  <data name="ErrorResultLoginFailed" xml:space="preserve">
+    <value>ログインIDまたはパスワードが正しくありません。</value>
+    <comment>ログイン失敗時のエラーメッセージ。</comment>
+  </data>
   <data name="ErrorResultNoAuthorizationHeader" xml:space="preserve">
     <value>認証ヘッダーを指定してください。</value>
     <comment>認証ヘッダーが存在しない場合のメッセージ。</comment>

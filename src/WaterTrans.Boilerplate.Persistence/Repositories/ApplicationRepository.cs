@@ -9,35 +9,35 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
 {
     public class ApplicationRepository : Repository, IApplicationRepository
     {
-        private readonly SqlTableDataGateway<ApplicationSqlEntity> _sqlRepository;
+        private readonly SqlTableDataGateway<ApplicationSqlEntity> _sqlTableDataGateway;
 
         public ApplicationRepository(IDBSettings dbSettings)
             : base(dbSettings)
         {
-            _sqlRepository = new SqlTableDataGateway<ApplicationSqlEntity>(dbSettings);
+            _sqlTableDataGateway = new SqlTableDataGateway<ApplicationSqlEntity>(dbSettings);
         }
 
         public void Create(Domain.Entities.Application entity)
         {
             ApplicationSqlEntity sqlEntity = entity;
-            _sqlRepository.Create(sqlEntity);
+            _sqlTableDataGateway.Create(sqlEntity);
         }
 
         public bool Delete(Guid applicationId)
         {
-            return _sqlRepository.Delete(new ApplicationSqlEntity { ApplicationId = applicationId });
+            return _sqlTableDataGateway.Delete(new ApplicationSqlEntity { ApplicationId = applicationId });
         }
 
         public Domain.Entities.Application GetById(Guid applicationId)
         {
-            Domain.Entities.Application result = _sqlRepository.GetById(new ApplicationSqlEntity { ApplicationId = applicationId });
+            Domain.Entities.Application result = _sqlTableDataGateway.GetById(new ApplicationSqlEntity { ApplicationId = applicationId });
             return result;
         }
 
         public bool Update(Domain.Entities.Application entity)
         {
             ApplicationSqlEntity sqlEntity = entity;
-            return _sqlRepository.Update(sqlEntity);
+            return _sqlTableDataGateway.Update(sqlEntity);
         }
     }
 }
