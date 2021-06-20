@@ -1,5 +1,5 @@
 ﻿using System;
-using WaterTrans.Boilerplate.Domain.Utils;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Utils;
 
 namespace WaterTrans.Boilerplate.Web.DataAnnotations
 {

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.ExtensionMethods;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Utils;
 using WaterTrans.Boilerplate.Domain.Abstractions;
 using WaterTrans.Boilerplate.Domain.Abstractions.QueryServices;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.Abstractions.Services;
 using WaterTrans.Boilerplate.Domain.Constants;
 using WaterTrans.Boilerplate.Domain.Entities;
-using WaterTrans.Boilerplate.Domain.Utils;
 
 namespace WaterTrans.Boilerplate.Domain.Services
 {

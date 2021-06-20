@@ -1,18 +1,9 @@
 ﻿using System;
 
-namespace WaterTrans.Boilerplate.Domain.Utils
+namespace WaterTrans.Boilerplate.CrossCuttingConcerns.Utils
 {
     public static class StringUtil
     {
-        public static string ToCamelCase(this string value)
-        {
-            if (value == null || value.Length == 0)
-            {
-                return value;
-            }
-            return char.ToLowerInvariant(value[0]) + value.Substring(1);
-        }
-
         public static string CreateCode()
         {
             return (StringUtil.Base64UrlEncode(Guid.NewGuid().ToByteArray()) +

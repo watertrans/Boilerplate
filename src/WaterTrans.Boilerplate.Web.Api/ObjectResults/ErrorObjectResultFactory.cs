@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
 using System.Net.Mime;
-using WaterTrans.Boilerplate.Domain.Utils;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.ExtensionMethods;
 using WaterTrans.Boilerplate.Web.Api.ResponseObjects;
 using WaterTrans.Boilerplate.Web.Resources;
 

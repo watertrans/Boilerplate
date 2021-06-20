@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
 
-namespace WaterTrans.Boilerplate.Domain.Utils
+namespace WaterTrans.Boilerplate.CrossCuttingConcerns.Utils
 {
     public static class JsonUtil
     {

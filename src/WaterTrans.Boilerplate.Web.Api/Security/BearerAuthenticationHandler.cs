@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
 using WaterTrans.Boilerplate.Domain.Abstractions.Services;
 using WaterTrans.Boilerplate.Domain.Constants;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Web.Api.ObjectResults;
 
 namespace WaterTrans.Boilerplate.Web.Api.Security

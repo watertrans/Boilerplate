@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.ExtensionMethods;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Utils;
 
 namespace WaterTrans.Boilerplate.Domain.Utils.UnitTests
 {

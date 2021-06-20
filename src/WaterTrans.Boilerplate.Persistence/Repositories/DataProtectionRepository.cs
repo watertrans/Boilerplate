@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
 using WaterTrans.Boilerplate.Domain.Abstractions;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Persistence.SqlEntities;
 
 namespace WaterTrans.Boilerplate.Persistence.Repositories

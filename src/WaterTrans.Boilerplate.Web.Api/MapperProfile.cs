@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using System;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.ExtensionMethods;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Utils;
 using WaterTrans.Boilerplate.Domain;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
 using WaterTrans.Boilerplate.Domain.Entities;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Web.Api.RequestObjects;
 using WaterTrans.Boilerplate.Web.Api.ResponseObjects;
 

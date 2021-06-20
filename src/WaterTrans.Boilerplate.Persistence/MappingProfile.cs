@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using WaterTrans.Boilerplate.CrossCuttingConcerns.Utils;
 using WaterTrans.Boilerplate.Domain.Constants;
 using WaterTrans.Boilerplate.Domain.Entities;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Domain.ValueObjects;
 using WaterTrans.Boilerplate.Persistence.SqlEntities;
 
