@@ -3,17 +3,18 @@ using WaterTrans.Boilerplate.Domain.Abstractions;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.Entities;
 using WaterTrans.Boilerplate.Persistence.SqlEntities;
+using WaterTrans.Boilerplate.Persistence.TableDataGateways;
 
 namespace WaterTrans.Boilerplate.Persistence.Repositories
 {
     public class ForecastRepository : Repository, IForecastRepository
     {
-        private readonly SqlRepository<ForecastSqlEntity> _sqlRepository;
+        private readonly SqlTableDataGateway<ForecastSqlEntity> _sqlRepository;
 
         public ForecastRepository(IDBSettings dbSettings)
             : base(dbSettings)
         {
-            _sqlRepository = new SqlRepository<ForecastSqlEntity>(dbSettings);
+            _sqlRepository = new SqlTableDataGateway<ForecastSqlEntity>(dbSettings);
         }
 
         public void Create(Forecast entity)

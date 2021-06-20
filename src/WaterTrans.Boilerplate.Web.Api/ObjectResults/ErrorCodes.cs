@@ -10,6 +10,7 @@
         public const string InvalidScope = "InvalidScope";
         public const string InvalidAuthorizationScheme = "InvalidAuthorizationScheme";
         public const string InvalidAuthorizationToken = "InvalidAuthorizationToken";
+        public const string InvalidRefreshToken = "InvalidRefreshToken";
         public const string AuthorizationTokenExpired = "AuthorizationTokenExpired";
         public const string BadRequest = "BadRequest";
         public const string Unauthorized = "Unauthorized";

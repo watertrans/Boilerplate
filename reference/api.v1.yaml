@@ -1,0 +1,311 @@
+openapi: 3.0.0
+info:
+  title: Boilerplate
+  version: '1.0'
+  contact:
+    email: watertrans@gmail.com
+    name: Masahisa Kobayashi
+    url: 'https://github.com/watertrans'
+  license:
+    name: MIT
+    url: 'https://github.com/watertrans/Boilerplate/blob/main/LICENSE'
+  description: The Boilerplate Web API specfications.
+servers:
+  - url: 'https://localhost:44312/api/v1'
+paths:
+  /token:
+    post:
+      summary: アクセストークン発行
+      operationId: post-token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+              examples:
+                Bearer:
+                  value:
+                    access_token: HP89YjM-tUqS8In7Av2L2gqQlIWtLxb06fNrp3WU58Kw
+                    expires_in: 3600
+                    token_type: Bearer
+                    scope: full_control read write
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: refresh_token=abcde12345; Path=/refresh_token; HttpOnly; SameSite=None; Max-Age=43200; Secure
+              description: 応答に refresh_token を含みます。refresh_tokenが有効期間内にある場合は /refresh_token エンドポイントでアクセストークンを取得できます。
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '500':
+          $ref: '#/components/responses/500InternalServerError'
+      description: アクセストークンを発行します。
+      security: []
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                    - client_credentials
+                    - authorization_code
+                  example: client_credentials
+                  description: 権限種別
+                scope:
+                  type: string
+                  description: スコープ
+                  enum:
+                    - fullcontrol
+                    - read
+                    - write
+                client_id:
+                  type: string
+                  description: クライアントID
+                  example: owner
+                client_secret:
+                  type: string
+                  description: クライアントシークレット
+                  example: owner-secret
+              required:
+                - grant_type
+            examples:
+              client_credentials:
+                value:
+                  grant_type: client_credentials
+                  client_id: owner
+                  client_secret: owner-secret
+        description: ''
+      tags:
+        - Token
+  /refresh_token:
+    post:
+      summary: アクセストークン発行（リフレッシュトークン）
+      operationId: post-refresh_token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+              examples:
+                Bearer:
+                  value:
+                    access_token: HP89YjM-tUqS8In7Av2L2gqQlIWtLxb06fNrp3WU58Kw
+                    expires_in: 3600
+                    token_type: Bearer
+                    scope: full_control read write
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                InvalidRefreshToken:
+                  value:
+                    code: InvalidRefreshToken
+                    message: リフレッシュトークンが正しくありません。
+        '500':
+          $ref: '#/components/responses/500InternalServerError'
+      tags:
+        - Token
+      description: リフレッシュトークンを使ってアクセストークンを発行します。
+      security: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                    - refresh_token
+                  example: refresh_token
+                  description: 権限種別
+              required:
+                - grant_type
+            examples:
+              refresh_token:
+                value:
+                  grant_type: refresh_token
+        description: ''
+components:
+  schemas:
+    Error:
+      title: Error
+      type: object
+      x-examples:
+        NotFound:
+          message: 指定したリソースは存在しません。
+          code: NotFound
+        ValidationError:
+          code: ValidationError
+          message: 入力エラーが発生しました。エラーメッセージを確認してください。
+          details:
+            - message: '''ステータス''の値が正しくありません。'
+              target: status
+              code: ValidationErrorDetail
+      description: エラー
+      properties:
+        code:
+          type: string
+          description: エラーコード
+        message:
+          type: string
+          description: エラーメッセージ
+        details:
+          type: array
+          description: エラー詳細
+          items:
+            $ref: '#/components/schemas/Error'
+        target:
+          type: string
+          description: エラーターゲット
+        innerError:
+          $ref: '#/components/schemas/Error'
+      required:
+        - code
+        - message
+    Token:
+      title: Token
+      type: object
+      description: アクセストークン
+      properties:
+        access_token:
+          type: string
+          description: アクセストークン
+          maxLength: 100
+        expires_in:
+          type: integer
+          description: アクセストークンの存続時間（秒単位）
+        token_type:
+          type: string
+          description: トークンタイプ
+        scope:
+          type: string
+          description: スコープ
+      required:
+        - access_token
+        - expires_in
+        - token_type
+        - scope
+      x-examples:
+        Bearer:
+          access_token: HP89YjM-tUqS8In7Av2L2gqQlIWtLxb06fNrp3WU58Kw
+          expires_in: 3600
+          token_type: Bearer
+          scope: full_control read write
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+  responses:
+    400BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Example:
+              value:
+                code: BadRequest
+                message: 要求が正しくありません。
+    401Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Example:
+              value:
+                code: Unauthorized
+                message: 認証情報が正しくありません。
+    403Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Example:
+              value:
+                code: Forbidden
+                message: 指定した操作を実行するアクセス権がありません。
+    404NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Example:
+              value:
+                code: NotFound
+                message: 指定したリソースは存在しません。
+    500InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Example:
+              value:
+                code: InternalServerError
+                message: サーバーで予期しないエラーが発生しました。
+  parameters:
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 999
+        default: 1
+      description: ページ番号
+    pageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      description: ページサイズ
+    sort:
+      name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+        example: 'sortNo,-createTime'
+        maxLength: 100
+      description: 並び順（カンマ区切りで複数指定可、各項目に-プレフィクス付与で降順）
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+        maxLength: 256
+      description: 検索キーワード
+  examples: {}
+security:
+  - Bearer: []
+tags:
+  - name: Token

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SqlResources\CreateRefreshToken.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SqlResources\CreateRefreshToken.sql" />
     <EmbeddedResource Include="SqlResources\CreateAccessToken.sql" />
     <EmbeddedResource Include="SqlResources\CreateAccount.sql" />
     <EmbeddedResource Include="SqlResources\CreateApplication.sql" />

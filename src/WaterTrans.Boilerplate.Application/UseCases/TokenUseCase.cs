@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Transactions;
 using WaterTrans.Boilerplate.Application.Abstractions.UseCases;
 using WaterTrans.Boilerplate.Application.Constants;
+using WaterTrans.Boilerplate.Application.UseCaseResults;
 using WaterTrans.Boilerplate.Domain.Abstractions.Services;
 using WaterTrans.Boilerplate.Domain.Constants;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
-using WaterTrans.Boilerplate.Domain.Entities;
 
 namespace WaterTrans.Boilerplate.Application.UseCases
 {
@@ -18,66 +17,64 @@ namespace WaterTrans.Boilerplate.Application.UseCases
             _authorizeService = authorizeService;
         }
 
-        public AccessToken AccessToken { get; private set; }
-
         public CreateTokenResult CreateTokenByAuthorizationCode(TokenCreateByAuthorizationCodeDto dto)
         {
             if (string.IsNullOrEmpty(dto.ClientId))
             {
-                return CreateTokenResult.InvalidClient;
+                return new CreateTokenResult(CreateTokenValidationResult.InvalidClient);
             }
 
             var application = _authorizeService.GetApplication(dto.ClientId);
 
             if (application == null)
             {
-                return CreateTokenResult.InvalidClient;
+                return new CreateTokenResult(CreateTokenValidationResult.InvalidClient);
             }
 
             if (!application.GrantTypes.Contains(GrantTypes.AuthorizationCode))
             {
-                return CreateTokenResult.InvalidGrantType;
+                return new CreateTokenResult(CreateTokenValidationResult.InvalidGrantType);
             }
 
             if (string.IsNullOrEmpty(dto.Code))
             {
-                return CreateTokenResult.InvalidCode;
+                return new CreateTokenResult(CreateTokenValidationResult.InvalidCode);
             }
 
             var authorizationCode = _authorizeService.GetAuthorizationCode(dto.Code);
 
             if (authorizationCode == null)
             {
-                return CreateTokenResult.InvalidCode;
+                return new CreateTokenResult(CreateTokenValidationResult.InvalidCode);
             }
 
             if (application.ApplicationId != authorizationCode.ApplicationId)
             {
-                return CreateTokenResult.InvalidCode;
+                return new CreateTokenResult(CreateTokenValidationResult.InvalidCode);
             }
 
-            AccessToken = _authorizeService.CreateAccessToken(authorizationCode, null);
+            var (accessToken, refreshToken) = _authorizeService.CreateAccessToken(authorizationCode, null);
 
-            return CreateTokenResult.Success;
+            return new CreateTokenResult(CreateTokenValidationResult.Success, accessToken, refreshToken);
         }
 
         public CreateTokenResult CreateTokenByClientCredentials(TokenCreateByClientCredentialsDto dto)
         {
             if (string.IsNullOrEmpty(dto.ClientId))
             {
-                return CreateTokenResult.InvalidClient;
+                return new CreateTokenResult(CreateTokenValidationResult.InvalidClient);
             }
 
             var application = _authorizeService.GetApplication(dto.ClientId);
 
             if (application == null || application.ClientSecret != dto.ClientSecret)
             {
-                return CreateTokenResult.InvalidClient;
+                return new CreateTokenResult(CreateTokenValidationResult.InvalidClient);
             }
 
             if (!application.GrantTypes.Contains(GrantTypes.ClientCredentials))
             {
-                return CreateTokenResult.InvalidGrantType;
+                return new CreateTokenResult(CreateTokenValidationResult.InvalidGrantType);
             }
 
             List<string> scopes = new List<string>();
@@ -90,14 +87,28 @@ namespace WaterTrans.Boilerplate.Application.UseCases
                 {
                     if (!application.Scopes.Contains(scope))
                     {
-                        return CreateTokenResult.InvalidScope;
+                        return new CreateTokenResult(CreateTokenValidationResult.InvalidScope);
                     }
                 }
             }
 
-            AccessToken = _authorizeService.CreateAccessToken(application.ApplicationId, scopes);
+            var (accessToken, refreshToken) = _authorizeService.CreateAccessToken(application.ApplicationId, scopes);
 
-            return CreateTokenResult.Success;
+            return new CreateTokenResult(CreateTokenValidationResult.Success, accessToken, refreshToken);
+        }
+
+        public CreateTokenResult CreateTokenByRefreshToken(string token)
+        {
+            var refreshToken = _authorizeService.GetRefreshToken(token);
+
+            if (refreshToken == null)
+            {
+                return new CreateTokenResult(CreateTokenValidationResult.InvalidRefreshToken);
+            }
+
+            var accessToken = _authorizeService.CreateAccessToken(refreshToken);
+
+            return new CreateTokenResult(CreateTokenValidationResult.Success, accessToken);
         }
     }
 }

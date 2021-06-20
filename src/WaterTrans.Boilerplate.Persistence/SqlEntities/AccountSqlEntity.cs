@@ -6,7 +6,7 @@ using WaterTrans.Boilerplate.Domain.Entities;
 namespace WaterTrans.Boilerplate.Persistence.SqlEntities
 {
     [Table("Account")]
-    public class AccountSqlEntity : SqlEntity
+    internal class AccountSqlEntity : SqlEntity
     {
         [Key]
         public Guid AccountId { get; set; }

@@ -63,6 +63,7 @@ namespace WaterTrans.Boilerplate.Persistence
             _connection.Execute(_resources["CreateAuthorizationCode.sql"]);
             _connection.Execute(_resources["CreateDataProtection.sql"]);
             _connection.Execute(_resources["CreateForecast.sql"]);
+            _connection.Execute(_resources["CreateRefreshToken.sql"]);
         }
 
         public void LoadInitialData()
@@ -83,6 +84,7 @@ namespace WaterTrans.Boilerplate.Persistence
             _connection.Execute("DROP TABLE IF EXISTS `AuthorizationCode`");
             _connection.Execute("DROP TABLE IF EXISTS `DataProtection`");
             _connection.Execute("DROP TABLE IF EXISTS `Forecast`");
+            _connection.Execute("DROP TABLE IF EXISTS `RefreshToken`");
         }
     }
 }

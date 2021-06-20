@@ -1,6 +1,5 @@
-﻿using WaterTrans.Boilerplate.Application.Constants;
+﻿using WaterTrans.Boilerplate.Application.UseCaseResults;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
-using WaterTrans.Boilerplate.Domain.Entities;
 
 namespace WaterTrans.Boilerplate.Application.Abstractions.UseCases
 {
@@ -8,6 +7,6 @@ namespace WaterTrans.Boilerplate.Application.Abstractions.UseCases
     {
         CreateTokenResult CreateTokenByClientCredentials(TokenCreateByClientCredentialsDto dto);
         CreateTokenResult CreateTokenByAuthorizationCode(TokenCreateByAuthorizationCodeDto dto);
-        AccessToken AccessToken { get; }
+        CreateTokenResult CreateTokenByRefreshToken(string token);
     }
 }

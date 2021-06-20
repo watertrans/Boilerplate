@@ -3,17 +3,18 @@ using WaterTrans.Boilerplate.Domain.Abstractions;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.Entities;
 using WaterTrans.Boilerplate.Persistence.SqlEntities;
+using WaterTrans.Boilerplate.Persistence.TableDataGateways;
 
 namespace WaterTrans.Boilerplate.Persistence.Repositories
 {
     public class AccountRepository : Repository, IAccountRepository
     {
-        private readonly SqlRepository<AccountSqlEntity> _sqlRepository;
+        private readonly SqlTableDataGateway<AccountSqlEntity> _sqlRepository;
 
         public AccountRepository(IDBSettings dbSettings)
             : base(dbSettings)
         {
-            _sqlRepository = new SqlRepository<AccountSqlEntity>(dbSettings);
+            _sqlRepository = new SqlTableDataGateway<AccountSqlEntity>(dbSettings);
         }
 
         public void Create(Account entity)

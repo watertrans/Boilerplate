@@ -234,6 +234,10 @@
     <value>権限種別が正しくありません。</value>
     <comment>許可されていない権限種別を指定した場合のメッセージ。</comment>
   </data>
+  <data name="ErrorResultInvalidRefreshToken" xml:space="preserve">
+    <value>リフレッシュトークンが正しくありません。</value>
+    <comment>リフレッシュトークンよるアクセストークン交換の失敗メッセージ。</comment>
+  </data>
   <data name="ErrorResultInvalidScope" xml:space="preserve">
     <value>スコープが正しくありません。</value>
     <comment>許可されていないスコープを指定した場合のメッセージ。</comment>

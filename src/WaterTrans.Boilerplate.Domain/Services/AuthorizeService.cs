@@ -18,6 +18,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
     {
         private readonly IAppSettings _appSettings;
         private readonly IAccessTokenRepository _accessTokenRepository;
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
         private readonly IAuthorizationCodeRepository _authorizationCodeRepository;
         private readonly IApplicationQueryService _applicationQueryService;
         private readonly IApplicationRepository _applicationRepository;
@@ -27,6 +28,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
         public AuthorizeService(
             IAppSettings appSettings,
             IAccessTokenRepository accessTokenRepository,
+            IRefreshTokenRepository refreshTokenRepository,
             IAuthorizationCodeRepository authorizationCodeRepository,
             IApplicationQueryService applicationQueryService,
             IApplicationRepository applicationRepository,
@@ -35,6 +37,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
         {
             _appSettings = appSettings;
             _accessTokenRepository = accessTokenRepository;
+            _refreshTokenRepository = refreshTokenRepository;
             _authorizationCodeRepository = authorizationCodeRepository;
             _applicationQueryService = applicationQueryService;
             _applicationRepository = applicationRepository;
@@ -42,36 +45,26 @@ namespace WaterTrans.Boilerplate.Domain.Services
             _dateTimeProvider = dateTimeProvider;
         }
 
-        public AccessToken CreateAccessToken(AuthorizationCode authorizationCode, IEnumerable<string> scopes)
+        public (AccessToken accessToken, RefreshToken refreshToken) CreateAccessToken(AuthorizationCode authorizationCode, IEnumerable<string> scopes)
         {
             if (authorizationCode == null)
             {
                 throw new ArgumentNullException(nameof(authorizationCode));
             }
 
-            if (authorizationCode.Status != AuthorizationCodeStatus.NORMAL)
+            if (!authorizationCode.IsEnabled(_dateTimeProvider.Now))
             {
                 throw new InvalidOperationException($"AuthorizationCode '{authorizationCode.Code}' was not valid.");
             }
 
             var application = _applicationRepository.GetById(authorizationCode.ApplicationId);
-            if (application == null)
-            {
-                throw new InvalidOperationException($"Application '{authorizationCode.ApplicationId}' was not found.");
-            }
-
-            if (application.Status != ApplicationStatus.NORMAL)
+            if (application == null || !application.IsEnabled())
             {
                 throw new InvalidOperationException($"Application '{authorizationCode.ApplicationId}' was not valid.");
             }
 
             var account = _accountService.GetAccount(authorizationCode.AccountId);
-            if (account == null)
-            {
-                throw new InvalidOperationException($"Account '{authorizationCode.AccountId}' was not found.");
-            }
-
-            if (account.Status != AccountStatus.NORMAL)
+            if (account == null || !account.IsEnabled())
             {
                 throw new InvalidOperationException($"Account '{authorizationCode.AccountId}' was not valid.");
             }
@@ -100,12 +93,28 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 ApplicationId = authorizationCode.ApplicationId,
                 PrincipalType = PrincipalType.User.ToString(),
                 PrincipalId = authorizationCode.AccountId,
-                Name = authorizationCode.AccountId + " - " + now.ToISO8601(),
+                Name = "AuthorizationCode - " + now.ToISO8601(),
                 Description = string.Empty,
                 Roles = account.Roles,
                 Scopes = accessTokenScopes,
                 Status = AccessTokenStatus.NORMAL,
                 ExpiryTime = now.AddSeconds(_appSettings.AccessTokenExpiresIn),
+                CreateTime = now,
+                UpdateTime = now,
+            };
+
+            var refreshToken = new RefreshToken
+            {
+                Token = StringUtil.CreateCode(),
+                ApplicationId = authorizationCode.ApplicationId,
+                PrincipalType = PrincipalType.User.ToString(),
+                PrincipalId = authorizationCode.AccountId,
+                Name = "AuthorizationCode - " + now.ToISO8601(),
+                Description = string.Empty,
+                Roles = account.Roles,
+                Scopes = accessTokenScopes,
+                Status = RefreshTokenStatus.NORMAL,
+                ExpiryTime = now.AddSeconds(_appSettings.RefreshTokenExpiresIn),
                 CreateTime = now,
                 UpdateTime = now,
             };
@@ -116,13 +125,15 @@ namespace WaterTrans.Boilerplate.Domain.Services
             using (var scope = new TransactionScope())
             {
                 _accessTokenRepository.Create(accessToken);
+                _refreshTokenRepository.Create(refreshToken);
                 _authorizationCodeRepository.Update(authorizationCode);
+                scope.Complete();
             }
 
-            return accessToken;
+            return (accessToken, refreshToken);
         }
 
-        public AccessToken CreateAccessToken(Guid applicationId, IEnumerable<string> scopes)
+        public (AccessToken accessToken, RefreshToken refreshToken) CreateAccessToken(Guid applicationId, IEnumerable<string> scopes)
         {
             if (applicationId == null || applicationId == Guid.Empty)
             {
@@ -130,12 +141,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var application = _applicationRepository.GetById(applicationId);
-            if (application == null)
-            {
-                throw new InvalidOperationException($"Application '{applicationId}' was not found.");
-            }
-
-            if (application.Status != ApplicationStatus.NORMAL)
+            if (application == null || !application.IsEnabled())
             {
                 throw new InvalidOperationException($"Application '{applicationId}' was not valid.");
             }
@@ -163,12 +169,73 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 ApplicationId = applicationId,
                 PrincipalType = PrincipalType.Application.ToString(),
                 PrincipalId = applicationId,
-                Name = application.Name + " - " + now.ToISO8601(),
+                Name = "ClientCredentials - " + now.ToISO8601(),
                 Description = string.Empty,
                 Roles = application.Roles,
                 Scopes = accessTokenScopes,
                 Status = AccessTokenStatus.NORMAL,
                 ExpiryTime = now.AddSeconds(_appSettings.AccessTokenExpiresIn),
+                CreateTime = now,
+                UpdateTime = now,
+            };
+
+            var refreshToken = new RefreshToken
+            {
+                Token = StringUtil.CreateCode(),
+                ApplicationId = applicationId,
+                PrincipalType = PrincipalType.Application.ToString(),
+                PrincipalId = applicationId,
+                Name = "ClientCredentials - " + now.ToISO8601(),
+                Description = string.Empty,
+                Roles = application.Roles,
+                Scopes = accessTokenScopes,
+                Status = RefreshTokenStatus.NORMAL,
+                ExpiryTime = now.AddSeconds(_appSettings.RefreshTokenExpiresIn),
+                CreateTime = now,
+                UpdateTime = now,
+            };
+
+            using (var scope = new TransactionScope())
+            {
+                _accessTokenRepository.Create(accessToken);
+                _refreshTokenRepository.Create(refreshToken);
+                scope.Complete();
+            }
+            
+            return (accessToken, refreshToken);
+        }
+
+        public AccessToken CreateAccessToken(RefreshToken refreshToken)
+        {
+            if (refreshToken == null)
+            {
+                throw new ArgumentNullException(nameof(refreshToken));
+            }
+
+            if (!refreshToken.IsEnabled(_dateTimeProvider.Now))
+            {
+                throw new InvalidOperationException($"RefreshToken '{refreshToken.Token}' was not valid.");
+            }
+
+            var application = _applicationRepository.GetById(refreshToken.ApplicationId);
+            if (application == null || !application.IsEnabled())
+            {
+                throw new InvalidOperationException($"Application '{refreshToken.ApplicationId}' was not valid.");
+            }
+
+            var now = _dateTimeProvider.Now;
+            var accessToken = new AccessToken
+            {
+                Token = StringUtil.CreateCode(),
+                ApplicationId = refreshToken.ApplicationId,
+                PrincipalType = refreshToken.PrincipalType,
+                PrincipalId = refreshToken.PrincipalId,
+                Name = "RefreshToken - " + now.ToISO8601(),
+                Description = string.Empty,
+                Roles = refreshToken.Roles,
+                Scopes = refreshToken.Scopes,
+                Status = AccessTokenStatus.NORMAL,
+                ExpiryTime = now.AddSeconds(_appSettings.RefreshTokenExpiresIn),
                 CreateTime = now,
                 UpdateTime = now,
             };
@@ -190,9 +257,9 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var application = _applicationRepository.GetById(applicationId);
-            if (application == null || application.Status != ApplicationStatus.NORMAL)
+            if (application == null || !application.IsEnabled())
             {
-                throw new InvalidOperationException($"Application '{applicationId}' was not found.");
+                throw new InvalidOperationException($"Application '{applicationId}' was not valid.");
             }
 
             List<string> accessTokenScopes = application.Scopes;
@@ -221,7 +288,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var accessToken = _accessTokenRepository.GetById(token);
-            if (accessToken == null || accessToken.Status != AccessTokenStatus.NORMAL)
+            if (accessToken == null || !accessToken.IsEnabled(_dateTimeProvider.Now))
             {
                 return null;
             }
@@ -233,7 +300,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var application = _applicationRepository.GetById(accessToken.ApplicationId);
-            if (application == null || application.Status != ApplicationStatus.NORMAL)
+            if (application == null || !application.IsEnabled())
             {
                 return null;
             }
@@ -242,12 +309,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             if (accessToken.PrincipalType == PrincipalType.User.ToString())
             {
                 var account = _accountService.GetAccount(accessToken.PrincipalId);
-                if (account == null)
-                {
-                    return null;
-                }
-
-                if (account.Status != AccountStatus.NORMAL)
+                if (account == null || !account.IsEnabled())
                 {
                     return null;
                 }
@@ -268,7 +330,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var application = _applicationQueryService.GetByClientId(clientId);
-            if (application == null || application.Status != ApplicationStatus.NORMAL)
+            if (application == null || !application.IsEnabled())
             {
                 return null;
             }
@@ -284,17 +346,54 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var authorizationCode = _authorizationCodeRepository.GetById(code);
-            if (authorizationCode == null || authorizationCode.Status != AuthorizationCodeStatus.NORMAL)
-            {
-                return null;
-            }
-
-            if (authorizationCode.ExpiryTime < _dateTimeProvider.Now)
+            if (authorizationCode == null || !authorizationCode.IsEnabled(_dateTimeProvider.Now))
             {
                 return null;
             }
 
             return authorizationCode;
+        }
+
+        public RefreshToken GetRefreshToken(string token)
+        {
+            if (token == null || token == string.Empty)
+            {
+                throw new ArgumentNullException(nameof(token));
+            }
+
+            var refreshToken = _refreshTokenRepository.GetById(token);
+            if (refreshToken == null || !refreshToken.IsEnabled(_dateTimeProvider.Now))
+            {
+                return null;
+            }
+
+            if (refreshToken.PrincipalType != PrincipalType.Application.ToString() &&
+                refreshToken.PrincipalType != PrincipalType.User.ToString())
+            {
+                throw new NotImplementedException();
+            }
+
+            var application = _applicationRepository.GetById(refreshToken.ApplicationId);
+            if (application == null || !application.IsEnabled())
+            {
+                return null;
+            }
+
+            var roles = application.Roles;
+            if (refreshToken.PrincipalType == PrincipalType.User.ToString())
+            {
+                var account = _accountService.GetAccount(refreshToken.PrincipalId);
+                if (account == null || !account.IsEnabled())
+                {
+                    return null;
+                }
+
+                roles = account.Roles;
+            }
+
+            refreshToken.Roles = roles;
+
+            return refreshToken;
         }
 
         private List<string> GetAccountRoleScopes(List<string> roles)

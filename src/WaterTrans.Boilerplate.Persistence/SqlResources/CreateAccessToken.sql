@@ -1,5 +1,5 @@
 ﻿CREATE TABLE IF NOT EXISTS `AccessToken` (
-    `Token` VARCHAR(100) NOT NULL
+    `Token` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
   , `Name` VARCHAR(100) NOT NULL
   , `Description` VARCHAR(400) NOT NULL
   , `ApplicationId` CHAR(36) NOT NULL

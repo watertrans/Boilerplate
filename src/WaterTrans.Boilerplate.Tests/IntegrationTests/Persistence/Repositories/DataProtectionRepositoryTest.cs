@@ -1,10 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Xml.Linq;
-using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
-using WaterTrans.Boilerplate.Domain.Constants;
-using WaterTrans.Boilerplate.Domain.Entities;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Tests;
 
 namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WaterTrans.Boilerplate.Persistence.SqlEntities
 {
     [Table("DataProtection")]
-    public class DataProtectionSqlEntity : SqlEntity
+    internal class DataProtectionSqlEntity : SqlEntity
     {
         [Key]
         public string DataProtectionId { get; set; }

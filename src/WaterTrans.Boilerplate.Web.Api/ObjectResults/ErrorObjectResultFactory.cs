@@ -101,6 +101,17 @@ namespace WaterTrans.Boilerplate.Web.Api.ObjectResults
             return result;
         }
 
+        public static ErrorObjectResult InvalidRefreshToken()
+        {
+            var result = new ErrorObjectResult(new Error()
+            {
+                Code = ErrorCodes.InvalidRefreshToken,
+                Message = ErrorMessages.ErrorResultInvalidRefreshToken,
+            });
+            result.StatusCode = StatusCodes.Status401Unauthorized;
+            return result;
+        }
+
         public static ErrorObjectResult InvalidGrantType()
         {
             var result = new ErrorObjectResult(new Error()

@@ -19,9 +19,9 @@ namespace WaterTrans.Boilerplate.Domain.Entities
         public DateTime UpdateTime { get; set; }
         public DateTime ConcurrencyToken { get; set; }
 
-        public bool IsEnabled
+        public bool IsEnabled()
         {
-            get { return Status == AccountStatus.NORMAL; }
+            return Status == AccountStatus.NORMAL;
         }
     }
 }

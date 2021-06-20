@@ -2,17 +2,18 @@
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.Entities;
 using WaterTrans.Boilerplate.Persistence.SqlEntities;
+using WaterTrans.Boilerplate.Persistence.TableDataGateways;
 
 namespace WaterTrans.Boilerplate.Persistence.Repositories
 {
     public class AuthorizationCodeRepository : Repository, IAuthorizationCodeRepository
     {
-        private readonly SqlRepository<AuthorizationCodeSqlEntity> _sqlRepository;
+        private readonly SqlTableDataGateway<AuthorizationCodeSqlEntity> _sqlRepository;
 
         public AuthorizationCodeRepository(IDBSettings dbSettings)
             : base(dbSettings)
         {
-            _sqlRepository = new SqlRepository<AuthorizationCodeSqlEntity>(dbSettings);
+            _sqlRepository = new SqlTableDataGateway<AuthorizationCodeSqlEntity>(dbSettings);
         }
 
         public void Create(AuthorizationCode entity)

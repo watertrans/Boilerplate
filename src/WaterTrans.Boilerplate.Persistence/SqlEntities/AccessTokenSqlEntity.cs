@@ -6,7 +6,7 @@ using WaterTrans.Boilerplate.Domain.Entities;
 namespace WaterTrans.Boilerplate.Persistence.SqlEntities
 {
     [Table("AccessToken")]
-    public class AccessTokenSqlEntity : SqlEntity
+    internal class AccessTokenSqlEntity : SqlEntity
     {
         [Key]
         public string Token { get; set; }

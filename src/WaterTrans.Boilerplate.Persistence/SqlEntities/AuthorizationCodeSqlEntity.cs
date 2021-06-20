@@ -6,7 +6,7 @@ using WaterTrans.Boilerplate.Domain.Entities;
 namespace WaterTrans.Boilerplate.Persistence.SqlEntities
 {
     [Table("AuthorizationCode")]
-    public class AuthorizationCodeSqlEntity : SqlEntity
+    internal class AuthorizationCodeSqlEntity : SqlEntity
     {
         [Key]
         public string Code { get; set; }

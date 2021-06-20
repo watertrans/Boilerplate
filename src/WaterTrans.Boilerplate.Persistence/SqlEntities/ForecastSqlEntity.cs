@@ -6,7 +6,7 @@ using WaterTrans.Boilerplate.Domain.Entities;
 namespace WaterTrans.Boilerplate.Persistence.SqlEntities
 {
     [Table("Forecast")]
-    public class ForecastSqlEntity : SqlEntity
+    internal class ForecastSqlEntity : SqlEntity
     {
         [Key]
         public Guid ForecastId { get; set; }

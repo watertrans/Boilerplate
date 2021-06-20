@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using WaterTrans.Boilerplate.Domain.Entities;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Domain.ValueObjects;
 using WaterTrans.Boilerplate.Tests;
 

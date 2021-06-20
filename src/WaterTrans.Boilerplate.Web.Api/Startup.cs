@@ -85,6 +85,7 @@ namespace WaterTrans.Boilerplate.Web.Api
             services.AddTransient<IForecastRepository, ForecastRepository>();
             services.AddTransient<IForecastService, ForecastService>();
             services.AddTransient<IForecastUseCase, ForecastUseCase>();
+            services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddTransient<ITokenUseCase, TokenUseCase>();
 
             if (!WebHostEnvironment.IsProduction())

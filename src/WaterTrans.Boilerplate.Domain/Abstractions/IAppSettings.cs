@@ -4,5 +4,6 @@
     {
         int AccessTokenExpiresIn { get; }
         int AuthorizationCodeExpiresIn { get; }
+        int RefreshTokenExpiresIn { get; }
     }
 }

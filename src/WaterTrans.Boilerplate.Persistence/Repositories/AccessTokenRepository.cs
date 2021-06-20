@@ -1,19 +1,19 @@
-﻿using System;
-using WaterTrans.Boilerplate.Domain.Abstractions;
+﻿using WaterTrans.Boilerplate.Domain.Abstractions;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.Entities;
 using WaterTrans.Boilerplate.Persistence.SqlEntities;
+using WaterTrans.Boilerplate.Persistence.TableDataGateways;
 
 namespace WaterTrans.Boilerplate.Persistence.Repositories
 {
     public class AccessTokenRepository : Repository, IAccessTokenRepository
     {
-        private readonly SqlRepository<AccessTokenSqlEntity> _sqlRepository;
+        private readonly SqlTableDataGateway<AccessTokenSqlEntity> _sqlRepository;
 
         public AccessTokenRepository(IDBSettings dbSettings)
             : base(dbSettings)
         {
-            _sqlRepository = new SqlRepository<AccessTokenSqlEntity>(dbSettings);
+            _sqlRepository = new SqlTableDataGateway<AccessTokenSqlEntity>(dbSettings);
         }
 
         public void Create(AccessToken entity)

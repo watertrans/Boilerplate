@@ -5,7 +5,6 @@ using WaterTrans.Boilerplate.CrossCuttingConcerns.Exceptions;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
 using WaterTrans.Boilerplate.Domain.Entities;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Tests;
 
 namespace WaterTrans.Boilerplate.Domain.Services.UnitTests

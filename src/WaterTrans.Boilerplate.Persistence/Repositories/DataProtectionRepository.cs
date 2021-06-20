@@ -4,18 +4,19 @@ using System.Xml.Linq;
 using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
 using WaterTrans.Boilerplate.Domain.Abstractions;
 using WaterTrans.Boilerplate.Persistence.SqlEntities;
+using WaterTrans.Boilerplate.Persistence.TableDataGateways;
 
 namespace WaterTrans.Boilerplate.Persistence.Repositories
 {
     public class DataProtectionRepository : Repository, IXmlRepository
     {
-        private readonly SqlRepository<DataProtectionSqlEntity> _sqlRepository;
+        private readonly SqlTableDataGateway<DataProtectionSqlEntity> _sqlRepository;
         private readonly IDateTimeProvider _dateTimeProvider;
 
         public DataProtectionRepository(IDBSettings dbSettings, IDateTimeProvider dateTimeProvider)
             : base(dbSettings)
         {
-            _sqlRepository = new SqlRepository<DataProtectionSqlEntity>(dbSettings);
+            _sqlRepository = new SqlTableDataGateway<DataProtectionSqlEntity>(dbSettings);
             _dateTimeProvider = dateTimeProvider;
         }
 

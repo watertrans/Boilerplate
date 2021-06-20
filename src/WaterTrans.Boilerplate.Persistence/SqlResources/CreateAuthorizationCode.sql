@@ -1,5 +1,5 @@
 ﻿CREATE TABLE IF NOT EXISTS `AuthorizationCode` (
-    `Code` VARCHAR(100) NOT NULL
+    `Code` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
   , `ApplicationId` CHAR(36) NOT NULL
   , `AccountId` CHAR(36) NOT NULL
   , `Status` VARCHAR(20) NOT NULL

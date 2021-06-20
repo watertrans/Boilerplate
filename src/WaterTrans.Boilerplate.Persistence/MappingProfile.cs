@@ -47,6 +47,12 @@ namespace WaterTrans.Boilerplate.Persistence
             CreateMap<Forecast, ForecastSqlEntity>()
                 .ForMember(dest => dest.CityCode, opt => opt.MapFrom(src => src.City.CityCode))
                 .ForMember(dest => dest.CountryCode, opt => opt.MapFrom(src => src.Country.CountryCode));
+            CreateMap<RefreshTokenSqlEntity, RefreshToken>()
+                .ForMember(dest => dest.Scopes, opt => opt.MapFrom(src => JsonUtil.Deserialize<List<string>>(src.Scopes)))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => (RefreshTokenStatus)Enum.Parse(typeof(RefreshTokenStatus), src.Status)));
+            CreateMap<RefreshToken, RefreshTokenSqlEntity>()
+                .ForMember(dest => dest.Scopes, opt => opt.MapFrom(src => JsonUtil.Serialize(src.Scopes)))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
         }
     }
 }

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using WaterTrans.Boilerplate.Domain.Constants;
 using WaterTrans.Boilerplate.Domain.Entities;
-using WaterTrans.Boilerplate.Domain.Utils;
 using WaterTrans.Boilerplate.Tests;
 
 namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests

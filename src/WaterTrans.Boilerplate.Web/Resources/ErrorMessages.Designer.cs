@@ -385,6 +385,15 @@ namespace WaterTrans.Boilerplate.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to リフレッシュトークンが正しくありません。.
+        /// </summary>
+        public static string ErrorResultInvalidRefreshToken {
+            get {
+                return ResourceManager.GetString("ErrorResultInvalidRefreshToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to スコープが正しくありません。.
         /// </summary>
         public static string ErrorResultInvalidScope {

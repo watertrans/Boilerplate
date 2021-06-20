@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WaterTrans.Boilerplate.Persistence.SqlEntities
 {
     [Table("Application")]
-    public class ApplicationSqlEntity : SqlEntity
+    internal class ApplicationSqlEntity : SqlEntity
     {
         [Key]
         public Guid ApplicationId { get; set; }
