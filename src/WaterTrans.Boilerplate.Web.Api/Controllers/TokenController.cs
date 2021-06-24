@@ -133,25 +133,25 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
             HttpContext.Response.Cookies.Append("refresh_token", refreshToken, options);
         }
 
-        private ActionResult GetErrorResult(CreateTokenState errorResult)
+        private ActionResult GetErrorResult(CreateTokenState state)
         {
-            if (errorResult == CreateTokenState.InvalidClient)
+            if (state == CreateTokenState.InvalidClient)
             {
                 return ErrorObjectResultFactory.InvalidClient();
             }
-            else if (errorResult == CreateTokenState.InvalidCode)
+            else if (state == CreateTokenState.InvalidCode)
             {
                 return ErrorObjectResultFactory.InvalidCode();
             }
-            else if (errorResult == CreateTokenState.InvalidGrantType)
+            else if (state == CreateTokenState.InvalidGrantType)
             {
                 return ErrorObjectResultFactory.InvalidGrantType();
             }
-            else if (errorResult == CreateTokenState.InvalidScope)
+            else if (state == CreateTokenState.InvalidScope)
             {
                 return ErrorObjectResultFactory.InvalidScope();
             }
-            else if (errorResult == CreateTokenState.InvalidRefreshToken)
+            else if (state == CreateTokenState.InvalidRefreshToken)
             {
                 return ErrorObjectResultFactory.InvalidRefreshToken();
             }
