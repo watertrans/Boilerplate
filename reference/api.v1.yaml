@@ -74,6 +74,11 @@ paths:
                   type: string
                   description: クライアントシークレット
                   example: owner-secret
+                code:
+                  type: string
+                  maxLength: 100
+                  description: |
+                    認可コード
               required:
                 - grant_type
             examples:
@@ -82,6 +87,11 @@ paths:
                   grant_type: client_credentials
                   client_id: owner
                   client_secret: owner-secret
+              authorization_code:
+                value:
+                  grant_type: authorization_code
+                  client_id: clientapp
+                  code: HP89YjM-tUqS8In7Av2L2gqQlIWtLxb06fNrp3WU58Kw
         description: ''
       tags:
         - Token
