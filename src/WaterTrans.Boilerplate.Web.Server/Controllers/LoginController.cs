@@ -34,9 +34,9 @@ namespace WaterTrans.Boilerplate.Web.Server.Controllers
 
             var result = _loginUseCase.Login("clientapp", request.LoginId, request.Password);
 
-            if (result.Result == LoginValidationResult.Success)
+            if (result.State == LoginState.Success)
             {
-                return Redirect("Dashboard?token=" + HttpUtility.UrlEncode(result.AuthorizationCode.Code));
+                return Redirect("Dashboard?code=" + HttpUtility.UrlEncode(result.AuthorizationCode.Code));
             }
             else
             {

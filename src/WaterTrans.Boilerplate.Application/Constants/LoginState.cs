@@ -1,6 +1,6 @@
 ﻿namespace WaterTrans.Boilerplate.Application.Constants
 {
-    public enum LoginValidationResult
+    public enum LoginState
     {
         InvalidClientId,
         InvalidLoginId,

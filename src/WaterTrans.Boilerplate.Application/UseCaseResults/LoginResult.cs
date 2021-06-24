@@ -5,18 +5,18 @@ namespace WaterTrans.Boilerplate.Application.UseCaseResults
 {
     public class LoginResult
     {
-        public LoginResult(LoginValidationResult result)
+        public LoginResult(LoginState state)
         {
-            Result = result;
+            State = state;
         }
 
-        public LoginResult(LoginValidationResult result, AuthorizationCode authorizationCode)
+        public LoginResult(LoginState state, AuthorizationCode authorizationCode)
         {
-            Result = result;
+            State = state;
             AuthorizationCode = authorizationCode;
         }
 
-        public LoginValidationResult Result { get; }
+        public LoginState State { get; }
         public AuthorizationCode AuthorizationCode { get; }
     }
 }

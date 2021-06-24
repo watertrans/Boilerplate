@@ -24,26 +24,26 @@ namespace WaterTrans.Boilerplate.Application.UseCases
 
             if (application == null || !application.IsEnabled())
             {
-                return new LoginResult(LoginValidationResult.InvalidClientId);
+                return new LoginResult(LoginState.InvalidClientId);
             }
 
             var account = _accountService.GetAccountByLoginId(loginId);
 
             if (account == null || !account.IsEnabled())
             {
-                return new LoginResult(LoginValidationResult.InvalidLoginId);
+                return new LoginResult(LoginState.InvalidLoginId);
             }
 
             if (!_accountService.VerifyPassword(password, account))
             {
-                return new LoginResult(LoginValidationResult.InvalidPassword);
+                return new LoginResult(LoginState.InvalidPassword);
             }
 
             _accountService.UpdateLastLoginTime(account.AccountId);
 
             var authorizationCode = _authorizeService.CreateAuthorizationCode(application.ApplicationId, account.AccountId);
 
-            return new LoginResult(LoginValidationResult.Success, authorizationCode);
+            return new LoginResult(LoginState.Success, authorizationCode);
         }
     }
 }

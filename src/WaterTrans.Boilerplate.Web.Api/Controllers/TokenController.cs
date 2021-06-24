@@ -43,7 +43,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
             {
                 var result = _tokenUseCase.CreateTokenByAuthorizationCode(_mapper.Map<TokenCreateByAuthorizationCodeDto>(request));
 
-                if (result.Result == CreateTokenValidationResult.Success)
+                if (result.State == CreateTokenState.Success)
                 {
                     AppendRefreshTokenCookie(result.RefreshToken.Token);
                     return new TokenResponse
@@ -56,14 +56,14 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
                 }
                 else
                 {
-                    return GetErrorResult(result.Result);
+                    return GetErrorResult(result.State);
                 }
             }
             else if (request.GrantType == GrantTypes.ClientCredentials)
             {
                 var result = _tokenUseCase.CreateTokenByClientCredentials(_mapper.Map<TokenCreateByClientCredentialsDto>(request));
 
-                if (result.Result == CreateTokenValidationResult.Success)
+                if (result.State == CreateTokenState.Success)
                 {
                     AppendRefreshTokenCookie(result.RefreshToken.Token);
                     return new TokenResponse
@@ -76,7 +76,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
                 }
                 else
                 {
-                    return GetErrorResult(result.Result);
+                    return GetErrorResult(result.State);
                 }
             }
             else
@@ -104,7 +104,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
 
             var result = _tokenUseCase.CreateTokenByRefreshToken(token);
 
-            if (result.Result == CreateTokenValidationResult.Success)
+            if (result.State == CreateTokenState.Success)
             {
                 return new TokenResponse
                 {
@@ -116,7 +116,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
             }
             else
             {
-                return GetErrorResult(result.Result);
+                return GetErrorResult(result.State);
             }
         }
 
@@ -133,25 +133,25 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
             HttpContext.Response.Cookies.Append("refresh_token", refreshToken, options);
         }
 
-        private ActionResult GetErrorResult(CreateTokenValidationResult errorResult)
+        private ActionResult GetErrorResult(CreateTokenState errorResult)
         {
-            if (errorResult == CreateTokenValidationResult.InvalidClient)
+            if (errorResult == CreateTokenState.InvalidClient)
             {
                 return ErrorObjectResultFactory.InvalidClient();
             }
-            else if (errorResult == CreateTokenValidationResult.InvalidCode)
+            else if (errorResult == CreateTokenState.InvalidCode)
             {
                 return ErrorObjectResultFactory.InvalidCode();
             }
-            else if (errorResult == CreateTokenValidationResult.InvalidGrantType)
+            else if (errorResult == CreateTokenState.InvalidGrantType)
             {
                 return ErrorObjectResultFactory.InvalidGrantType();
             }
-            else if (errorResult == CreateTokenValidationResult.InvalidScope)
+            else if (errorResult == CreateTokenState.InvalidScope)
             {
                 return ErrorObjectResultFactory.InvalidScope();
             }
-            else if (errorResult == CreateTokenValidationResult.InvalidRefreshToken)
+            else if (errorResult == CreateTokenState.InvalidRefreshToken)
             {
                 return ErrorObjectResultFactory.InvalidRefreshToken();
             }

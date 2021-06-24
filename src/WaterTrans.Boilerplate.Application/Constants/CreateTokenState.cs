@@ -1,6 +1,6 @@
 ﻿namespace WaterTrans.Boilerplate.Application.Constants
 {
-    public enum CreateTokenValidationResult
+    public enum CreateTokenState
     {
         InvalidClient,
         InvalidGrantType,

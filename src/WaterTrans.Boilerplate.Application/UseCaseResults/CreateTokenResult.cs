@@ -5,25 +5,25 @@ namespace WaterTrans.Boilerplate.Application.UseCaseResults
 {
     public class CreateTokenResult
     {
-        public CreateTokenResult(CreateTokenValidationResult result)
+        public CreateTokenResult(CreateTokenState state)
         {
-            Result = result;
+            State = state;
         }
 
-        public CreateTokenResult(CreateTokenValidationResult result, AccessToken access)
+        public CreateTokenResult(CreateTokenState state, AccessToken access)
         {
-            Result = result;
+            State = state;
             AccessToken = access;
         }
 
-        public CreateTokenResult(CreateTokenValidationResult result, AccessToken access, RefreshToken refreshToken)
+        public CreateTokenResult(CreateTokenState state, AccessToken accessToken, RefreshToken refreshToken)
         {
-            Result = result;
-            AccessToken = access;
+            State = state;
+            AccessToken = accessToken;
             RefreshToken = refreshToken;
         }
 
-        public CreateTokenValidationResult Result { get; }
+        public CreateTokenState State { get; }
         public AccessToken AccessToken { get; }
         public RefreshToken RefreshToken { get; }
     }
