@@ -77,7 +77,6 @@ namespace WaterTrans.Boilerplate.Web.Api
             services.AddTransient<IAccessTokenRepository, AccessTokenRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<IApplicationQueryService, ApplicationQueryService>();
             services.AddTransient<IApplicationRepository, ApplicationRepository>();
             services.AddTransient<IAuthorizationCodeRepository, AuthorizationCodeRepository>();
             services.AddTransient<IAuthorizeService, AuthorizeService>();

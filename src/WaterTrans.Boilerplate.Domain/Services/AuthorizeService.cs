@@ -20,7 +20,6 @@ namespace WaterTrans.Boilerplate.Domain.Services
         private readonly IAccessTokenRepository _accessTokenRepository;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
         private readonly IAuthorizationCodeRepository _authorizationCodeRepository;
-        private readonly IApplicationQueryService _applicationQueryService;
         private readonly IApplicationRepository _applicationRepository;
         private readonly IAccountService _accountService;
         private readonly IDateTimeProvider _dateTimeProvider;
@@ -30,7 +29,6 @@ namespace WaterTrans.Boilerplate.Domain.Services
             IAccessTokenRepository accessTokenRepository,
             IRefreshTokenRepository refreshTokenRepository,
             IAuthorizationCodeRepository authorizationCodeRepository,
-            IApplicationQueryService applicationQueryService,
             IApplicationRepository applicationRepository,
             IAccountService accountService,
             IDateTimeProvider dateTimeProvider)
@@ -39,7 +37,6 @@ namespace WaterTrans.Boilerplate.Domain.Services
             _accessTokenRepository = accessTokenRepository;
             _refreshTokenRepository = refreshTokenRepository;
             _authorizationCodeRepository = authorizationCodeRepository;
-            _applicationQueryService = applicationQueryService;
             _applicationRepository = applicationRepository;
             _accountService = accountService;
             _dateTimeProvider = dateTimeProvider;
@@ -329,7 +326,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 throw new ArgumentNullException(nameof(clientId));
             }
 
-            var application = _applicationQueryService.GetByClientId(clientId);
+            var application = _applicationRepository.GetByClientId(clientId);
             if (application == null || !application.IsEnabled())
             {
                 return null;

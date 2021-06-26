@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
 using WaterTrans.Boilerplate.Domain.Abstractions;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.Entities;
@@ -31,6 +33,23 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
         public Domain.Entities.Application GetById(Guid applicationId)
         {
             Domain.Entities.Application result = _sqlTableDataGateway.GetById(new ApplicationSqlEntity { ApplicationId = applicationId });
+            return result;
+        }
+
+        public Domain.Entities.Application GetByClientId(string clientId)
+        {
+            var sql = new StringBuilder();
+
+            sql.AppendLine(" SELECT * ");
+            sql.AppendLine("   FROM `Application` ");
+            sql.AppendLine("  WHERE `ClientId` = @ClientId ");
+
+            var param = new
+            {
+                ClientId = clientId
+            };
+
+            Domain.Entities.Application result = _sqlTableDataGateway.ExecuteQuery(sql.ToString(), param).SingleOrDefault();
             return result;
         }
 
