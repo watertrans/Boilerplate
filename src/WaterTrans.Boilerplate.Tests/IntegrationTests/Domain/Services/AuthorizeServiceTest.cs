@@ -15,10 +15,12 @@ namespace WaterTrans.Boilerplate.Domain.Services.Tests
     {
         private AuthorizeService _authorizeService;
         private AppSettings _appSettings;
+        private DateTimeProvider _dateTimeProvider;
 
         [TestInitialize]
         public void TestInitialize()
         {
+            _dateTimeProvider = new DateTimeProvider();
             _appSettings = new AppSettings
             {
                 AccessTokenExpiresIn = 3600,
@@ -33,7 +35,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.Tests
             var accountService = new AccountService(
                 accountRepository,
                 new PasswordHashProvider(),
-                new DateTimeProvider());
+                _dateTimeProvider);
 
             _authorizeService = new AuthorizeService(
                 _appSettings,
@@ -42,7 +44,7 @@ namespace WaterTrans.Boilerplate.Domain.Services.Tests
                 authorizationCodeRepository,
                 applicationRepository,
                 accountService,
-                new DateTimeProvider()
+                _dateTimeProvider
                 );
         }
 
@@ -67,9 +69,9 @@ namespace WaterTrans.Boilerplate.Domain.Services.Tests
         }
 
         [TestMethod]
-        public void GetApplication_停止しているアプリケーションはnullを返却()
+        public void GetApplication_停止しているアプリケーションを取得できる()
         {
-            Assert.AreEqual(null, _authorizeService.GetApplication("owner-suspended"));
+            Assert.AreEqual(false, _authorizeService.GetApplication("owner-suspended").IsEnabled());
         }
 
         [TestMethod]
@@ -92,15 +94,9 @@ namespace WaterTrans.Boilerplate.Domain.Services.Tests
         }
 
         [TestMethod]
-        public void GetAuthorizationCode_使用済み認可コードはnullを返却()
+        public void GetAuthorizationCode_使用済み認可コードを取得できる()
         {
-            Assert.AreEqual(null, _authorizeService.GetAuthorizationCode("used"));
-        }
-
-        [TestMethod]
-        public void GetAuthorizationCode_期限切れ認可コードはnullを返却()
-        {
-            Assert.AreEqual(null, _authorizeService.GetAuthorizationCode("expired"));
+            Assert.AreEqual(false, _authorizeService.GetAuthorizationCode("used").IsEnabled(_dateTimeProvider.Now));
         }
 
         [TestMethod]
@@ -123,15 +119,9 @@ namespace WaterTrans.Boilerplate.Domain.Services.Tests
         }
 
         [TestMethod]
-        public void GetRefreshToken_停止しているトークンはnullを返却()
+        public void GetRefreshToken_停止しているトークンを取得できる()
         {
-            Assert.AreEqual(null, _authorizeService.GetRefreshToken("suspended"));
-        }
-
-        [TestMethod]
-        public void GetRefreshToken_期限切れトークンはnullを返却()
-        {
-            Assert.AreEqual(null, _authorizeService.GetRefreshToken("expired"));
+            Assert.AreEqual(false, _authorizeService.GetRefreshToken("suspended").IsEnabled(_dateTimeProvider.Now));
         }
 
         [TestMethod]
@@ -179,15 +169,9 @@ namespace WaterTrans.Boilerplate.Domain.Services.Tests
         }
 
         [TestMethod]
-        public void GetAccessToken_停止しているトークンはnullを返却()
+        public void GetAccessToken_停止しているトークンを取得できる()
         {
-            Assert.AreEqual(null, _authorizeService.GetAccessToken("suspended"));
-        }
-
-        [TestMethod]
-        public void GetAccessToken_期限切れトークンはnullを返却()
-        {
-            Assert.AreEqual(null, _authorizeService.GetAccessToken("expired"));
+            Assert.AreEqual(false, _authorizeService.GetAccessToken("suspended").IsEnabled(_dateTimeProvider.Now));
         }
 
         [TestMethod]

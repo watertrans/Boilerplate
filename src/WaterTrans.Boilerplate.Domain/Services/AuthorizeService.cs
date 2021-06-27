@@ -290,7 +290,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var accessToken = _accessTokenRepository.GetById(token);
-            if (accessToken == null || !accessToken.IsEnabled(_dateTimeProvider.Now))
+            if (accessToken == null)
             {
                 return null;
             }
@@ -332,7 +332,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var application = _applicationRepository.GetByClientId(clientId);
-            if (application == null || !application.IsEnabled())
+            if (application == null)
             {
                 return null;
             }
@@ -348,7 +348,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var authorizationCode = _authorizationCodeRepository.GetById(code);
-            if (authorizationCode == null || !authorizationCode.IsEnabled(_dateTimeProvider.Now))
+            if (authorizationCode == null)
             {
                 return null;
             }
@@ -364,7 +364,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
             }
 
             var refreshToken = _refreshTokenRepository.GetById(token);
-            if (refreshToken == null || !refreshToken.IsEnabled(_dateTimeProvider.Now))
+            if (refreshToken == null)
             {
                 return null;
             }
