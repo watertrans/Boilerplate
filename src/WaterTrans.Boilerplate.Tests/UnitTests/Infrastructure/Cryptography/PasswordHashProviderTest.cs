@@ -103,5 +103,27 @@ namespace WaterTrans.Boilerplate.Web.UnitTests
             Debug.WriteLine("0x" + BitConverter.ToString(salt).Replace("-", string.Empty));
             Debug.WriteLine("0x" + BitConverter.ToString(hashedPassword).Replace("-", string.Empty));
         }
+
+        [TestMethod]
+        public void Hash_停止中管理者の初期パスワード()
+        {
+            string password = "suspended-secret";
+            int iterations = 1000;
+            byte[] salt = Guid.Empty.ToByteArray().Concat(Guid.Empty.ToByteArray()).ToArray();
+            byte[] hashedPassword = _passwordHashProvider.Hash(password, salt, iterations);
+            Debug.WriteLine("0x" + BitConverter.ToString(salt).Replace("-", string.Empty));
+            Debug.WriteLine("0x" + BitConverter.ToString(hashedPassword).Replace("-", string.Empty));
+        }
+
+        [TestMethod]
+        public void Hash_Readerの初期パスワード()
+        {
+            string password = "reader-secret";
+            int iterations = 1000;
+            byte[] salt = Guid.Empty.ToByteArray().Concat(Guid.Empty.ToByteArray()).ToArray();
+            byte[] hashedPassword = _passwordHashProvider.Hash(password, salt, iterations);
+            Debug.WriteLine("0x" + BitConverter.ToString(salt).Replace("-", string.Empty));
+            Debug.WriteLine("0x" + BitConverter.ToString(hashedPassword).Replace("-", string.Empty));
+        }
     }
 }

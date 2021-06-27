@@ -42,6 +42,14 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories.IntegrationTests
         }
 
         [TestMethod]
+        public void GetByLoginId_存在するデータを取得できる()
+        {
+            var accountRepository = new AccountRepository(TestEnvironment.DBSettings);
+            var account = accountRepository.GetByLoginId("suspended");
+            Assert.IsNotNull(account);
+        }
+
+        [TestMethod]
         public void Update_登録したデータを更新できる()
         {
             var accountRepository = new AccountRepository(TestEnvironment.DBSettings);
