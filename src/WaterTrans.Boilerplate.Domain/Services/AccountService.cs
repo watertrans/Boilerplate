@@ -27,11 +27,6 @@ namespace WaterTrans.Boilerplate.Domain.Services
             _accountRepository.Update(account);
         }
 
-        public bool ExistsAccount(Guid accountId)
-        {
-            return _accountRepository.GetById(accountId) != null;
-        }
-
         public Account GetAccount(Guid accountId)
         {
             return _accountRepository.GetById(accountId);
