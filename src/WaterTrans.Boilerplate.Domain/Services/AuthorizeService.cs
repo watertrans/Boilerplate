@@ -6,7 +6,6 @@ using WaterTrans.Boilerplate.CrossCuttingConcerns.Abstractions.OS;
 using WaterTrans.Boilerplate.CrossCuttingConcerns.ExtensionMethods;
 using WaterTrans.Boilerplate.CrossCuttingConcerns.Utils;
 using WaterTrans.Boilerplate.Domain.Abstractions;
-using WaterTrans.Boilerplate.Domain.Abstractions.QueryServices;
 using WaterTrans.Boilerplate.Domain.Abstractions.Repositories;
 using WaterTrans.Boilerplate.Domain.Abstractions.Services;
 using WaterTrans.Boilerplate.Domain.Constants;
@@ -143,7 +142,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 throw new InvalidOperationException($"Application '{applicationId}' was not valid.");
             }
 
-            List<string> accessTokenScopes = scopes.ToList();
+            List<string> accessTokenScopes = scopes?.ToList();
             if (scopes == null || scopes.Count() == 0)
             {
                 accessTokenScopes = application.Scopes;
@@ -232,7 +231,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 Roles = refreshToken.Roles,
                 Scopes = refreshToken.Scopes,
                 Status = AccessTokenStatus.NORMAL,
-                ExpiryTime = now.AddSeconds(_appSettings.RefreshTokenExpiresIn),
+                ExpiryTime = now.AddSeconds(_appSettings.AccessTokenExpiresIn),
                 CreateTime = now,
                 UpdateTime = now,
             };
@@ -257,6 +256,12 @@ namespace WaterTrans.Boilerplate.Domain.Services
             if (application == null || !application.IsEnabled())
             {
                 throw new InvalidOperationException($"Application '{applicationId}' was not valid.");
+            }
+
+            var account = _accountService.GetAccount(accountId);
+            if (account == null || !account.IsEnabled())
+            {
+                throw new InvalidOperationException($"Account '{accountId}' was not valid.");
             }
 
             List<string> accessTokenScopes = application.Scopes;
