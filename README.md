@@ -11,10 +11,9 @@ This is a Boilerplate Code, with implementation of Clean Architecture, using Mic
 ### Initialize Database
 
 - MariaDB on Docker
-  - `cd .\db`
-  - `docker compose up -d`
-  - `dbadmin init server -s`
-  - `dbadmin init database -s`
+  - `docker-compose -f db/docker-compose.yml up -d`
+  - `dotnet run -p src/WaterTrans.Boilerplate.DBAdmin -- init server -s`
+  - `dotnet run -p src/WaterTrans.Boilerplate.DBAdmin -- init database -s`
 
 ### Get Client Credentials Flow Access Tokens
 
@@ -53,8 +52,7 @@ With public clients applications, such as native or single-page applications.
 ## Database Maintenance
 
 - Create tables, indexes, stored procedures and others.
-  - `cd .\db`
-  - `dbadmin apply database`
+  - `dotnet run -p src/WaterTrans.Boilerplate.DBAdmin --  apply database`
 
 ## Default settings
 
