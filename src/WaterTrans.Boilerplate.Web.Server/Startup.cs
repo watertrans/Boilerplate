@@ -72,11 +72,15 @@ namespace WaterTrans.Boilerplate.Web.Server
 
             services.AddTransient<ILoginUseCase, LoginUseCase>();
 
-            services.AddControllersWithViews()
-                .AddDataAnnotationsLocalization(options =>
-                {
-                    options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(ErrorMessages));
-                });
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            })
+            .AddDataAnnotationsLocalization(options =>
+            {
+                options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(ErrorMessages));
+            });
+
             services.AddDataProtection();
         }
 
