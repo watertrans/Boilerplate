@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using WaterTrans.Boilerplate.Infrastructure.Cryptography;
 
-namespace WaterTrans.Boilerplate.Web.UnitTests
+namespace WaterTrans.Boilerplate.Infrastructure.Cryptography.UnitTests
 {
     [TestClass]
     [TestCategory("UnitTests")]

@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace WaterTrans.Boilerplate.Entities.Services.UnitTests
+namespace WaterTrans.Boilerplate.Domain.Entities.UnitTests
 {
     [TestClass]
     [TestCategory("UnitTests")]

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace WaterTrans.Boilerplate.CrossCuttingConcerns.ExtensionMethods.Tests
+namespace WaterTrans.Boilerplate.CrossCuttingConcerns.ExtensionMethods.UnitTests
 {
     [TestClass]
     [TestCategory("UnitTests")]

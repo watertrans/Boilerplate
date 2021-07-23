@@ -7,7 +7,7 @@ using WaterTrans.Boilerplate.Infrastructure.OS;
 using WaterTrans.Boilerplate.Persistence.Repositories;
 using WaterTrans.Boilerplate.Tests;
 
-namespace WaterTrans.Boilerplate.Domain.Services.Tests
+namespace WaterTrans.Boilerplate.Domain.Services.IntegrationTests
 {
     [TestClass]
     [TestCategory("IntegrationTests")]
