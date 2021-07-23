@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
@@ -32,6 +33,7 @@ using WaterTrans.Boilerplate.Persistence.QueryServices;
 using WaterTrans.Boilerplate.Persistence.Repositories;
 using WaterTrans.Boilerplate.Web.Api.Filters;
 using WaterTrans.Boilerplate.Web.Api.ObjectResults;
+using WaterTrans.Boilerplate.Web.Api.Security;
 using WaterTrans.Boilerplate.Web.AttributeAdapters;
 using WaterTrans.Boilerplate.Web.Resources;
 
@@ -101,6 +103,9 @@ namespace WaterTrans.Boilerplate.Web.Api
                     });
                 });
             }
+
+            services.AddAuthentication(BearerAuthenticationHandler.SchemeName)
+                .AddScheme<AuthenticationSchemeOptions, BearerAuthenticationHandler>(BearerAuthenticationHandler.SchemeName, null);
 
             services.AddSwaggerGen(options =>
             {

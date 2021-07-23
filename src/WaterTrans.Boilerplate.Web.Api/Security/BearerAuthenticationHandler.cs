@@ -71,7 +71,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Security
                     }
 
                     var accessToken = _authorizeService.GetAccessToken(authHeader.Parameter);
-                    if (accessToken == null)
+                    if (accessToken == null || accessToken.Status != AccessTokenStatus.NORMAL)
                     {
                         _responseHeader = "Bearer error=\"invalid_token\"";
                         _responseResult = ErrorObjectResultFactory.InvalidAuthorizationToken();

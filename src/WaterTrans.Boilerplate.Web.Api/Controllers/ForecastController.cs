@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WaterTrans.Boilerplate.Application.Abstractions.UseCases;
+using WaterTrans.Boilerplate.Domain.Constants;
 using WaterTrans.Boilerplate.Domain.DataTransferObjects;
 using WaterTrans.Boilerplate.Domain.Entities;
 using WaterTrans.Boilerplate.Web.Api.RequestObjects;
@@ -26,6 +28,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Owner + "," + Roles.Contributor)]
         [Route("api/v{version:apiVersion}/forecasts")]
         public ActionResult<ForecastResponse> Create([FromBody] ForecastCreateRequest request)
         {
@@ -35,6 +38,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = Roles.Owner + "," + Roles.Contributor)]
         [Route("api/v{version:apiVersion}/forecasts/{forecastId}")]
         public ActionResult Delete(
             [FromRoute, Required(ErrorMessage = "DataAnnotationRequired"), Guid(ErrorMessage = "DataAnnotationGuid")] string forecastId)
@@ -44,6 +48,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Roles.Owner + "," + Roles.Contributor + "," + Roles.Reader + "," + Roles.User)]
         [Route("api/v{version:apiVersion}/forecasts/{forecastId}")]
         public ActionResult<ForecastResponse> Get(
             [FromRoute, Required(ErrorMessage = "DataAnnotationRequired"), Guid(ErrorMessage = "DataAnnotationGuid")] string forecastId)
@@ -53,6 +58,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Roles.Owner + "," + Roles.Contributor + "," + Roles.Reader + "," + Roles.User)]
         [Route("api/v{version:apiVersion}/forecasts")]
         public PagedObject<ForecastResponse> Query([FromQuery]ForecastQueryRequest request)
         {
@@ -69,6 +75,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
         }
 
         [HttpPatch]
+        [Authorize(Roles = Roles.Owner + "," + Roles.Contributor)]
         [Route("api/v{version:apiVersion}/forecasts/{forecastId}")]
         public ActionResult<ForecastResponse> Update(
             [FromRoute, Required(ErrorMessage = "DataAnnotationRequired"), Guid(ErrorMessage = "DataAnnotationGuid")] string forecastId,
