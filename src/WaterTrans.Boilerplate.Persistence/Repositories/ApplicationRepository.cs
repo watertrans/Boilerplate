@@ -46,7 +46,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
 
             var param = new
             {
-                ClientId = clientId
+                ClientId = clientId,
             };
 
             Domain.Entities.Application result = _sqlTableDataGateway.ExecuteQuery(sql.ToString(), param).SingleOrDefault();

@@ -197,7 +197,7 @@ namespace WaterTrans.Boilerplate.Domain.Services
                 _refreshTokenRepository.Create(refreshToken);
                 scope.Complete();
             }
-            
+
             return (accessToken, refreshToken);
         }
 

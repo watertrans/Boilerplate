@@ -36,7 +36,6 @@ namespace WaterTrans.Boilerplate.DBAdmin
                 setup.CreateDatabase();
                 Console.WriteLine("done");
 
-
                 Console.Write("Creating test database...");
                 setup.CreateTestDatabase();
                 Console.WriteLine("done");

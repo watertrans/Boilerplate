@@ -37,7 +37,7 @@ namespace WaterTrans.Boilerplate.Application.UseCases
 
         public Forecast GetById(Guid forecastId)
         {
-            return _forecastService.GetById(forecastId); ;
+            return _forecastService.GetById(forecastId);
         }
 
         public IList<Forecast> Query(ForecastQueryDto dto)

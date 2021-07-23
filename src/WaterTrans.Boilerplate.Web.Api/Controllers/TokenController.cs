@@ -22,7 +22,7 @@ namespace WaterTrans.Boilerplate.Web.Api.Controllers
         private readonly IMapper _mapper;
         private readonly IAppSettings _appSetgings;
         private readonly ITokenUseCase _tokenUseCase;
-        
+
         public TokenController(
             IMapper mapper,
             IAppSettings appSetgings,

@@ -7,7 +7,8 @@ namespace WaterTrans.Boilerplate.Persistence
     {
         private static readonly Lazy<IMapper> Lazy = new Lazy<IMapper>(() =>
         {
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.AddProfile<MappingProfile>();
             });
             return config.CreateMapper();

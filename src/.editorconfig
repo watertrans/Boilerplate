@@ -22,6 +22,9 @@ dotnet_diagnostic.IDE0057.severity = none
 # IDE0059: Value assigned to variable is never used
 csharp_style_unused_value_assignment_preference = discard_variable:none
 
+# SA0001: XML comment analysis disabled
+dotnet_diagnostic.SA0001.severity = none
+
 # SA1025: Code should not contain multiple whitespace in a row
 dotnet_diagnostic.SA1025.severity = none
 
@@ -40,17 +43,35 @@ dotnet_diagnostic.SA1201.severity = none
 # SA1208: System using directives should be placed before other using directives
 dotnet_diagnostic.SA1208.severity = none
 
+# SA1308: Variable names should not be prefixed
+dotnet_diagnostic.SA1308.severity = none
+
 # SA1309: Field names should not begin with underscore
 dotnet_diagnostic.SA1309.severity = none
 
 # SA1310: Field names should not contain underscore
 dotnet_diagnostic.SA1310.severity = none
 
+# SA1311: Static readonly fields should begin with upper-case letter
+dotnet_diagnostic.SA1311.severity = none
+
+# SA1501: Statement should not be on a single line
+dotnet_diagnostic.SA1501.severity = none
+
 # SA1513: Closing brace should be followed by blank line
 dotnet_diagnostic.SA1513.severity = none
 
 # SA1515: Single-line comment should be preceded by blank line
 dotnet_diagnostic.SA1515.severity = none
+
+# SA1516: Elements should be separated by blank line
+dotnet_diagnostic.SA1516.severity = none
+
+# SA1600: Elements should be documented
+dotnet_diagnostic.SA1600.severity = none
+
+# SA1602: Enumeration items should be documented
+dotnet_diagnostic.SA1602.severity = none
 
 # SA1623: Property summary documentation should match accessors
 dotnet_diagnostic.SA1623.severity = none

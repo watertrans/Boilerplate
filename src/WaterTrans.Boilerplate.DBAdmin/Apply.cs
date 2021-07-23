@@ -16,7 +16,6 @@ namespace WaterTrans.Boilerplate.DBAdmin
             [Option("p", "The password of the account use for connecting to the server.")] string password = "user",
             [Option(null, "The port number to use.")] uint port = 3306)
         {
-
             var dbSettings = new DBSettings();
             dbSettings.SqlProviderFactory = MySqlConnectorFactory.Instance;
             dbSettings.SqlConnectionString = Program.CreateConnectionString(host, database, user, password, port);
@@ -30,7 +29,6 @@ namespace WaterTrans.Boilerplate.DBAdmin
                 Console.Write("Creating schemas that do not exist....");
                 setup.CreateTables();
                 Console.WriteLine("done");
-
             }
             catch (Exception ex)
             {

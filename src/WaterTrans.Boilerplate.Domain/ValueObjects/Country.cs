@@ -15,8 +15,8 @@ namespace WaterTrans.Boilerplate.Domain.ValueObjects
 
         public Country(string code)
         {
-            if (code == null) throw new ArgumentNullException(nameof(code));
-            if (!s_countries.ContainsKey(code)) throw new ArgumentException(string.Format(ErrorMessages.NotContains, code, nameof(code)));
+            if (code == null) { throw new ArgumentNullException(nameof(code)); }
+            if (!s_countries.ContainsKey(code)) { throw new ArgumentException(string.Format(ErrorMessages.NotContains, code, nameof(code))); }
             var item = s_countries[code];
             CountryCode = (string)item["CountryCode"];
             Name = (string)item["Name"];

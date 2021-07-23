@@ -45,7 +45,7 @@ namespace WaterTrans.Boilerplate.Persistence.Repositories
 
             var param = new
             {
-                LoginId = loginId
+                LoginId = loginId,
             };
 
             Account result = _sqlTableDataGateway.ExecuteQuery(sql.ToString(), param).SingleOrDefault();

@@ -34,14 +34,16 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways
                 _connection.Insert<TSqlEntity>(sqlEntity, statement => statement
                     .WithTimeout(TimeSpan.FromSeconds(_dbSettings.CommandTimeout)));
             }
-            //catch (SqlException ex) when (ex.Number == 2601 | ex.Number == 2627)
-            //{
-            //    throw new DuplicateKeyException("The primary key is duplicated.", ex);
-            //}
             catch (MySqlException ex) when (ex.Number == 1022 | ex.Number == 1062)
             {
                 throw new DuplicateKeyException("The primary key is duplicated.", ex);
             }
+            /*
+            catch (SqlException ex) when (ex.Number == 2601 | ex.Number == 2627)
+            {
+                throw new DuplicateKeyException("The primary key is duplicated.", ex);
+            }
+            */
         }
 
         public async Task CreateAsync(TSqlEntity sqlEntity)
@@ -51,14 +53,16 @@ namespace WaterTrans.Boilerplate.Persistence.TableDataGateways
                 await _connection.InsertAsync<TSqlEntity>(sqlEntity, statement => statement
                     .WithTimeout(TimeSpan.FromSeconds(_dbSettings.CommandTimeout)));
             }
-            //catch (SqlException ex) when (ex.Number == 2601 | ex.Number == 2627)
-            //{
-            //    throw new DuplicateKeyException("The primary key is duplicated.", ex);
-            //}
             catch (MySqlException ex) when (ex.Number == 1022 | ex.Number == 1062)
             {
                 throw new DuplicateKeyException("The primary key is duplicated.", ex);
             }
+            /*
+            catch (SqlException ex) when (ex.Number == 2601 | ex.Number == 2627)
+            {
+                throw new DuplicateKeyException("The primary key is duplicated.", ex);
+            }
+            */
         }
 
         public IEnumerable<TSqlEntity> GetAll()

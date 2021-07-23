@@ -45,7 +45,7 @@ namespace WaterTrans.Boilerplate.Persistence.QueryServices
             sqlCount.AppendLine(" SELECT COUNT(*) FROM `Forecast` WHERE  1 = 1 ");
             sqlCount.AppendLine(sqlWhere.ToString());
 
-            paging.TotalCount = (long)Connection.ExecuteScalar(sqlCount.ToString(),param, commandTimeout: DBSettings.CommandTimeout);
+            paging.TotalCount = (long)Connection.ExecuteScalar(sqlCount.ToString(), param, commandTimeout: DBSettings.CommandTimeout);
 
             var sqlSort = DataUtil.ConvertToOrderBy(sort, "Date", "CountryCode", "CityCode", "CreateTime");
             if (sqlSort == string.Empty)

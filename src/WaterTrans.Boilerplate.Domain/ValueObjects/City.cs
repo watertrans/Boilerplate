@@ -19,8 +19,8 @@ namespace WaterTrans.Boilerplate.Domain.ValueObjects
 
         public City(string code)
         {
-            if (code == null) throw new ArgumentNullException(nameof(code));
-            if (!s_cities.ContainsKey(code)) throw new ArgumentException(string.Format(ErrorMessages.NotContains, code, nameof(code)));
+            if (code == null) { throw new ArgumentNullException(nameof(code)); }
+            if (!s_cities.ContainsKey(code)) { throw new ArgumentException(string.Format(ErrorMessages.NotContains, code, nameof(code))); }
             var item = s_cities[code];
             CityCode = (string)item["CityCode"];
             Name = (string)item["Name"];
