@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaterTrans.Boilerplate.Appl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaterTrans.Boilerplate.Persistence", "WaterTrans.Boilerplate.Persistence\WaterTrans.Boilerplate.Persistence.csproj", "{1E254571-C40C-49CB-A8C9-109BCE108A06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaterTrans.Boilerplate.Tests", "WaterTrans.Boilerplate.Tests\WaterTrans.Boilerplate.Tests.csproj", "{BAEA1130-DFD9-4A97-99B4-E74DA2493B03}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{82C1F5A7-A3C5-4F85-89C9-3C535099879B}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -27,6 +25,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaterTrans.Boilerplate.CrossCuttingConcerns", "WaterTrans.Boilerplate.CrossCuttingConcerns\WaterTrans.Boilerplate.CrossCuttingConcerns.csproj", "{1CE9CCE5-85EE-484C-9FB9-E249F0A46093}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaterTrans.Boilerplate.Infrastructure", "WaterTrans.Boilerplate.Infrastructure\WaterTrans.Boilerplate.Infrastructure.csproj", "{4B603B51-CD5D-4363-8693-13CC264082E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaterTrans.Boilerplate.UnitTests", "WaterTrans.Boilerplate.UnitTests\WaterTrans.Boilerplate.UnitTests.csproj", "{86A411B9-0263-48F1-A06B-A606A275DC6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaterTrans.Boilerplate.IntegrationTests", "WaterTrans.Boilerplate.IntegrationTests\WaterTrans.Boilerplate.IntegrationTests.csproj", "{992319DB-DEA3-4195-89BF-16E4F4A7C8A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0A8EC20F-7A99-49EA-9760-F7A67EAB400C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,10 +54,6 @@ Global
 		{1E254571-C40C-49CB-A8C9-109BCE108A06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E254571-C40C-49CB-A8C9-109BCE108A06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E254571-C40C-49CB-A8C9-109BCE108A06}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAEA1130-DFD9-4A97-99B4-E74DA2493B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAEA1130-DFD9-4A97-99B4-E74DA2493B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAEA1130-DFD9-4A97-99B4-E74DA2493B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAEA1130-DFD9-4A97-99B4-E74DA2493B03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DFB3D6C4-FF49-48EC-AEA7-36E8C4F75805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DFB3D6C4-FF49-48EC-AEA7-36E8C4F75805}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFB3D6C4-FF49-48EC-AEA7-36E8C4F75805}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,9 +74,21 @@ Global
 		{4B603B51-CD5D-4363-8693-13CC264082E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B603B51-CD5D-4363-8693-13CC264082E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B603B51-CD5D-4363-8693-13CC264082E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86A411B9-0263-48F1-A06B-A606A275DC6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86A411B9-0263-48F1-A06B-A606A275DC6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86A411B9-0263-48F1-A06B-A606A275DC6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86A411B9-0263-48F1-A06B-A606A275DC6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{992319DB-DEA3-4195-89BF-16E4F4A7C8A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{992319DB-DEA3-4195-89BF-16E4F4A7C8A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{992319DB-DEA3-4195-89BF-16E4F4A7C8A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{992319DB-DEA3-4195-89BF-16E4F4A7C8A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{86A411B9-0263-48F1-A06B-A606A275DC6E} = {0A8EC20F-7A99-49EA-9760-F7A67EAB400C}
+		{992319DB-DEA3-4195-89BF-16E4F4A7C8A2} = {0A8EC20F-7A99-49EA-9760-F7A67EAB400C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4642BC72-4085-4774-92C7-056730E4F678}
